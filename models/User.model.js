@@ -16,7 +16,7 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true
     },
-    password: {
+    passwordHash: {
       type: String,
       required: true
     },
@@ -28,8 +28,7 @@ const userSchema = new Schema(
     //googleId ???
     role: {
       type: String,
-      enum: ['visitor', 'artist', 'admin'],
-      required: true
+      enum: ['visitor', 'artist', 'admin']
     },
     age: {
       type: Number
