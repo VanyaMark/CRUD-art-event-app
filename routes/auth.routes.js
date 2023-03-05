@@ -13,7 +13,12 @@ const {
 router.get('/userSignup',isUserLoggedOut,(req, res, nex) => res.render('auth/user-signup'));
 
 router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
+
+    console.log(req.body)
+   
+
+
        const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
       res
@@ -33,7 +38,8 @@ router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
           return User.create({
             username,
             email,
-            passwordHash: hashedPassword
+            passwordHash: hashedPassword,
+            role
           })
           .then(userFromDB => {
             console.log('Newly created user is: ', userFromDB);
@@ -96,6 +102,33 @@ router.post('/userLogout', isUserLoggedIn, (req, res, next) => {
     res.redirect('/');
   })
 });
+
+/*
+
+// GET route to add User's details (Role, Age, etc...)
+router.get('/user/:id', isUserLoggedIn, (req, res, next) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then(user => {
+      if (req.session.currentUser.role == "visitor") {
+        res.render('visitor')
+      }
+    })
+  res.render('auth/user-login')
+})
+
+//POST route to add Users details (Role, Age, etc...)
+router.post('/landing', isUserLoggedIn,(req, res, next) => {
+  console.log('SESSION =====> ', req.session);
+  const { role, age, gender, nationality,  } = req.body;
+
+  User.findOneAndUpdate({ email })
+    .then(user => {
+
+})
+.catch(error => next(error));
+*/
+
 
 
 

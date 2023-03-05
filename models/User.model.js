@@ -20,16 +20,19 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+
+    role: {
+      type: String,
+      enum: ['visitor', 'artist'],
+      required: true
+    },
+
     phoneNumber: Number,
     avatarUrl: {
       type: String,
       // default: //add default image for user
     }, 
     //googleId ???
-    role: {
-      type: String,
-      enum: ['visitor', 'artist', 'admin']
-    },
     age: {
       type: Number
     },
