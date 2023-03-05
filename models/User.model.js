@@ -6,7 +6,7 @@ const userSchema = new Schema(
     username: {
       type: String,
       trim: true,
-      required: false,
+      required: true,
       unique: true
     },
     email: {
@@ -19,6 +19,29 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true
+    },
+    phoneNumber: Number,
+    avatarUrl: {
+      type: String,
+      // default: //add default image for user
+    }, 
+    //googleId ???
+    role: {
+      type: String,
+      enum: ['visitor', 'artist', 'admin'],
+      required: true
+    },
+    age: {
+      type: Number
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'non-binary']
+    },
+    nationality: String,
+    favourites: {
+      //should refer to artwork model
+      type: Schema.Types.ObjectId, ref:"Artwork"
     }
   },
   {
