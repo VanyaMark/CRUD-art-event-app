@@ -10,7 +10,7 @@ const {
   isUserLoggedOut,
 } = require('../middleware/route-guard');
 
-router.get('/userSignup',isUserLoggedOut,(req, res) => res.render('auth/user-signup'));
+router.get('/userSignup',isUserLoggedOut,(req, res, nex) => res.render('auth/user-signup'));
 
 router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
     const { username, email, password } = req.body;
@@ -57,12 +57,15 @@ router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
   });
 
 router.get('/user',isUserLoggedIn, (req, res) => {
-  res.render('user/user-profile', { userInSession: req.session.currentUser });
+  res.render('landing', { userInSession: req.session.currentUser });
 })
 
-router.get('/userLogin', isUserLoggedOut,(req, res) => res.render('auth/user-login'));
+router.get('/login', isUserLoggedOut,(req, res, next) => {
+  res.render('auth/user-login')
+ // .catch((err)=> next(err))
+});
 
-router.post('/userLogin', isUserLoggedOut,(req, res, next) => {
+router.post('/login', isUserLoggedOut,(req, res, next) => {
   console.log('SESSION =====> ', req.session);
   const { email, password } = req.body;
   if (email === '' || password === '') {
