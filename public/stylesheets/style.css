@@ -1,8 +1,10 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: grey;
+  height:200vh;
+  width:100vw;
 }
-
 nav{
   background-color: aqua;
 }
@@ -11,10 +13,11 @@ a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
+.body-div{
+  background-color: aqua;
+  height:100%;
+  width:100%;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
