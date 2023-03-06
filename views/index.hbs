@@ -1,15 +1,18 @@
 
-{{#with message}}
- {{>welcomePartial}}
-{{/with}}
 
+    <div class="welcomePartial container"> 
+        {{#with message}}
+        {{>welcomePartial}}
+        {{/with}}
+    </div>
 
-    {{>carouselPartial}}
+    <div class="carouselPartial">
+        {{>carouselPartial}}
+    </div>
 
-
-   
-    {{>buttonsPartial}}
-
+    <div class="buttonsPartial"> 
+        {{>buttonsPartial}}
+    </div> 
 
        
 

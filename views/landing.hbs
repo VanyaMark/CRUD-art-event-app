@@ -1,26 +1,15 @@
 
- 
- <!--<form id="logout-form" action="/clientLogout" method="POST">
-            <button>Logout</button>
-          </form>-->
 
-  {{#with userInSession}}
-  {{>welcomePartial}}
+
+  <div>
+    {{#with userInSession}}
+    {{>welcomePartial}}
     {{/with}}
-
-   
-{{>buttonsPartial}}
-
-
-
-<!-- <p>This is your profile page my friend!</p>
-
-
-    <h2>Welcome, {{userInSession.username}}!</h2>
-    <p>This is your profile page my friend!</p>
-  
-
-    <a href = "/user/{{userInSession._id}}">Account Details</a> -->
+  </div>
+    
+  <div>
+    {{>buttonsPartial}}
+  </div>
 
 
 

@@ -20,16 +20,18 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-
     role: {
       type: String,
-      enum: ['visitor', 'artist'],
+      enum: ['visitor', 'artist', 'admin'],
       required: true
     },
-
+    address:{
+      type:String,
+      default: '-'
+    },
     phoneNumber: {
       type:Number,
-      default:`-`
+      default:0000000000
     },
     avatarUrl: {
       type: String,
@@ -37,11 +39,11 @@ const userSchema = new Schema(
     }, 
     age: {
       type: Number,
-      default:`-`
+      default:00
     },
     gender: {
       type: String,
-      enum: ['Male', 'Female', 'Non-Binary', 'Rather Not Say'],
+      enum: ['-','Male', 'Female', 'Non-Binary', 'Rather Not Say'],
       default: `-`
     },
     nationality: {
@@ -55,7 +57,7 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId, ref:"Exhibition"
     }],
     favourites: {
-      type: Schema.Types.ObjectId, ref:"Artwork",
+      type: Schema.Types.Mixed, ref:"Artwork",
       default: `-`
     }
   },

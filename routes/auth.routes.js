@@ -96,7 +96,7 @@ router.post('/login', isUserLoggedOut,(req, res, next) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        res.render('auth/user-login', { errorMessage: 'Email is not registered. Try with other email.' });
+        res.render('auth/user-login', { errorMessage: 'Email not found. Try with a different email or, register with us by signing up' });
         return;
       } else if (bcryptjs.compareSync(password, user.passwordHash)) {
         req.session.currentUser = user;

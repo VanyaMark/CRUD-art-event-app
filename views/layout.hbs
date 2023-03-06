@@ -10,7 +10,9 @@
       <link rel="stylesheet" href="/stylesheets/style.css" />
    </head>
 
-   <header>
+   <body class="container lg md">
+
+         <header>
 
        <nav class="container">
 
@@ -18,24 +20,47 @@
 
             <div class="col-md-4">
 
-               <h1 class="m-2">ArtBox</h1>
+               <h1 class="m-2"><a href="/">ArtBox</a></h1>
 
             </div>
 
          <div class="col-md-8 d-flex justify-content-start">
 
-            <div class="d-flex justify-content-center m-2">
-
-               <a class="m-2 red-font">Home</a>
-
-               <a class="m-2">About</a>
-
-
-               <a class="m-2">Contact</a>
+            <div class="d-flex justify-content-start m-4">
 
                <div class="dropdown">
 
-                  <span id="menu">Menu</span>
+                  <a href="/about" class="m-2">About</a>
+               
+               </div>
+
+                <div class="dropdown">
+
+                  <a href="/fineArtImg" class="m-2">Fine Art</a>
+               
+               </div>
+
+                <div class="dropdown">
+
+                  <a href="/photographyImg" class="m-2">Photography</a>
+               
+               </div>
+
+                 <div class="dropdown">
+
+                  <a href="/plasticArtImg" class="m-2">Plastic Art</a>
+               
+               </div>
+
+               <div>
+
+                  <a href="/contact" class="m-2">Contact</a>
+
+               </div>
+
+               <div class="dropdown">
+
+                  <a id="menu" class="m-2">Menu</a>
 
                   <div class="dropdown-content">
 
@@ -46,7 +71,9 @@
                      <a href="/userProfile">Profile</a>
 
                      <form id="logout-form" action="/userLogout" method="POST">
+
                         <button>Logout</button> 
+
                      </form>
 
                   </div>
@@ -59,7 +86,7 @@
 
       </nav>
 
-      <section class="search-section pt-5 pb-5">
+      <section class="search-section h-20">
 
                 <div class="container">
 
@@ -67,17 +94,24 @@
 
                         <div class="col-md-4 d-flex flex-column justify-content-center align-items-center text-center">
 
-                          <form action="/artist-search" method="GET">
+                           <form action='/movies/{{movieToEdit._id}}/edit' method='POST'>
 
-                              <label>
+                              <select name='cast' id='cast'>
 
-                                 <input type="text" name="artist" placeholder="Name of an Artist">
+                              
+                                 <option>Select One</option>
 
-                              </label>  
+                                 {{#each castToEdit}}
 
-                              <button type="submit">Search by Artist</button>
+                                 <option value='{{_id}}'>{{name}}</option>
 
-                           </form> 
+                                 {{/each}}
+
+                              </select>
+
+                              <button type='submit'>Search by Exhibition</button>
+
+                           </form>   
                             
                         </div>
 
@@ -85,11 +119,14 @@
 
                            <form action='/movies/{{movieToEdit._id}}/edit' method='POST'>
 
-                              <select name='cast' id='cast' multiple>
+                              <select name='cast' id='cast'>
+
+                              
+                                 <option>Select One</option>
 
                                  {{#each castToEdit}}
 
-                                    <option value='{{_id}}'>{{name}}</option>
+                                 <option value='{{_id}}'>{{name}}</option>
 
                                  {{/each}}
 
@@ -105,7 +142,9 @@
 
                             <form action='/movies/{{movieToEdit._id}}/edit' method='POST'>
 
-                              <select name='cast' id='cast' multiple>
+                              <select name='cast' id='cast' >
+
+                                 <option>Select One</option>
 
                                  {{#each castToEdit}}
 
@@ -128,8 +167,6 @@
             </section>
 
    </header>
-
-   <body>
 
       <div class="body-div">
    
