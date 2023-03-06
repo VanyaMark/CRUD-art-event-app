@@ -27,23 +27,36 @@ const userSchema = new Schema(
       required: true
     },
 
-    phoneNumber: Number,
+    phoneNumber: {
+      type:Number,
+      default:`-`
+    },
     avatarUrl: {
       type: String,
-      // default: //add default image for user
+      default: ``
     }, 
-    //googleId ???
     age: {
-      type: Number
+      type: Number,
+      default:`-`
     },
     gender: {
       type: String,
-      enum: ['male', 'female', 'non-binary']
+      enum: ['Male', 'Female', 'Non-Binary', 'Rather Not Say'],
+      default: `-`
     },
-    nationality: String,
+    nationality: {
+      type:String,
+      default:`-`
+    },
+    exhibitionsHosted:[{
+      type: Schema.Types.ObjectId, ref:"Exhibition"
+    }],
+    exhibitionsAttended:[{
+      type: Schema.Types.ObjectId, ref:"Exhibition"
+    }],
     favourites: {
-      //should refer to artwork model
-      type: Schema.Types.ObjectId, ref:"Artwork"
+      type: Schema.Types.ObjectId, ref:"Artwork",
+      default: `-`
     }
   },
   {

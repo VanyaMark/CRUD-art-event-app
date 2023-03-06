@@ -1,12 +1,14 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: grey;
-  height:200vh;
+  background: #BDC3C7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #2C3E50, #BDC3C7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #2C3E50, #BDC3C7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width:100vw;
+  background-repeat: no-repeat;
 }
 nav{
-  background-color: aqua;
+  background-color: aqua
 }
 
 a {
@@ -15,7 +17,7 @@ a {
 
 .body-div{
   background-color: aqua;
-  height:100%;
+  height:80%;
   width:100%;
 }
 .dropdown {
