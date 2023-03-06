@@ -63,7 +63,19 @@ router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
   });
 
 router.get('/user',isUserLoggedIn, (req, res) => {
-  res.render('landing', { userInSession: req.session.currentUser });
+
+  if(req.session.currentUser.role === "visitor"){
+    res.render('landing', { userInSession: `Welcome ${req.session.currentUser.username}`, linkA:`/visitor`, buttonA:`Visitor Dashboard`,buttonB: `Artist Dashboard`, buttonC: `Admin Dashboard`})
+  }
+
+  else if(req.session.currentUser.role === "artist"){
+    res.render('landing', { userInSession: `Welcome ${req.session.currentUser.username}`,linkA:`/visitor`, buttonA:`Visitor Dashboard`, linkB:`/artist`, buttonB: `Artist Dashboard`, buttonC: `Admin Dashboard`})
+  }
+
+  else if(req.session.currentUser.role === "admin"){
+    res.render('landing', { userInSession: `Welcome ${req.session.currentUser.username}`, linkA:`/visitor`, buttonA:`Visitor Dashboard`,linkB:`/artist`, buttonB: `Artist Dashboard`, linkC:`/admin`, buttonC: `Admin Dashboard`})
+  }
+  ;
 })
 
 router.get('/login', isUserLoggedOut,(req, res, next) => {
