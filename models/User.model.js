@@ -37,13 +37,13 @@ const userSchema = new Schema(
       type: String,
       default: ``
     }, 
-    age: {
-      type: Number,
-      default:00
+    dateOfBirth: {
+      type:String,
+      default:`-`
     },
     gender: {
       type: String,
-      enum: ['-','Male', 'Female', 'Non-Binary', 'Rather Not Say'],
+      enum: ['Male', 'Female', 'Non-Binary', 'Rather Not Say','-'],
       default: `-`
     },
     nationality: {

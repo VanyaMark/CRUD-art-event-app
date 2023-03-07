@@ -1,6 +1,6 @@
 
   
-  <form action="/artist/{{userInSession.id}}" method="GET">
+  <form action="/artist/{{userInSession._id}}/edit" method="POST">
     
     <img src="{{userInSession.avatarUrl}}">
     <p>Name: {{userInSession.username}}</p>
@@ -10,7 +10,7 @@
     <p>Age: {{userInSession.age}}</p>
     <p>Genger: {{userInSession.gender}}</p>
     <p>Nationality: {{userInSession.nationality}}</p>
-    <p>Exhibitions Hosted: {{userInSession.exhibitionsHosted}}</p>s
+    <p>Exhibitions Hosted: {{userInSession.exhibitionsHosted}}</p>
  
 
   

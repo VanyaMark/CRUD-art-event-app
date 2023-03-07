@@ -2,6 +2,8 @@ const { Router } = require('express');
 const router = new Router();
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
+const bcryptjs = require('bcryptjs');
+const saltRounds = 10;
 
 const {
     isUserLoggedIn,
@@ -16,7 +18,7 @@ const {
 
   router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const { id } = req.params;
-    User.findById(id)
+    User.find({id})
         .then(user => {
           console.log(user)
             res.render('artist/artist-details', { userInSession: req.session.currentUser, user })
@@ -24,12 +26,71 @@ const {
 
   })
 
+  router.get('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+    const { id } = req.params;
+    User.findById(id)
+        .then(user => {
+          console.log(user)
+            res.render('artist/artist-edit', { userInSession: req.session.currentUser, user })
+        })
+  })
+
+  router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+    const { id } = req.params;
+    const userId = req.session.currentUser._id
+    const { username, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
+    
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!regex.test(password)) {
+      res
+        .status(500)
+        .render('artist/artist-edit', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+      return;
+    }
+    bcryptjs
+      .genSalt(saltRounds)
+      .then(salt => bcryptjs.hash(password, salt))
+      .then(hashedPassword => {
+        /*if (!username || !email || !password) {
+          res.render('auth/user-signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
+          return;
+        }*/
+       
+          User.findByIdAndUpdate(id, {
+            username,
+            email,
+            passwordHash: hashedPassword,
+            address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality
+       
+          }, {new:true})
+          
+          .then(userFromDB => {
+            console.log('The updated user is: ', userFromDB);
+            res.redirect(`/artist/${userId}`)
+          })
+          .catch(error => {
+            /*  if (error instanceof mongoose.Error.ValidationError) {
+                res.status(500).render('auth/user-signup', { errorMessage: error.message });
+            } 
+            else if (error.code === 11000) {
+              res.status(500).render('auth/user-signup', {
+                 errorMessage: 'Username and email need to be unique. Either username or email is already used.'
+              })
+            } */
+            
+                next(error);
+            
+          })
+      })
+
+  })
+
+
+
+
   //router.post("/artist/:id", isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
    // const { id } = req.params;
-
-    
-
   
   //})
 
