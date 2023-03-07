@@ -4,34 +4,34 @@
 
     <label>
       Username
-      <input type="text" name="username" placeholder="{{userInSession.username}}" />
+      <input type="text" name="username" value="{{userInSession.username}}" />
     </label>
 
     <label>
       Email
-      <input type="email" name="email" placeholder="{{userInSession.email}}" />
+      <input type="email" name="email" value="{{userInSession.email}}" />
     </label>
 
     <label>
       Password
-      <input type="password" name="password" placeholder="********" />
+      <input type="password" name="password" value="********" />
     </label>
 
     <label>
       Address
-      <input type="text" name="address" placeholder="{{userInSession.address}}" />
+      <input type="text" name="address" value="{{userInSession.address}}" />
     </label>
     <label>
       Phone number
-      <input type="number" name="phoneNumber" placeholder="{{userInSession.phoneNumber}}"/>
+      <input type="number" name="phoneNumber" value="{{userInSession.phoneNumber}}"/>
     </label>
     <label>
       Avatar URl
-      <input type="text" name="avatarUrl" placeholder="{{userInSession.avatarUrl}}" />
+      <input type="text" name="avatarUrl" value="{{userInSession.avatarUrl}}" />
     </label>
     <label>
       Date of Birth
-      <input type="date" name="dateOfBirth" placeholder="{{userInSession.dateOfBirth}}" />
+      <input type="date" name="dateOfBirth" value="{{userInSession.dateOfBirth}}" />
     </label>
     <label> Gender
       <select name="gender"> 
@@ -43,7 +43,7 @@
     </label>
     <label>Nationality
         <select id="nationality" name="nationality" data-name="nationality" required="" ms-field="nationality" data-parsley-required-message="Please let us know your nationality." class="select-field w-select">
-            <option value="">Select one...</option>
+            <option value="{{userInSession.nationality}}">{{userInSession.nationality}}</option>
             <option value='afghan'>Afghan</option>
             <option value='albanian'>Albanian</option>
             <option value='algerian'>Algerian</option>

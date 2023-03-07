@@ -1,21 +1,20 @@
 
   
-  <form action="/artist/{{userInSession._id}}/edit" method="POST">
+
     
-    <img src="{{userInSession.avatarUrl}}">
-    <p>Name: {{userInSession.username}}</p>
-    <p>Email: {{userInSession.email}}</p>
-    <p>Role: {{userInSession.role}}</p>
-    <p>Phone Number: {{userInSession.phoneNumber}}</p>
-    <p>Age: {{userInSession.age}}</p>
-    <p>Genger: {{userInSession.gender}}</p>
-    <p>Nationality: {{userInSession.nationality}}</p>
-    <p>Exhibitions Hosted: {{userInSession.exhibitionsHosted}}</p>
+    <img src="{{user.avatarUrl}}">
+    <p>Name: {{user.username}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Role: {{user.role}}</p>
+    <p>Phone Number: {{user.phoneNumber}}</p>
+    <p>Date of Birth: {{user.dateOfBirth}}</p>
+    <p>Genger: {{user.gender}}</p>
+    <p>Nationality: {{user.nationality}}</p>
+    <p>Exhibitions Hosted: {{user.exhibitionsHosted}}</p>
  
 
   
 
-    <button type="submit">Create account</button>
+    <button><a href="/artist/{{userInSession._id}}/edit">Edit Account Details</a></button>
 
 
-</form>

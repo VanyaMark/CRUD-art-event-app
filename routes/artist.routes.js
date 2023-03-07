@@ -18,9 +18,10 @@ const {
 
   router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const { id } = req.params;
-    User.find({id})
+  
+    User.findById(id)
         .then(user => {
-          console.log(user)
+          console.log(`user from get artist id route: ${user}` )
             res.render('artist/artist-details', { userInSession: req.session.currentUser, user })
         })
 
@@ -28,26 +29,28 @@ const {
 
   router.get('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const { id } = req.params;
+   console.log(`get edit route id ${id}`)
     User.findById(id)
         .then(user => {
-          console.log(user)
+          console.log(`***user from get edit route: ${user}`)
             res.render('artist/artist-edit', { userInSession: req.session.currentUser, user })
         })
   })
 
   router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const { id } = req.params;
-    const userId = req.session.currentUser._id
+    
     const { username, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
     
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    /*const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
       res
         .status(500)
         .render('artist/artist-edit', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
       return;
-    }
-    bcryptjs
+    }*/
+   
+      bcryptjs
       .genSalt(saltRounds)
       .then(salt => bcryptjs.hash(password, salt))
       .then(hashedPassword => {
@@ -55,7 +58,8 @@ const {
           res.render('auth/user-signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
           return;
         }*/
-       
+        console.log(`post edot user id ${id}`)
+    
           User.findByIdAndUpdate(id, {
             username,
             email,
@@ -65,8 +69,9 @@ const {
           }, {new:true})
           
           .then(userFromDB => {
+            req.session.currentUser = userFromDB;
             console.log('The updated user is: ', userFromDB);
-            res.redirect(`/artist/${userId}`)
+            res.redirect(`/artist/${userFromDB.id}`)
           })
           .catch(error => {
             /*  if (error instanceof mongoose.Error.ValidationError) {
@@ -82,6 +87,8 @@ const {
             
           })
       })
+    
+   
 
   })
 
