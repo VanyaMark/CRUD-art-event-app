@@ -4,7 +4,7 @@ const User = require('../models/User.model');
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
-
+const ArtistCart = require('../models/ArtistCart.model');
 const {
     isUserLoggedIn,
     isUserLoggedOut,
@@ -13,7 +13,7 @@ const {
   } = require('../middleware/route-guard');
 
   router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artist/exhibition-application-form", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
+    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artist/application", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
   })
 
   router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
@@ -40,7 +40,7 @@ const {
   router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const { id } = req.params;
     
-    const { username, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
+    const { username, firstName, lastName, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
     
     /*const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
@@ -62,6 +62,8 @@ const {
     
           User.findByIdAndUpdate(id, {
             username,
+            firstName,
+            lastName,
             email,
             passwordHash: hashedPassword,
             address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality
@@ -92,7 +94,37 @@ const {
 
   })
 
+ // router.get('/artist/application', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
+    //User.findById(req.session.currentUser._id)
+    //.then((user)=>{
+       // console.log(`This ${user} is awesome!`)
+      //  res.render('artist/artist-app-form')
+   // })
+    
+//})
 
+
+
+router.post('/artist/application', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+    const {firstName, lastName, email, age, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
+    ArtistCart.create({
+        firstName,
+        lastName,
+        email,
+        age,
+        profilePicUrl,
+        address,
+        phoneNumber,
+        artworkUrl, 
+        wallSize, 
+        description, 
+        dateRequested
+    })
+    .then(artistCart => {
+        console.log('New Artist cart: ', artistCart)
+        res.render('artist/artist-app-form', {artistCart} )
+    })
+})
 
 
   //router.post("/artist/:id", isUserLoggedIn, isArtistOrAdmin, (req, res) => {

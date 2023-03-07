@@ -1,0 +1,47 @@
+<div>
+  <h2>Fill in your details</h2>
+  <form action="/artist/application" method="POST">
+
+    <label>
+      First Name: 
+      <input type="text" name="firstName" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Last Name:
+      <input type="text" name="lastName" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      email:
+      <input type="email" name="email" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Age:
+      <input type="number" name="age" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Profile picture:
+      <input type="text" name="profilePicUrl" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Address:
+      <input type="text" name="address" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Phone Number:
+      <input type="number" name="phoneNumber" value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Links to artwork images:
+      <input type="string" name="artworkUrl" multiple value="{{userInSession.username}}" />
+    </label>
+    <label>
+      Wall Size:
+      <select name="wallSize"> 
+        <option value="3m space - €100">3m space - €100</option>
+        <option  value="6m space - €200">6m space - €200</option>
+        <option  value="9m space - €300">9m space - €300</option>
+      </select>
+    </label>
+    <button type="submit">View in cart</button>
+    </form>
+</div> 

@@ -42,6 +42,9 @@ app.use("/", adminRoutes);
 const artistRoutes = require("./routes/artist.routes");
 app.use("/", artistRoutes); 
 
+//const exhibitionRoutes = require("./routes/exhibition.routes");
+//app.use("/", exhibitionRoutes); 
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

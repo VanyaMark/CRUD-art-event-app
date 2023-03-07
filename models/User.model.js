@@ -9,6 +9,19 @@ const userSchema = new Schema(
       required: true,
       unique: true
     },
+
+    firstName: {
+      type: String,
+      trim: true,
+      default:'-'
+    },
+
+    lastName: {
+      type: String,
+      trim: true,
+      default:'-'
+    },
+
     email: {
       type: String,
       required: true,
@@ -35,7 +48,8 @@ const userSchema = new Schema(
     },
     avatarUrl: {
       type: String,
-      default: ``
+      default: `-`,
+      trim: true
     }, 
     dateOfBirth: {
       type:String,
