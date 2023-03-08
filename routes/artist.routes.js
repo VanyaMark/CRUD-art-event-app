@@ -101,8 +101,9 @@ const {
 
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+    const user = req.session.currentUser._id
     const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
-    ArtistApplication.create({
+    ArtistApplication.create({user,
         firstName,
         lastName,
         email,
@@ -123,15 +124,8 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     })
 })
 
-router.get('artistCart/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-  const {id} = req.params
 
-  ArtistApplication.findById(id)
-    .then((app) =>{
-      console.log('monkey: ', app);
-      res.render('artist/artist-cart', {app})
-    })
-})
+
 
 router.get('/artistCart/:id/edit', (req, res) => {
   const { id } = req.params;
@@ -142,35 +136,45 @@ router.get('/artistCart/:id/edit', (req, res) => {
 })
 
 router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, next) =>{
-  const { id } = req.params;
-  const { firstName,
-    lastName,
-    email,
-    dateOfBirth,
-    profilePicUrl,
-    address,
-    phoneNumber,
-    artworkUrl,
-    artType, 
-    wallSize, 
-    description, 
-    dateRequested } = req.body;
-    ArtistApplication.findByIdAndUpdate(id,{
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        profilePicUrl,
-        address,
-        phoneNumber,
-        artworkUrl,
-        artType, 
-        wallSize, 
-        description, 
-        dateRequested
-    }, {new: true})
-    .then((app)=>{res.redirect(`/artistCart/${app.id}`)})
+    const { id } = req.params;
+    const { firstName,
+      lastName,
+      email,
+      dateOfBirth,
+      profilePicUrl,
+      address,
+      phoneNumber,
+      artworkUrl,
+      artType, 
+      wallSize, 
+      description, 
+      dateRequested } = req.body;
+      ArtistApplication.findByIdAndUpdate(id,{
+          firstName,
+          lastName,
+          email,
+          dateOfBirth,
+          profilePicUrl,
+          address,
+          phoneNumber,
+          artworkUrl,
+          artType, 
+          wallSize, 
+          description, 
+          dateRequested
+      }, {new: true})
+      .then(()=>{res.redirect('/artistCart')})
   
 } )
-
+router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const user = req.session.currentUser._id
+  ArtistApplication.find({user})
+  .then((editedItem)=>{
+    console.log(editedItem);
+    
+    res.render('artist/artist-cart', {editedItem})
+  })
+  
+      
+    })
 module.exports = router;
