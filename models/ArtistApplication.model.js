@@ -54,7 +54,7 @@ const artistApplicationSchema = new Schema(
     // message for artist to choose size wisely
     wallSize: {
         type: String,
-        enum: ['3m space - €80 per week', '6m space - €120 per week', '9m space - €150 per week' ],
+        enum: ['1m space - €80 per week', '2m space - €120 per week', '3m space - €150 per week' ],
         required: true
     },
    

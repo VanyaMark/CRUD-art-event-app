@@ -1,6 +1,5 @@
+
 {{#if artistApp}}
-
-
 
 <img src="{{artistApp.profilePicUrl}}">
     <p>First Name: {{artistApp.firstName}}</p>
@@ -20,29 +19,33 @@
 
      <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application Details</a></button>
 
-    {{else if editedItem}}
 
-    <img src="{{editedItem.profilePicUrl}}">
-    <p>First Name: {{editedItem.firstName}}</p>
-    <p>Last Name: {{editedItem.lastName}}</p>
-    <p>Email: {{artistApp.email}}</p>
+{{/if}}
 
-    <p>Phone Number: {{artistApp.phoneNumber}}</p>
-    <p>Address: {{artistApp.address}}</p>
-    <p>Date of Birth: {{artistApp.dateOfBirth}}</p>
+
+    {{#each editedItem}}
+
+    <img src="{{this.profilePicUrl}}">
+    <p>First Name: {{this.firstName}}</p>
+    <p>Last Name: {{this.lastName}}</p>
+    <p>Email: {{this.email}}</p>
+
+    <p>Phone Number: {{this.phoneNumber}}</p>
+    <p>Address: {{this.address}}</p>
+    <p>Date of Birth: {{this.dateOfBirth}}</p>
 
     <p>Artwork Image URL</p>
-    <img src="{{artistApp.artworkUrl}}">
-    <p>Art Type: {{artistApp.artType}}</p>
-    <p>Wall Size: {{artistApp.wallSize}}</p>
-    <p>Description: {{artistApp.description}}</p>
-    <p>Requested Date: {{artistApp.dateRequested}}</p>
+    <img src="{{this.artworkUrl}}">
+    <p>Art Type: {{this.artType}}</p>
+    <p>Wall Size: {{this.wallSize}}</p>
+    <p>Description: {{this.description}}</p>
+    <p>Requested Date: {{this.dateRequested}}</p>
 
 
 
-    <button><a href="/artistCart/{{editedItem._id}}/edit">Edit Application Details</a></button>
- 
-{{/if}}
+    <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
+
+{{/each}}
 
 
   

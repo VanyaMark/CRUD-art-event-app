@@ -130,8 +130,8 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 router.get('/artistCart/:id/edit', (req, res) => {
   const { id } = req.params;
   ArtistApplication.findById(id)
-    .then((artistApp => {
-      res.render('artist/artist-cart-edit', {artistApp})
+    .then((artistApptoEdit => {
+      res.render('artist/artist-cart-edit', {artistApptoEdit})
     }))
 })
 
@@ -170,7 +170,8 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const user = req.session.currentUser._id
   ArtistApplication.find({user})
   .then((editedItem)=>{
-    console.log(editedItem);
+    
+    console.log('flonkey: ', editedItem);
     
     res.render('artist/artist-cart', {editedItem})
   })
