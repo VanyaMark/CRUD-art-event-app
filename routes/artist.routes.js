@@ -166,6 +166,17 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
       .then(()=>{res.redirect('/artistCart')})
   
 } )
+
+router.post('/artistCart/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const { id } = req.params;
+  console.log('delete: ', id);
+
+  ArtistApplication.findByIdAndDelete(id)
+    .then(() => {
+      res.redirect('/artist')
+    })
+})
+
 router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const user = req.session.currentUser._id
   ArtistApplication.find({user})
@@ -175,7 +186,7 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     
     res.render('artist/artist-cart', {editedItem})
   })
-  
       
     })
+
 module.exports = router;

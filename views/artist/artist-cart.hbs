@@ -19,6 +19,10 @@
 
      <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application Details</a></button>
 
+<form action='/artistCart/{{artistApp._id}}/delete' method="POST">
+<button>Delete Application</button>
+
+</form>
 
 {{/if}}
 
@@ -44,9 +48,12 @@
 
 
     <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
+    
+    <form action='/artistCart/{{this._id}}/delete' method="POST">
+    <button>Delete Application</button>
+    </form>
 
 {{/each}}
-
 
   
 
