@@ -1,1 +1,21 @@
-{{}}
+
+<img src="{{artistApp.profilePicUrl}}">
+    <p>First Name: {{app.firstName}}</p>
+    <p>Last Name: {{app.lastName}}</p>
+    <p>Email: {{artistApp.email}}</p>
+
+    <p>Phone Number: {{artistApp.phoneNumber}}</p>
+    <p>Address: {{artistApp.address}}</p>
+    <p>Date of Birth: {{artistApp.dateOfBirth}}</p>
+
+    <p>Artwork Image URL</p>
+    <img src="{{artistApp.artworkUrl}}">
+    <p>Art Type: {{artistApp.artType}}</p>
+    <p>Wall Size: {{artistApp.wallSize}}</p>
+    <p>Description: {{app.description}}</p>
+    <p>Requested Date: {{artistApp.dateRequested}}</p>
+ 
+
+  
+
+    <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application Details</a></button>

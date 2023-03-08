@@ -100,9 +100,8 @@ const {
 })
 
 
-
-router.post('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    const {firstName, lastName, email, age, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
+router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+    const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
     ArtistApplication.create({
         firstName,
         lastName,
@@ -118,16 +117,60 @@ router.post('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) =>
         dateRequested
     })
     .then(artistApp => {
+      console.log('donkey: ', artistApp)
         console.log('New Artist cart: ', artistApp)
-        res.render('artist/artist-app-form', {artistApp} )
+        res.render('artist/artist-cart', {artistApp} )
     })
 })
 
+router.get('artistCart/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const {id} = req.params
 
-  //router.post("/artist/:id", isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  ArtistApplication.findById(id)
+    .then((app) =>{
+      console.log('monkey: ', app);
+      res.render('artist/artist-cart', {app})
+    })
+})
 
-   // const { id } = req.params;
+router.get('/artistCart/:id/edit', (req, res) => {
+  const { id } = req.params;
+  ArtistApplication.findById(id)
+    .then((artistApp => {
+      res.render('artist/artist-cart-edit', {artistApp})
+    }))
+})
+
+router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, next) =>{
+  const { id } = req.params;
+  const { firstName,
+    lastName,
+    email,
+    dateOfBirth,
+    profilePicUrl,
+    address,
+    phoneNumber,
+    artworkUrl,
+    artType, 
+    wallSize, 
+    description, 
+    dateRequested } = req.body;
+    ArtistApplication.findByIdAndUpdate(id,{
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        profilePicUrl,
+        address,
+        phoneNumber,
+        artworkUrl,
+        artType, 
+        wallSize, 
+        description, 
+        dateRequested
+    }, {new: true})
+    .then((app)=>{res.redirect(`/artistCart/${app.id}`)})
   
-  //})
+} )
 
 module.exports = router;

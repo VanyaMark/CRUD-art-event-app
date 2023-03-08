@@ -1,0 +1,76 @@
+<div id="form">
+  <h2>Edit your application details</h2>
+  <form action="/artistCart/{{artistApp._id}}" method="POST">
+
+    <label>
+      First Name
+      <input type="text" name="firstName" value="{{artistApp.firstName}}" readonly/>
+    </label>
+
+    <label>
+      Last Name
+      <input type="text" name="lastName" value="{{artistApp.lastName}}" readonly/>
+    </label>
+
+    <label>
+      Email
+      <input type="email" name="email" value="{{artistApp.email}}" readonly />
+    </label>
+
+    <label>
+      Address
+      <input type="text" name="address" value="{{artistApp.address}}" />
+    </label>
+
+    <label>
+      Phone Number
+      <input type="number" name="phoneNumber" value="{{artistApp.phoneNumber}}" />
+    </label>
+
+    <label>
+      Date of Birth
+      <input type="date" name="dateOfBirth" value="{{artistApp.dateOfBirth}}" />
+    </label>
+
+        <label>
+      Profile picture:
+      <input type="text" name="profilePicUrl" value="{{artistApp.profilePicUrl}}" />
+    </label>
+
+    <label>
+      Artwork Image URL
+      <input type="text" name="artworkUrl" value="{{artistApp.artworkUrl}}" />
+    </label>
+
+     
+    <label>
+      Art Type:
+      <select name="artType"> 
+        <option value="Fine Art">Fine Art</option>
+        <option  value="Photography">Photography</option>
+        <option  value="Plastic Art">Plastic Art</option>
+      </select>
+    </label>
+
+    <label>
+      Wall Size:
+      <select name="wallSize"> 
+        <option value="3m space - €80 per week">1m space - €80 per week</option>
+        <option  value="6m space - €120 per week">2m space - €120 per week</option>
+        <option  value="9m space - €150 per week">3m space - €150 per week</option>
+      </select>
+    </label>
+
+    <label for="w3review">Description:</label>
+     <textarea name="description" value="{{artistApp.description}}" rows="4" cols="50">
+     </textarea>
+
+    <label>
+      Preferred Date:
+      <input type="date" name="dateRequested" min="2023-09-18" value="{{artistApp.dateRequested}}" />
+    </label>
+
+     <button type="submit">Update Application</button>
+
+     </form>
+     </div>
