@@ -1,47 +1,74 @@
 <div>
-  <h2>Fill in your details</h2>
+  
+  <h2>Artist Application Form</h2>
+
   <form action="/artist/application" method="POST">
 
     <label>
       First Name: 
-      <input type="text" name="firstName" value="{{userInSession.username}}" />
+      <input type="text" name="firstName" value="{{user.firstName}}" />
     </label>
+
     <label>
       Last Name:
-      <input type="text" name="lastName" value="{{userInSession.username}}" />
+      <input type="text" name="lastName" value="{{user.lastName}}" />
     </label>
+
     <label>
       email:
-      <input type="email" name="email" value="{{userInSession.username}}" />
+      <input type="email" name="email" value="{{user.email}}" />
     </label>
-    <label>
-      Age:
-      <input type="number" name="age" value="{{userInSession.username}}" />
-    </label>
-    <label>
-      Profile picture:
-      <input type="text" name="profilePicUrl" value="{{userInSession.username}}" />
-    </label>
+
     <label>
       Address:
-      <input type="text" name="address" value="{{userInSession.username}}" />
+      <input type="text" name="address" value="{{user.address}}" />
     </label>
+
     <label>
       Phone Number:
-      <input type="number" name="phoneNumber" value="{{userInSession.username}}" />
+      <input type="number" name="phoneNumber" value="{{user.phoneNumber}}" />
     </label>
+
     <label>
-      Links to artwork images:
-      <input type="string" name="artworkUrl" multiple value="{{userInSession.username}}" />
+      Date of Birth:
+      <input type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
     </label>
+
+    <label>
+      Profile picture:
+      <input type="text" name="profilePicUrl" placeholder="Enter Image URL Here" />
+    </label>
+    
+    <label>
+      Links to artwork image:
+      <input type="string" name="artworkUrl" placeholder="Enter Artwork URL Here" />
+    </label>
+
+    <label>
+      Art Type:
+      <select name="artType"> 
+        <option value="Fine Art">Fine Art</option>
+        <option  value="Photography">Photography</option>
+        <option  value="Plastic Art">Plastic Art</option>
+      </select>
+    </label>
+
     <label>
       Wall Size:
       <select name="wallSize"> 
-        <option value="3m space - €100">3m space - €100</option>
-        <option  value="6m space - €200">6m space - €200</option>
-        <option  value="9m space - €300">9m space - €300</option>
+        <option value="3m space - €80 per week">1m space - €80 per week</option>
+        <option  value="6m space - €120 per week">2m space - €120 per week</option>
+        <option  value="9m space - €150 per week">3m space - €150 per week</option>
       </select>
     </label>
-    <button type="submit">View in cart</button>
+
+    <label>
+      Preferred Date:
+      <input type="date" name="dateRequested" min="2023-09-18" placeholder="2023-09-18" />
+    </label>
+
+    <button type="submit">View Application</button>
+
     </form>
+
 </div> 

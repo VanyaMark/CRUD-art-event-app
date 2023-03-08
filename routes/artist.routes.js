@@ -4,7 +4,7 @@ const User = require('../models/User.model');
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
-const ArtistCart = require('../models/ArtistCart.model');
+const ArtistApplication = require('../models/ArtistApplication.model');
 const {
     isUserLoggedIn,
     isUserLoggedOut,
@@ -13,7 +13,7 @@ const {
   } = require('../middleware/route-guard');
 
   router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artist/application", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
+    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
   })
 
   router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
@@ -48,24 +48,24 @@ const {
         .status(500)
         .render('artist/artist-edit', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
       return;
-    }*/
+    }
    
       bcryptjs
       .genSalt(saltRounds)
       .then(salt => bcryptjs.hash(password, salt))
       .then(hashedPassword => {
-        /*if (!username || !email || !password) {
-          res.render('auth/user-signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
+        if (!username || !email || !password) {
+          res.render('artist/artist-edit', { errorMessage: 'Please ensure username, email and password fields are complete.' });
           return;
         }*/
-        console.log(`post edot user id ${id}`)
+        console.log(`post edit user id ${id}`)
     
           User.findByIdAndUpdate(id, {
-            username,
+           // username,
             firstName,
             lastName,
-            email,
-            passwordHash: hashedPassword,
+           // email,
+           // passwordHash: hashedPassword,
             address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality
        
           }, {new:true})
@@ -89,40 +89,37 @@ const {
             
           })
       })
-    
-   
 
-  })
-
- // router.get('/artist/application', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
-    //User.findById(req.session.currentUser._id)
-    //.then((user)=>{
+  router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
+    User.findById(req.session.currentUser._id)
+    .then((user)=>{
        // console.log(`This ${user} is awesome!`)
-      //  res.render('artist/artist-app-form')
-   // })
+        res.render('artist/artist-app-form', {user})
+    })
     
-//})
+})
 
 
 
-router.post('/artist/application', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+router.post('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const {firstName, lastName, email, age, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
-    ArtistCart.create({
+    ArtistApplication.create({
         firstName,
         lastName,
         email,
-        age,
+        dateOfBirth,
         profilePicUrl,
         address,
         phoneNumber,
-        artworkUrl, 
+        artworkUrl,
+        artType, 
         wallSize, 
         description, 
         dateRequested
     })
-    .then(artistCart => {
-        console.log('New Artist cart: ', artistCart)
-        res.render('artist/artist-app-form', {artistCart} )
+    .then(artistApp => {
+        console.log('New Artist cart: ', artistApp)
+        res.render('artist/artist-app-form', {artistApp} )
     })
 })
 

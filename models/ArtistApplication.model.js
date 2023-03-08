@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
-const artistCartSchema = new Schema(
+const artistApplicationSchema = new Schema(
   {
     firstName: {
       type: String,
@@ -20,10 +20,9 @@ const artistCartSchema = new Schema(
         lowercase: true,
         trim: true
     },
-    age: {
-        type: Number,
+    dateOfBirth: {
+        type: String,
         required: true,
-        trim: true,
     },
 
     profilePicUrl: {
@@ -32,22 +31,27 @@ const artistCartSchema = new Schema(
     },
     address:{
         type:String,
-        default: '-',
         required: true
       },
       phoneNumber: {
         type:Number,
-        default:0000000000,
         required: true
       },
     artworkUrl:{
         type:[String],
         required: true
     },
-// message for artist to choose size wisely
+
+   artType: {
+      type: String,
+      enum: ['Fine Art', 'Photography', 'Plastic Art' ],
+      required: true
+    },
+
+    // message for artist to choose size wisely
     wallSize: {
         type: String,
-        enum: ['3m space - €100', '6m space - €200', '9m space - €300' ],
+        enum: ['3m space - €80 per week', '6m space - €120 per week', '9m space - €150 per week' ],
         required: true
     },
    
@@ -66,6 +70,6 @@ const artistCartSchema = new Schema(
   }
 );
 
-const ArtistCart = model("ArtistCart", artistCartSchema);
+const ArtistApplication = model("ArtistApplication", artistApplicationSchema);
 
-module.exports = ArtistCart;
+module.exports = ArtistApplication;

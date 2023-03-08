@@ -2,10 +2,10 @@
   <h2>Fill in your details</h2>
   <form action="/artist/{{userInSession._id}}/edit" method="POST">
 
-    <label>
+    <!--<label>
       Username
       <input type="text" name="username" value="{{userInSession.username}}" />
-    </label>
+    </label>-->
 
     <label>
       First Name
@@ -17,15 +17,15 @@
       <input type="text" name="lastName" value="{{userInSession.lastName}}" />
     </label>
  
-    <label>
+    <!--<label>
       Email
       <input type="email" name="email" value="{{userInSession.email}}" />
-    </label>
+    </label>-->
 
-    <label>
+    <!--<label>
       Password
-      <input type="password" name="password" value="********" />
-    </label>
+      <input type="password" name="password" placeholder="*********"/>
+    </label>-->
 
     <label>
       Address
@@ -291,3 +291,7 @@
     -->
   </form>
 </div>
+
+{{#if errorMessage}}
+  {{this.errorMessage}}
+{{/if}}

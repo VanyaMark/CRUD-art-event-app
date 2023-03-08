@@ -13,13 +13,12 @@ const userSchema = new Schema(
     firstName: {
       type: String,
       trim: true,
-      default:'-'
+
     },
 
     lastName: {
       type: String,
       trim: true,
-      default:'-'
     },
 
     email: {
@@ -40,29 +39,27 @@ const userSchema = new Schema(
     },
     address:{
       type:String,
-      default: '-'
     },
     phoneNumber: {
       type:Number,
-      default:0000000000
+   
     },
     avatarUrl: {
       type: String,
-      default: `-`,
       trim: true
     }, 
     dateOfBirth: {
       type:String,
-      default:`-`
+      
     },
     gender: {
       type: String,
-      enum: ['Male', 'Female', 'Non-Binary', 'Rather Not Say','-'],
-      default: `-`
+      enum: ['Male', 'Female', 'Non-Binary', 'Rather Not Say'],
+    
     },
     nationality: {
       type:String,
-      default:`-`
+      
     },
     exhibitionsHosted:[{
       type: Schema.Types.ObjectId, ref:"Exhibition"
@@ -71,8 +68,7 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId, ref:"Exhibition"
     }],
     favourites: {
-      type: Schema.Types.Mixed, ref:"Artwork",
-      default: `-`
+      type: Schema.Types.ObjectId, ref:"Artwork"
     }
   },
   {
