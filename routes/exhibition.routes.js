@@ -27,6 +27,19 @@ router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => {
         })      
 }) 
 
+router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
+    const { id } = req.params;
+    Exhibition.findById(id)
+        .then((exhibitionToEdit) => {
+            res.render('exhibition/edit-exhibition', {exhibitionToEdit})
+        })
+})
+
+router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
+    const { id } = req.params;
+    const { exhibitionName, artType, exhibitionWeek, exhibitionStatus, archived } = req.body;
+})
+
 /*router.post('/createExhibition', isUserLoggedIn, isAdmin, (req, res) => {
     const {exhibitionName, artType, exhibitionWeek } = req.body;
     Exhibition.create({

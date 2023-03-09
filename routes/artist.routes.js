@@ -4,6 +4,7 @@ const User = require('../models/User.model');
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
+const Exhibition = require('../models/Exhibition.model')
 const ArtistApplication = require('../models/ArtistApplication.model');
 const {
     isUserLoggedIn,
@@ -90,14 +91,29 @@ const {
           })
       })
 
-  router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
+/*  router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
     User.findById(req.session.currentUser._id)
     .then((user)=>{
-       // console.log(`This ${user} is awesome!`)
-        res.render('artist/artist-app-form', {user})
-    })
-    
-})
+      console.log('user: ', user)
+    Exhibition.find()
+      .then((exhibitionToJoin) => {
+        console.log('exhibitionToJoin: ', exhibitionToJoin)
+        if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+          res.render('artist/artist-app-form', {user, exhibitionToJoin})
+        }
+      })
+    })   
+}) */
+
+  router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
+    let user = await User.findById(req.session.currentUser._id)
+      console.log('user: ', user)
+    let exhibitionToJoin = await Exhibition.find()
+        console.log('exhibitionToJoin: ', exhibitionToJoin)
+        if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+          res.render('artist/artist-app-form', {user, exhibitionToJoin})
+        }
+      })
 
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {

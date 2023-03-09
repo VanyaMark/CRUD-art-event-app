@@ -24,13 +24,14 @@ const exhibitionSchema = new Schema(
       type: Schema.Types.ObjectId, ref:"User"
     }],
 
-    week: {
+    exhibitionWeek: {
       type: String,
     },
 
     exhibitionStatus: {
       type: String,
-      enum: ['open', 'closed']
+      enum: ['open', 'closed', 'cancelled'],
+      default: 'open',
     },
     archived: {
       type: Boolean,

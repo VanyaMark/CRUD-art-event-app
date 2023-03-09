@@ -61,11 +61,12 @@ const artistApplicationSchema = new Schema(
       required: true
     },
     chooseWeek: {
-        type: [String],
+        type: String,
         required: true
     },
     applicationStatus: {
       type: String,
+      enum: ['approved', 'unapproved'],
       default: "unapproved"
     },
   },

@@ -1,5 +1,5 @@
 <h2>Edit Exhibition</h2>
-<form>
+<form action="/exhibition/{{exhibitionToEdit._id}}/edit" method="POST">
     <label>Exhibition Name
         <input type="text" name="exhibitionName" value="{{exhibitionToEdit.artType}}" readonly/>
     </label>
@@ -8,10 +8,24 @@
         <input type="text" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly/>
     </label>
 
-         {{#each}}
-            <p>Artist: {{exhibitionToEdit.artistApplication.firstName}} {{exhibition.artistApplication.lastName}}</p>
-            <p>Artwork Name: {{exhibitionToEdit.artistApplication.artworkName}}</p>
-            <p>Status: {{exhibitionToEdit.artistApplication.status}}</p>
+         {{#each exhibitionToEdit.artistApplication}}
+         <label>
+          <input type="text" name="firstName" value="{{this.firstName}}" readonly/>
+         </label>
+         <label>
+          <input type="text" name="lastName" value="{{this.lastName}}" readonly/>
+         </label>
+         <label>
+          <input type="text" name="artworkName" value="{{this.artworkName}}" readonly/>
+         </label>
+
+        <label>Application Status
+        <select name="applicationStatus"> 
+        <option selected value="{{this.applicationStatus}}">{{this.applicationStatus}}</option>
+        <option value="approved">Approved</option>
+        <option  value="unapproved">Unapproved</option>
+        </select>
+
         {{/each}}
 
 
@@ -19,17 +33,17 @@
     
     <label>Exhibition Status Released
         <select name="exhibitionStatus"> 
-        <option selected value="{{exhibitionToEdit.exhibitionStatus}}">Selected - {{exhibitionToEdit.exhibtionStatus}}</option>
+        <option selected value="{{exhibitionToEdit.exhibitionStatus}}">{{exhibitionToEdit.exhibtionStatus}}</option>
         <option value="open">Open</option>
         <option  value="closed">Closed</option>
-       
-      </select>
+        <option  value="cancelled">Cancelled</option>   
+    </select>
 
 
 
     </label>
     <label>Is Archived
-        <input type="checkbox" name="exhibitionWeek" readonly/>
+        <input type="checkbox" name="archived" readonly/>
     </label>
 
     <button type="submit">Edit Exhibition</button>

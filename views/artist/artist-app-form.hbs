@@ -47,7 +47,6 @@
 
 <textarea name="description" rows="4" cols="50">
 
-
 </textarea>
 
     <label>
@@ -75,12 +74,10 @@
     <label>
       Choose Week:
       <select name="chooseWeek"> 
-        {{#each}}
-        <option value="">working on it</option>
+        {{#each exhibitionToJoin}}
+        <option value="{{exhibitionToJoin.exhibitionWeek}}">{{exhibitionToJoin.exhibitionWeek}}</option>
         {{/each}}
-
       </select>
-      <input type="date" name="chooseWeek" min="2023-09-18" placeholder="2023-09-18" />
     </label>
 
     <button type="submit">View Application</button>
