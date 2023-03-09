@@ -13,7 +13,7 @@ const {
   } = require('../middleware/route-guard');
 
   router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
+    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
   })
 
   router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
