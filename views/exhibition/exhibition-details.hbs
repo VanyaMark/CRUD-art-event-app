@@ -1,0 +1,53 @@
+<!--{{#if newExhibition}}-->
+   <p>Check</p>
+    <p>Exhibition Name: {{exhibition.exhibitionName}}</p>
+    <p>Art Type: {{this.artType}}</p>
+    <p>Exhibition Week: {{this.week}}</p>
+
+    <p>Exhibition Status: {{this.exhibitionStatus}}</p>
+    <p>Visitors that attended: {{this.usersAttended}}</p>
+
+  
+            <p>Artist: {{exhibition.artistApplication.firstName}} {{exhibition.artistApplication.lastName}}</p>
+            <p>Artwork Name: {{exhibition.artistApplication.artworkName}}</p>
+            <p>Status: {{exhibition.artistApplication.status}}</p>
+   
+
+     <button><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button>
+
+<!--<form action='/createdExhibition/{{exhibition._id}}/delete' method="POST">
+<button>Delete Exhibition</button> 
+
+</form> -->
+
+
+<!--{{/if}}
+
+
+    {{#each editedItem}}
+
+    <img src="{{this.profilePicUrl}}">
+    <p>First Name: {{this.firstName}}</p>
+    <p>Last Name: {{this.lastName}}</p>
+    <p>Email: {{this.email}}</p>
+
+    <p>Phone Number: {{this.phoneNumber}}</p>
+    <p>Address: {{this.address}}</p>
+    <p>Date of Birth: {{this.dateOfBirth}}</p>
+
+    <p>Artwork Image URL</p>
+    <img src="{{this.artworkUrl}}">
+    <p>Art Type: {{this.artType}}</p>
+    <p>Wall Size: {{this.wallSize}}</p>
+    <p>Description: {{this.description}}</p>
+    <p>Requested Date: {{this.dateRequested}}</p>
+
+
+
+    <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
+    
+    <form action='/artistCart/{{this._id}}/delete' method="POST">
+    <button>Delete Application</button>
+    </form>
+
+{{/each}} -->

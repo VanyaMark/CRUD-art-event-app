@@ -1,36 +1,43 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const exhibitionSchema = new Schema(
   {
-    name: {
+    id: {
+      type: String
+    },
+    exhibitionName: {
       type: String,
       trim: true,
       required: true,
       unique: true
     },
-    imageUrl: {
-        type: String,
-        required: true,
+    artType: {
+      type: String,
+      enum: ['Fine Art', 'Photography', 'Plastic Art' ],
+      required: true
     },
-    description: {
-        type: String,
-        required: true
+    artistApplication: [{
+      type: Schema.Types.ObjectId, ref:"ArtistApplication"
+    }],
+
+    usersAttended: [{
+      type: Schema.Types.ObjectId, ref:"User"
+    }],
+
+    week: {
+      type: String,
     },
-    artist: {
-        //refers to Artist model
+
+    exhibitionStatus: {
+      type: String,
+      enum: ['open', 'closed']
     },
-    location: {
-        type: String
+    archived: {
+      type: Boolean,
+      default: false,
     }
-    /* startDate: {},
-    endDate: {},
-    status: {},
-    ranking: {},
-    likes: {}, */
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+  {  
     timestamps: true
   }
 );

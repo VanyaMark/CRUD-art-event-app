@@ -115,7 +115,8 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
         artType, 
         wallSize, 
         description, 
-        dateRequested
+        chooseWeek,
+        applicationStatus
     })
     .then(artistApp => {
       console.log('donkey: ', artistApp)
@@ -148,7 +149,8 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
       artType, 
       wallSize, 
       description, 
-      dateRequested } = req.body;
+      chooseWeek,
+      applicationStatus } = req.body;
       ArtistApplication.findByIdAndUpdate(id,{
           firstName,
           lastName,
@@ -161,7 +163,8 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
           artType, 
           wallSize, 
           description, 
-          dateRequested
+          chooseWeek,
+          applicationStatus
       }, {new: true})
       .then(()=>{res.redirect('/artistCart')})
   

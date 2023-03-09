@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const artistApplicationSchema = new Schema(
   {
     user: {
@@ -27,7 +26,6 @@ const artistApplicationSchema = new Schema(
         type: String,
         required: true,
     },
-
     profilePicUrl: {
       type: String,
       required: true,
@@ -40,39 +38,41 @@ const artistApplicationSchema = new Schema(
         type:Number,
         required: true
       },
+    artworkName: {
+      type:[String],
+      required: true
+    },
     artworkUrl:{
         type:[String],
         required: true
     },
-
    artType: {
       type: String,
       enum: ['Fine Art', 'Photography', 'Plastic Art' ],
       required: true
     },
-
-    // message for artist to choose size wisely
     wallSize: {
         type: String,
         enum: ['1m space - €80 per week', '2m space - €120 per week', '3m space - €150 per week' ],
         required: true
     },
-   
     description: {
       type: String,
       required: true
     },
-    dateRequested: {
-        type: String,
+    chooseWeek: {
+        type: [String],
         required: true
-    }
+    },
+    applicationStatus: {
+      type: String,
+      default: "unapproved"
+    },
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+  {  
     timestamps: true
   }
 );
-
 const ArtistApplication = model("ArtistApplication", artistApplicationSchema);
 
 module.exports = ArtistApplication;

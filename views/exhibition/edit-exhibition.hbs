@@ -1,0 +1,37 @@
+<h2>Edit Exhibition</h2>
+<form>
+    <label>Exhibition Name
+        <input type="text" name="exhibitionName" value="{{exhibitionToEdit.artType}}" readonly/>
+    </label>
+        <input type="text" name="artType" value="{{exhibitionToEdit.artType}}" readonly/>
+    <label>Exhibition Week
+        <input type="text" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly/>
+    </label>
+
+         {{#each}}
+            <p>Artist: {{exhibitionToEdit.artistApplication.firstName}} {{exhibition.artistApplication.lastName}}</p>
+            <p>Artwork Name: {{exhibitionToEdit.artistApplication.artworkName}}</p>
+            <p>Status: {{exhibitionToEdit.artistApplication.status}}</p>
+        {{/each}}
+
+
+    
+    
+    <label>Exhibition Status Released
+        <select name="exhibitionStatus"> 
+        <option selected value="{{exhibitionToEdit.exhibitionStatus}}">Selected - {{exhibitionToEdit.exhibtionStatus}}</option>
+        <option value="open">Open</option>
+        <option  value="closed">Closed</option>
+       
+      </select>
+
+
+
+    </label>
+    <label>Is Archived
+        <input type="checkbox" name="exhibitionWeek" readonly/>
+    </label>
+
+    <button type="submit">Edit Exhibition</button>
+
+</form>

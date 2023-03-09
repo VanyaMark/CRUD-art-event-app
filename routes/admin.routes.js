@@ -8,8 +8,5 @@ const {
     isAdmin
   } = require('../middleware/route-guard');
 
-  router.get('/admin', isUserLoggedIn, (req, res) => {
-    res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, buttonA: "Artist Orders", linkA: "/admin/artist-orders", buttonB: "Visitor Orders", linkB: "/admin/visitor-orders", buttonC: "Modify Database", linkC: "/admin/modify-database"});
-  })
 
 module.exports = router;

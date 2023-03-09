@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
     username: {
@@ -9,18 +8,14 @@ const userSchema = new Schema(
       required: true,
       unique: true
     },
-
     firstName: {
       type: String,
       trim: true,
-
     },
-
     lastName: {
       type: String,
       trim: true,
     },
-
     email: {
       type: String,
       required: true,
@@ -42,24 +37,20 @@ const userSchema = new Schema(
     },
     phoneNumber: {
       type:Number,
-   
     },
     avatarUrl: {
       type: String,
       trim: true
     }, 
     dateOfBirth: {
-      type:String,
-      
+      type:String, 
     },
     gender: {
       type: String,
       enum: ['Male', 'Female', 'Non-Binary', 'Rather Not Say'],
-    
     },
     nationality: {
-      type:String,
-      
+      type:String,  
     },
     exhibitionsHosted:[{
       type: Schema.Types.ObjectId, ref:"Exhibition"
@@ -71,12 +62,10 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId, ref:"Artwork"
     }
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+  { 
     timestamps: true
   }
 );
-
 const User = model("User", userSchema);
 
 module.exports = User;

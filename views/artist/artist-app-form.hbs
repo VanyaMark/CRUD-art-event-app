@@ -59,6 +59,10 @@
       </select>
     </label>
 
+    <label>Artwork Title:
+      <input type="text" name="artworkName" placeholder="Enter Artwork Title Here"/>
+    </label>
+
     <label>
       Wall Size:
       <select name="wallSize"> 
@@ -69,8 +73,14 @@
     </label>
 
     <label>
-      Preferred Date:
-      <input type="date" name="dateRequested" min="2023-09-18" placeholder="2023-09-18" />
+      Choose Week:
+      <select name="chooseWeek"> 
+        {{#each}}
+        <option value="">working on it</option>
+        {{/each}}
+
+      </select>
+      <input type="date" name="chooseWeek" min="2023-09-18" placeholder="2023-09-18" />
     </label>
 
     <button type="submit">View Application</button>

@@ -1,11 +1,11 @@
 
-/*const { Router } = require('express');
+const { Router } = require('express');
 const router = new Router();
 const User = require('../models/User.model');
-const ArtistCart = require('../models/ArtistCart.model');
+const ArtistApplication = require('../models/ArtistApplication.model');
+const Exhibition = require('../models/Exhibition.model')
 const mongoose = require('mongoose');
-const bcryptjs = require('bcryptjs');
-const saltRounds = 10;
+
 
 const {
     isUserLoggedIn,
@@ -14,37 +14,30 @@ const {
     isArtistOrAdmin
   } = require('../middleware/route-guard');
 
-router.get('/artist/application', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
-    //User.findById(req.session.currentUser._id)
-    //.then((user)=>{
-       // console.log(`This ${user} is awesome!`)
-        res.render('artist/artist-app-form')
-   // })
-    
-})
+  router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
+    res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "working", linkB: "/artist/favourites", buttonC: "working", linkC: "/artist/application-history"});
+  })
 
+router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => { 
 
+    Exhibition.find()
+    .then((exhibition) => {
+            console.log('Exhibition: ', exhibition)
+            res.render('exhibition/exhibition-details', {exhibition} )
+        })      
+}) 
 
-router.post('/artist/application', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    const {firstName, lastName, email, age, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
-    ArtistCart.create({
-        firstName,
-        lastName,
-        email,
-        age,
-        profilePicUrl,
-        address,
-        phoneNumber,
-        artworkUrl, 
-        wallSize, 
-        description, 
-        dateRequested
+/*router.post('/createExhibition', isUserLoggedIn, isAdmin, (req, res) => {
+    const {exhibitionName, artType, exhibitionWeek } = req.body;
+    Exhibition.create({
+        exhibitionName,
+        artType,
+        exhibitionWeek,
     })
-    .then(artistCart => {
-        console.log('New Artist cart: ', artistCart)
-        res.render('artist/artist-cart', {artistCart} )
+    .then(newExhibition => {
+        console.log('New Exhibition: ', newExhibition)
+        res.render('exhibition/created-exhibition', {newExhibition} )
     })
-})
+})*/
 
 module.exports = router;
-*/
