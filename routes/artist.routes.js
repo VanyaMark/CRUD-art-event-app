@@ -106,29 +106,33 @@ const {
 }) */
 
   router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
-    let user = await User.findById(req.session.currentUser._id)
-      console.log('user: ', user)
     let exhibitionToJoin = await Exhibition.find()
-        console.log('exhibitionToJoin: ', exhibitionToJoin)
-        if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
-          res.render('artist/artist-app-form', {user, exhibitionToJoin})
-        }
+    console.log('exhibitionToJoin: ', exhibitionToJoin)
+    //  if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+          let user = await User.findById(req.session.currentUser._id)
+            console.log('user: ', user)
+          Promise.all([user, exhibitionToJoin])
+            .then((values) => {
+              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1]})
+            })
+      //  }
       })
+
 
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const user = req.session.currentUser._id
-    const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, dateRequested } = req.body;
+    const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, chooseWeek, applicationStatus } = req.body;
     ArtistApplication.create({user,
         firstName,
         lastName,
         email,
         dateOfBirth,
+        artType,
         profilePicUrl,
         address,
         phoneNumber,
         artworkUrl,
-        artType, 
         wallSize, 
         description, 
         chooseWeek,
@@ -144,13 +148,29 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
 
 
-router.get('/artistCart/:id/edit', (req, res) => {
+router.get('/artistCart/:id/edit', async (req, res) => {
   const { id } = req.params;
-  ArtistApplication.findById(id)
-    .then((artistApptoEdit => {
-      res.render('artist/artist-cart-edit', {artistApptoEdit})
+  let artistApptoEdit = await ArtistApplication.findById(id)
+  let exhibitionToJoin = await Exhibition.find()
+  Promise.all([artistApptoEdit, exhibitionToJoin])
+    .then((values => {
+      res.render('artist/artist-cart-edit', {artistApptoEdit: values[0], exhibitionToJoin: values[1]})
     }))
 })
+
+/*router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
+  let exhibitionToJoin = await Exhibition.find()
+  console.log('exhibitionToJoin: ', exhibitionToJoin)
+  //  if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+        let user = await User.findById(req.session.currentUser._id)
+          console.log('user: ', user)
+        Promise.all([user, exhibitionToJoin])
+          .then((values) => {
+            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1]})
+          })
+    //  }
+    }) */
+
 
 router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, next) =>{
     const { id } = req.params;

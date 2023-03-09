@@ -1,11 +1,11 @@
 <div>
-  
+
   <h2>Artist Application Form</h2>
 
   <form action="/artistCart" method="POST">
 
     <label>
-      First Name: 
+      First Name:
       <input type="text" name="firstName" value="{{user.firstName}}" />
     </label>
 
@@ -36,52 +36,67 @@
 
     <label>
       Profile picture:
-      <input type="text" name="profilePicUrl" placeholder="Enter Image URL Here" />
+      <input
+        type="text"
+        name="profilePicUrl"
+        placeholder="Enter Image URL Here"
+      />
     </label>
-    
+
     <label>
       Links to artwork image:
-      <input type="string" name="artworkUrl" placeholder="Enter Artwork URL Here" />
+      <input
+        type="string"
+        name="artworkUrl"
+        placeholder="Enter Artwork URL Here"
+      />
     </label>
-    <label for="w3review">Description:</label>
-
-<textarea name="description" rows="4" cols="50">
-
-</textarea>
 
     <label>
       Art Type:
-      <select name="artType"> 
+      <select name="artType">
+        <option selected value="{{user.artType}}">Selected -
+          {{user.artType}}</option>
         <option value="Fine Art">Fine Art</option>
-        <option  value="Photography">Photography</option>
-        <option  value="Plastic Art">Plastic Art</option>
+        <option value="Photography">Photography</option>
+        <option value="Plastic Art">Plastic Art</option>
       </select>
     </label>
 
+    <label for="w3review">Description:</label>
+    <textarea name="description" rows="4" cols="50">
+    </textarea>
+
     <label>Artwork Title:
-      <input type="text" name="artworkName" placeholder="Enter Artwork Title Here"/>
+      <input
+        type="text"
+        name="artworkName"
+        placeholder="Enter Artwork Title Here"
+      />
     </label>
 
     <label>
       Wall Size:
-      <select name="wallSize"> 
+      <select name="wallSize">
         <option value="1m space - €80 per week">1m space - €80 per week</option>
-        <option  value="2m space - €120 per week">2m space - €120 per week</option>
-        <option  value="3m space - €150 per week">3m space - €150 per week</option>
+        <option value="2m space - €120 per week">2m space - €120 per week</option>
+        <option value="3m space - €150 per week">3m space - €150 per week</option>
       </select>
     </label>
 
     <label>
       Choose Week:
-      <select name="chooseWeek"> 
+      <select name="chooseWeek">
         {{#each exhibitionToJoin}}
-        <option value="{{exhibitionToJoin.exhibitionWeek}}">{{exhibitionToJoin.exhibitionWeek}}</option>
+          <option
+            value="{{this.exhibitionName}}-{{this.exhibitionWeek}}"
+          >{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
         {{/each}}
       </select>
     </label>
 
     <button type="submit">View Application</button>
 
-    </form>
+  </form>
 
-</div> 
+</div>

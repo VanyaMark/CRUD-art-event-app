@@ -4,17 +4,32 @@
 
     <label>
       First Name
-      <input type="text" name="firstName" value="{{artistApptoEdit.firstName}}" readonly/>
+      <input
+        type="text"
+        name="firstName"
+        value="{{artistApptoEdit.firstName}}"
+        readonly
+      />
     </label>
 
     <label>
       Last Name
-      <input type="text" name="lastName" value="{{artistApptoEdit.lastName}}" readonly/>
+      <input
+        type="text"
+        name="lastName"
+        value="{{artistApptoEdit.lastName}}"
+        readonly
+      />
     </label>
 
     <label>
       Email
-      <input type="email" name="email" value="{{artistApptoEdit.email}}" readonly />
+      <input
+        type="email"
+        name="email"
+        value="{{artistApptoEdit.email}}"
+        readonly
+      />
     </label>
 
     <label>
@@ -24,54 +39,85 @@
 
     <label>
       Phone Number
-      <input type="number" name="phoneNumber" value="{{artistApptoEdit.phoneNumber}}" />
+      <input
+        type="number"
+        name="phoneNumber"
+        value="{{artistApptoEdit.phoneNumber}}"
+      />
     </label>
 
     <label>
       Date of Birth
-      <input type="date" name="dateOfBirth" value="{{artistApptoEdit.dateOfBirth}}" />
+      <input
+        type="date"
+        name="dateOfBirth"
+        value="{{artistApptoEdit.dateOfBirth}}"
+      />
     </label>
 
-        <label>
+    <label>
       Profile picture:
-      <input type="text" name="profilePicUrl" value="{{artistApptoEdit.profilePicUrl}}" />
+      <input
+        type="text"
+        name="profilePicUrl"
+        value="{{artistApptoEdit.profilePicUrl}}"
+      />
     </label>
 
     <label>
       Artwork Image URL
-      <input type="text" name="artworkUrl" value="{{artistApptoEdit.artworkUrl}}" />
+      <input
+        type="text"
+        name="artworkUrl"
+        value="{{artistApptoEdit.artworkUrl}}"
+      />
     </label>
 
-     
     <label>
       Art Type:
-      <select name="artType"> 
-        <option selected value="{{artistApptoEdit.artType}}">Selected - {{artistApptoEdit.artType}}</option>
+      <select name="artType">
+        <option selected value="{{artistApptoEdit.artType}}">Selected -
+          {{artistApptoEdit.artType}}</option>
         <option value="Fine Art">Fine Art</option>
-        <option  value="Photography">Photography</option>
-        <option  value="Plastic Art">Plastic Art</option>
+        <option value="Photography">Photography</option>
+        <option value="Plastic Art">Plastic Art</option>
       </select>
     </label>
 
     <label>
       Wall Size:
-      <select name="wallSize"> 
-        <option selected value="{{artistApptoEdit.wallSize}}">Selected - {{artistApptoEdit.wallSize}}</option>
+      <select name="wallSize">
+        <option selected value="{{artistApptoEdit.wallSize}}">Selected -
+          {{artistApptoEdit.wallSize}}</option>
         <option value="1m space - €80 per week">1m space - €80 per week</option>
-        <option  value="2m space - €120 per week">2m space - €120 per week</option>
-        <option  value="3m space - €150 per week">3m space - €150 per week</option>
+        <option value="2m space - €120 per week">2m space - €120 per week</option>
+        <option value="3m space - €150 per week">3m space - €150 per week</option>
       </select>
     </label>
 
     <label for="w3review">Description:</label>
-     <textarea name="description"  rows="4" cols="50">{{artistApptoEdit.description}}</textarea>
+    <textarea
+      name="description"
+      rows="4"
+      cols="50"
+    >{{artistApptoEdit.description}}</textarea>
 
     <label>
-      Preferred Date:
-      <input type="date" name="dateRequested" min="2023-09-18" value="{{artistApptoEdit.dateRequested}}" />
+      Choose Week:
+      <select name="chooseWeek">
+        <option
+          selected
+          value="{{artistApptoEdit.chooseWeek}}"
+        >{{artistApptoEdit.chooseWeek}}</option>
+        {{#each exhibitionToJoin}}
+          <option
+            value="{{this.exhibitionName}}-{{this.exhibitionWeek}}"
+          >{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
+        {{/each}}
+      </select>
     </label>
 
-     <button type="submit">Update Application</button>
+    <button type="submit">Update Application</button>
 
-     </form>
-     </div>
+  </form>
+</div>
