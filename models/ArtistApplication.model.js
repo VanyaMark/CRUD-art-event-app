@@ -39,7 +39,7 @@ const artistApplicationSchema = new Schema(
         required: true
       },
     artworkName: {
-      type:[String],
+      type: String,
       required: true
     },
     artworkUrl:{

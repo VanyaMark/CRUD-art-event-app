@@ -122,7 +122,7 @@ const {
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
     const user = req.session.currentUser._id
-    const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkUrl, wallSize, description, chooseWeek, applicationStatus } = req.body;
+    const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkName, artworkUrl, wallSize, description, chooseWeek, applicationStatus } = req.body;
     ArtistApplication.create({user,
         firstName,
         lastName,
@@ -132,6 +132,7 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
         profilePicUrl,
         address,
         phoneNumber,
+        artworkName,
         artworkUrl,
         wallSize, 
         description, 
@@ -142,7 +143,7 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
         console.log('New Artist cart: ', artistApp)
         res.render('artist/artist-cart', {artistApp} )
     })
-    .catch(async (err)=> {
+   .catch(async (err)=> {
       console.log('err code: ', typeof err.code)
 
  if (err._message === 'ArtistApplication validation failed') {
@@ -155,10 +156,10 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
             .then((values) => {
               res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1], errorMessage: "Error: Please, ensure all fields are complete."})
             })
-      }
+      } 
       else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one."}) 
    }
-})
+}) 
 })
 
 
@@ -195,6 +196,7 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
       profilePicUrl,
       address,
       phoneNumber,
+      artworkName,
       artworkUrl,
       artType, 
       wallSize, 
@@ -209,6 +211,7 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
           profilePicUrl,
           address,
           phoneNumber,
+          artworkName,
           artworkUrl,
           artType, 
           wallSize, 
@@ -246,19 +249,34 @@ router.get('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   res.render('artist/artist-submit-app')
 })
 
+async function addArtistAppObject(theExhibitionToUpdate, newArtistApp) {
+  let updatedExhibition = await Exhibition.updateOne(
+    theExhibitionToUpdate, 
+    {$push: {artistApplication: newArtistApp}});
+    console.log('Updated Exhibiton:', updatedExhibition)
+
+}
+
 router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res) => {
   const { id } = req.session.currentUser._id
-  let artistApplication = []
-  const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek} = req.body;
+  console.log('session.currentUser: ',req.session.currentUser)
+  const user = req.session.currentUser;
+//  let artistApplication = []
+const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek} = req.body;
   console.log('monkey')
   console.log("req.body: ", req.body)
   
   let exhibition = await Exhibition.find()
 for (let i = 0; i < exhibition.length; i++) {
-    if (exhibition[i].exhibitionWeek == chooseWeek && exhibition[i].artType == artType) {
+    if (exhibition[i].exhibitionWeek == chooseWeek) {
     console.log('exhibition: ', exhibition[i])
+    let artistApplication = JSON.parse(JSON.stringify(req.body)) 
+    addArtistAppObject(exhibition[i], artistApplication)
   } 
 }
+
+await ArtistApplication.findOneAndDelete({user})
+
   res.render('artist/artist-submit-app')
 })
 
