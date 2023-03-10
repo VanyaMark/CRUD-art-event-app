@@ -11,25 +11,25 @@ const users = [
   { username: "Vanya Mark", email: "vanya.mark@ironhack.com", passwordHash:"$2a$10$LZ8XiLY1melVKdAr.E/WreBSaO.W66uclyIuH3.7CgKqUhdP7FDua", role: "admin" }  
 ]
 
-  const exhibitions = [{"exhibitionName": "Nature","exhibitionWeek": "Mon-08/01/2024-Sun-14/01/2024"}, 
+  const exhibitions = [{"exhibitionName": "Nature","exhibitionWeek": "Mon-08/01/2024-Sun-14/01/2024", "archived": true}, 
   
-  {"exhibitionName": "Future", "exhibitionWeek": "Mon-15/01/2024-Sun-21/01/2024"}, 
+  {"exhibitionName": "Future", "exhibitionWeek": "Mon-15/01/2024-Sun-21/01/2024", "archived": true, "exhibitionStatus": "cancelled" }, 
   
-  {"exhibitionName": "Flowers", "exhibitionWeek": "Mon-22/01/2024-Sun-28/01/2024"}, 
+  {"exhibitionName": "Flowers", "exhibitionWeek": "Mon-22/01/2024-Sun-28/01/2024", "archived": true, "exhibitionStatus": "cancelled" }, 
   
-  {"exhibitionName": "Puppies' Love", "exhibitionWeek": "Mon-29/01/2024-Sun-04/02/2024"}, 
+  {"exhibitionName": "Puppies' Love", "exhibitionWeek": "Mon-29/01/2024-Sun-04/02/2024", "archived": true, "exhibitionStatus": "cancelled" }, 
   
-  {"exhibitionName": "Safari", "exhibitionWeek": "Mon-05/02/2024-Sun-11/02/2024"},
+  {"exhibitionName": "Safari", "exhibitionWeek": "Mon-05/02/2024-Sun-11/02/2024", "archived": true},
   
-  {"exhibitionName": "City Jungle", "exhibitionWeek": "Mon-12/02/2024-Sun-18/02/2024"},
+  {"exhibitionName": "City Jungle", "exhibitionWeek": "Mon-12/02/2024-Sun-18/02/2024", "archived": true},
   
-  {"exhibitionName": "Rural Paradise", "exhibitionWeek": "Mon-19/02/2024-Sun-25/02/2024"},
+  {"exhibitionName": "Rural Paradise", "exhibitionWeek": "Mon-19/02/2024-Sun-25/02/2024", "archived": true},
   
-  {"exhibitionName": "Nostalgy", "exhibitionWeek": "Mon-26/02/2024-Sun-03/03/2024"},
+  {"exhibitionName": "Nostalgy", "exhibitionWeek": "Mon-26/02/2024-Sun-03/03/2024", "exhibitionStatus": "closed" },
   
-  {"exhibitionName": "Coming Home", "exhibitionWeek": "Mon-04/03/2024-Sun-10/03/2024"},
+  {"exhibitionName": "Coming Home", "exhibitionWeek": "Mon-04/03/2024-Sun-10/03/2024", "exhibitionStatus": "closed" },
 
-  {"exhibitionName": "Solitude", "exhibitionWeek": "Mon-11/03/2024-Sun-17/03/2024"},
+  {"exhibitionName": "Solitude", "exhibitionWeek": "Mon-11/03/2024-Sun-17/03/2024",},
   
   {"exhibitionName": "Technology", "exhibitionWeek": "Mon-18/03/2024-Sun-24/03/2024"},
 

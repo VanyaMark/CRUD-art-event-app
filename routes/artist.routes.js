@@ -106,16 +106,22 @@ const {
 }) */
 
   router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
-    let exhibitionToJoin = await Exhibition.find()
-    console.log('exhibitionToJoin: ', exhibitionToJoin)
-    //  if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+    let exhibition = await Exhibition.find()
+    let exhibitionArray = [];
+
+     // if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
           let user = await User.findById(req.session.currentUser._id)
-            console.log('user: ', user)
-          Promise.all([user, exhibitionToJoin])
-            .then((values) => {
-              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1]})
+
+          Promise.all([user, exhibition])
+            .then((values) => { console.log("values:",values)
+            values[1].forEach((item)=> {
+              console.log('item: ', item);
+              if (item.exhibitionStatus === "open" && item.archived === false) {
+                  exhibitionArray.push(item)
+                }
+              })
+              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray})
             })
-      //  }
       })
 
 
@@ -148,15 +154,21 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
  if (err._message === 'ArtistApplication validation failed') {
   let exhibitionToJoin = await Exhibition.find()
+  let exhibitionArray = [];
     console.log('exhibitionToJoin: ', exhibitionToJoin)
-    //  if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+
           let user = await User.findById(req.session.currentUser._id)
             console.log('user: ', user)
           Promise.all([user, exhibitionToJoin])
             .then((values) => {
-              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1], errorMessage: "Error: Please, ensure all fields are complete."})
+              values[1].forEach((item)=> {
+                if (item.exhibitionStatus === "open" && item.archived === false) {
+                  exhibitionArray.push(item)
+                }
+              })
+              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete."})
             })
-      } 
+    }
       else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one."}) 
    }
 }) 
@@ -167,11 +179,19 @@ router.get('/artistCart/:id/edit', async (req, res) => {
   const { id } = req.params;
   let artistApptoEdit = await ArtistApplication.findById(id)
   let exhibitionToJoin = await Exhibition.find()
+  let exhibitionArray = [];
+  
   Promise.all([artistApptoEdit, exhibitionToJoin])
     .then((values => {
-      res.render('artist/artist-cart-edit', {artistApptoEdit: values[0], exhibitionToJoin: values[1]})
+      values[1].forEach((item)=> {
+        if (item.exhibitionStatus === "open" && item.archived === false) {
+          exhibitionArray.push(item)
+        }
+      })
+      res.render('artist/artist-cart-edit', {artistApptoEdit: values[0], exhibitionToJoin: exhibitionArray})
     }))
 })
+
 
 /*router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
   let exhibitionToJoin = await Exhibition.find()
@@ -268,7 +288,7 @@ const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBi
   
   let exhibition = await Exhibition.find()
 for (let i = 0; i < exhibition.length; i++) {
-    if (exhibition[i].exhibitionWeek == chooseWeek) {
+    if (exhibition[i].exhibitionWeek == chooseWeek.slice(chooseWeek.length-29,chooseWeek.length)) {
     console.log('exhibition: ', exhibition[i])
     let artistApplication = JSON.parse(JSON.stringify(req.body)) 
     addArtistAppObject(exhibition[i], artistApplication)

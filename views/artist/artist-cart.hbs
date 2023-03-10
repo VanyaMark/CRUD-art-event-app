@@ -26,9 +26,7 @@
     <button type="submit">Submit</button>
   </form>
 
-
   <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button>
-
 
   <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
     <button>Delete Application</button>
@@ -38,22 +36,27 @@
 
 {{#each editedItem}}
 
-  <img src="{{this.profilePicUrl}}" />
-  <p>First Name: {{this.firstName}}</p>
-  <p>Last Name: {{this.lastName}}</p>
-  <p>Email: {{this.email}}</p>
+  <form action="/artistSubmitApp" method="POST">
+  
+    <input name="profilePicUrl" value="{{this.profilePicUrl}}" />
+    <input name="firstName" value="{{this.firstName}}"/>
+    <input name="lastName" value="{{this.lastName}}" />
+    <input name="email" value= "{{this.email}}"/>
 
-  <p>Phone Number: {{this.phoneNumber}}</p>
-  <p>Address: {{this.address}}</p>
-  <p>Date of Birth: {{this.dateOfBirth}}</p>
+    <input name="phoneNumber" value= "{{this.phoneNumber}}"/>
+    <input name="address" value= "{{this.address}}"/>
+    <input name="dateOfBirth" value= "{{this.dateOfBirth}}"/>
 
-    <input name="artworkName" value="{{artistApp.artworkName}}"/>
-  <p>Artwork Image URL</p>
-  <img src="{{this.artworkUrl}}" />
-  <p>Art Type: {{this.artType}}</p>
-  <p>Wall Size: {{this.wallSize}}</p>
-  <p>Description: {{this.description}}</p>
-  <p>Choose week: {{this.chooseWeek}}</p>
+    <input name="artworkName" value="{{this.artworkName}}"/>
+    <input name="artworkUrl" value="{{this.artworkUrl}}" />
+    <input name="artType" value="{{this.artType}}"/>
+    <input name="wallSize" value="{{this.wallSize}}"/>
+    <input name="description" value="{{this.description}}"/>
+    <input name="chooseWeek" value="{{this.chooseWeek}}"/>
+
+    <button type="submit">Submit</button>
+
+  </form>
 
   <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
 

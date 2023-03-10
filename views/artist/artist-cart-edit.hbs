@@ -113,10 +113,10 @@
         <option
           selected
           value="{{artistApptoEdit.chooseWeek}}"
-        >{{artistApptoEdit.chooseWeek}}</option>
+        >{{artistApptoEdit.exhibitionName}}-{{artistApptoEdit.chooseWeek}}</option>
         {{#each exhibitionToJoin}}
           <option
-            value="{{this.exhibitionWeek}}"
+            value="{{this.exhibitionName}}-{{this.exhibitionWeek}}"
           >{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
         {{/each}}
       </select>
