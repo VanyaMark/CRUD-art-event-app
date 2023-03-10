@@ -2,22 +2,22 @@ const { Schema, model } = require("mongoose");
 
 const exhibitionSchema = new Schema(
   {
-    id: {
+   /* id: {
       type: String
-    },
+    },*/
     exhibitionName: {
       type: String,
       trim: true,
       required: true,
       unique: true
     },
-    artType: {
+  /*  artType: {
       type: String,
       enum: ['Fine Art', 'Photography', 'Plastic Art' ],
       required: true
-    },
+    }, */
     artistApplication: [{
-      type: Schema.Types.ObjectId, ref:"ArtistApplication"
+      type: Schema.Types.Mixed, ref:"ArtistApplication"
     }],
 
     usersAttended: [{

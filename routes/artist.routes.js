@@ -246,12 +246,20 @@ router.get('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   res.render('artist/artist-submit-app')
 })
 
-router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res) => {
   const { id } = req.session.currentUser._id
+  let artistApplication = []
   const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek} = req.body;
   console.log('monkey')
   console.log("req.body: ", req.body)
   
+  let exhibition = await Exhibition.find()
+for (let i = 0; i < exhibition.length; i++) {
+    if (exhibition[i].exhibitionWeek == chooseWeek && exhibition[i].artType == artType) {
+    console.log('exhibition: ', exhibition[i])
+  } 
+}
+  res.render('artist/artist-submit-app')
 })
 
 module.exports = router;
