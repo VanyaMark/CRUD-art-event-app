@@ -139,13 +139,27 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
         applicationStatus
     })
     .then(artistApp => {
-      console.log('donkey: ', artistApp)
         console.log('New Artist cart: ', artistApp)
         res.render('artist/artist-cart', {artistApp} )
     })
+    .catch(async (err)=> {
+      console.log('err code: ', typeof err.code)
+
+ if (err._message === 'ArtistApplication validation failed') {
+  let exhibitionToJoin = await Exhibition.find()
+    console.log('exhibitionToJoin: ', exhibitionToJoin)
+    //  if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
+          let user = await User.findById(req.session.currentUser._id)
+            console.log('user: ', user)
+          Promise.all([user, exhibitionToJoin])
+            .then((values) => {
+              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1], errorMessage: "Error: Please, ensure all fields are complete."})
+            })
+      }
+      else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one."}) 
+   }
 })
-
-
+})
 
 
 router.get('/artistCart/:id/edit', async (req, res) => {
@@ -227,5 +241,17 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   })
       
     })
+
+router.get('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  res.render('artist/artist-submit-app')
+})
+
+router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const { id } = req.session.currentUser._id
+  const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek} = req.body;
+  console.log('monkey')
+  console.log("req.body: ", req.body)
+  
+})
 
 module.exports = router;

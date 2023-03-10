@@ -1,57 +1,62 @@
+{{#if errMsg}}
+  <p>{{errMsg}}</p>
+  <button><a href="/artistCart"> Pending Application Here </a></button>
+{{/if}}
 
 {{#if artistApp}}
 
-<img src="{{artistApp.profilePicUrl}}">
-    <p>First Name: {{artistApp.firstName}}</p>
-    <p>Last Name: {{artistApp.lastName}}</p>
-    <p>Email: {{artistApp.email}}</p>
+  <form action="/artistSubmitApp" method="POST">
+  
+    <input name="profilePicUrl" value="{{artistApp.profilePicUrl}}" />
+    <input name="firstName" value="{{artistApp.firstName}}"/>
+    <input name="lastName" value="{{artistApp.lastName}}" />
+    <input name="email" value= "{{artistApp.email}}"/>
 
-    <p>Phone Number: {{artistApp.phoneNumber}}</p>
-    <p>Address: {{artistApp.address}}</p>
-    <p>Date of Birth: {{artistApp.dateOfBirth}}</p>
+    <input name="phoneNumber" value= "{{artistApp.phoneNumber}}"/>
+    <input name="address" value= "{{artistApp.address}}"/>
+    <input name="dateOfBirth" value= "{{artistApp.dateOfBirth}}"/>
 
-    <p>Artwork Image URL</p>
-    <img src="{{artistApp.artworkUrl}}">
-    <p>Art Type: {{artistApp.artType}}</p>
-    <p>Wall Size: {{artistApp.wallSize}}</p>
-    <p>Description: {{artistApp.description}}</p>
-    <p>Requested Week: {{artistApp.chooseWeek}}</p>
+    <input name="artworkUrl" value="{{artistApp.artworkUrl}}" />
+    <input name="artType" value="{{artistApp.artType}}"/>
+    <input name="wallSize" value="{{artistApp.wallSize}}"/>
+    <input name="description" value="{{artistApp.description}}"/>
+    <input name="chooseWeek" value="{{artistApp.chooseWeek}}"/>
 
-     <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application Details</a></button>
+    <button type="submit">Submit</button>
+  </form>
 
-<form action='/artistCart/{{artistApp._id}}/delete' method="POST">
-<button>Delete Application</button>
 
-</form>
+  <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button>
+
+
+  <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
+    <button>Delete Application</button>
+  </form>
 
 {{/if}}
 
+{{#each editedItem}}
 
-    {{#each editedItem}}
+  <img src="{{this.profilePicUrl}}" />
+  <p>First Name: {{this.firstName}}</p>
+  <p>Last Name: {{this.lastName}}</p>
+  <p>Email: {{this.email}}</p>
 
-    <img src="{{this.profilePicUrl}}">
-    <p>First Name: {{this.firstName}}</p>
-    <p>Last Name: {{this.lastName}}</p>
-    <p>Email: {{this.email}}</p>
+  <p>Phone Number: {{this.phoneNumber}}</p>
+  <p>Address: {{this.address}}</p>
+  <p>Date of Birth: {{this.dateOfBirth}}</p>
 
-    <p>Phone Number: {{this.phoneNumber}}</p>
-    <p>Address: {{this.address}}</p>
-    <p>Date of Birth: {{this.dateOfBirth}}</p>
+  <p>Artwork Image URL</p>
+  <img src="{{this.artworkUrl}}" />
+  <p>Art Type: {{this.artType}}</p>
+  <p>Wall Size: {{this.wallSize}}</p>
+  <p>Description: {{this.description}}</p>
+  <p>Choose week: {{this.chooseWeek}}</p>
 
-    <p>Artwork Image URL</p>
-    <img src="{{this.artworkUrl}}">
-    <p>Art Type: {{this.artType}}</p>
-    <p>Wall Size: {{this.wallSize}}</p>
-    <p>Description: {{this.description}}</p>
-    <p>Choose week: {{this.chooseWeek}}</p>
+  <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
 
-    <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
-    
-    <form action='/artistCart/{{this._id}}/delete' method="POST">
+  <form action="/artistCart/{{this._id}}/delete" method="POST">
     <button>Delete Application</button>
-    </form>
+  </form>
 
 {{/each}}
-
-  
-
