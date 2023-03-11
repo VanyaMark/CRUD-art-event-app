@@ -49,9 +49,26 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
 router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin,  (req, res) => {
     const { id } = req.params;
     const { exhibitionStatus, archived, artistApplication, applicationStatus } = req.body;
+    console.log('id: ', id)
+//----------------------------------------array
+console.log('req.body: ', req.body)// 
+console.log('req.body.applicationStatus: ', req.body.applicationStatus)//[approved, unapproved, tobeapproved]
 
-console.log('req.body: ', req.body)
-console.log('req.body.applicationStatus: ', req.body.applicationStatus[0])
+Exhibition.findById(id)
+ .then((exhibition) => {
+   /* for (let i=0; i<exhibition.artistApplication.length; i++) {
+        Exhibition.updateOne()
+    } */
+//                     ---!!!!!! WORKING ON THIS BIT !!!!! -----
+    console.log('exhibition.artistApplication: ', exhibition.artistApplication)
+     for (let i=0; i<exhibition.artistApplication.length; i++){
+                 Exhibition.updateOne(
+                     {'_id': 'ObjectId(id)', "artistApplication._id" : exhibition.artistApplication[i]._id},
+                     {$set:{"artistApplication.$.applicationStatus": req.body.applicationStatus[i]}}
+                 )
+             }     
+ })  
+
 })
  //   let exhibitionToUpdate = await Exhibition.findById(id)
  //   exhibitionToUpdate.artistApplication
