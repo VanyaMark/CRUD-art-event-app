@@ -1,31 +1,32 @@
 <h2>Edit Exhibition</h2>
 <form action="/exhibition/{{exhibitionToEdit._id}}/edit" method="POST">
     <label>Exhibition Name
-        <input type="text" name="exhibitionName" value="{{exhibitionToEdit.artType}}" readonly/>
+        <input type="text" name="exhibitionName" value="{{exhibitionToEdit.exhibitionName}}" readonly/>
     </label>
-        <input type="text" name="artType" value="{{exhibitionToEdit.artType}}" readonly/>
     <label>Exhibition Week
         <input type="text" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly/>
     </label>
 
          {{#each exhibitionToEdit.artistApplication}}
-         <label>
+<div>
+         <label>Artist's First and Last Name
           <input type="text" name="firstName" value="{{this.firstName}}" readonly/>
          </label>
          <label>
           <input type="text" name="lastName" value="{{this.lastName}}" readonly/>
          </label>
-         <label>
+         <label>Artwork Title
           <input type="text" name="artworkName" value="{{this.artworkName}}" readonly/>
          </label>
 
         <label>Application Status
         <select name="applicationStatus"> 
+            
         <option selected value="{{this.applicationStatus}}">{{this.applicationStatus}}</option>
         <option value="approved">Approved</option>
         <option  value="unapproved">Unapproved</option>
         </select>
-
+</div>
         {{/each}}
 
 

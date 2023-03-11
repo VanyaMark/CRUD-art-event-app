@@ -209,7 +209,9 @@ router.get('/artistCart/:id/edit', async (req, res) => {
 
 router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, next) =>{
     const { id } = req.params;
-    const { firstName,
+    let user=req.session.currentUser._id;
+
+    const {firstName,
       lastName,
       email,
       dateOfBirth,
@@ -223,7 +225,7 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
       description, 
       chooseWeek,
       applicationStatus } = req.body;
-      ArtistApplication.findByIdAndUpdate(id,{
+      ArtistApplication.findByIdAndUpdate(id,{ id, user,
           firstName,
           lastName,
           email,
@@ -280,12 +282,12 @@ async function addArtistAppObject(theExhibitionToUpdate, newArtistApp) {
 router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res) => {
   const { id } = req.session.currentUser._id
   console.log('session.currentUser: ',req.session.currentUser)
-  const user = req.session.currentUser;
-//  let artistApplication = []
-const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek} = req.body;
+
+//  let applicationId = await ArtistApplication.find({id})
+const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek, applicationStatus} = req.body;
   console.log('monkey')
   console.log("req.body: ", req.body)
-  
+  const user = req.session.currentUser;
   let exhibition = await Exhibition.find()
 for (let i = 0; i < exhibition.length; i++) {
     if (exhibition[i].exhibitionWeek == chooseWeek.slice(chooseWeek.length-29,chooseWeek.length)) {

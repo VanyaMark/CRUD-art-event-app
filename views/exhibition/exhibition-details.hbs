@@ -1,19 +1,14 @@
 
 {{#each exhibition}}
     <p>Exhibition Name: {{this.exhibitionName}}</p>
-    <p>Art Type: {{this.artType}}</p>
+
     <p>Exhibition Week: {{this.exhibitionWeek}}</p>
 
     <p>Exhibition Status: {{this.exhibitionStatus}}</p>
     <p>Visitors that attended: {{this.usersAttended}}</p>
 
   
-            <p>Artist: {{exhibition.artistApplication.firstName}} {{exhibition.artistApplication.lastName}}</p>
-            <p>Artwork Name: {{exhibition.artistApplication.artworkName}}</p>
-            <p>Status: {{exhibition.artistApplication.status}}</p>
-
-    
-    <button><a href="/exhibition/{{this._id}}/edit">Edit Exhibition Details</a></button>
+    <button><a href="/exhibition/{{this._id}}">See Exhibition Details</a></button>
 
 <hr>
 {{/each}}

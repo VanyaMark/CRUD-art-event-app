@@ -66,8 +66,8 @@ const artistApplicationSchema = new Schema(
     },
     applicationStatus: {
       type: String,
-      enum: ['approved', 'unapproved'],
-      default: "unapproved"
+      enum: ['approved', 'unapproved', 'to be approved'],
+      default: "to be approved"
     },
   },
   {  

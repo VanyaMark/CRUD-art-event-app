@@ -1,0 +1,25 @@
+    <p>Exhibition Name: {{exhibition.exhibitionName}}</p>
+
+    <p>Exhibition Week: {{exhibition.exhibitionWeek}}</p>
+
+    <p>Exhibition Status: {{exhibition.exhibitionStatus}}</p>
+    <p>Visitors that attended: {{exhibition.usersAttended}}</p>
+
+{{#each exhibition.artistApplication}}
+            <img src="{{this.profilePicUrl}}"/>
+            <p>Artist: {{this.firstName}} {{this.lastName}}</p>
+            <p>email: {{this.email}}</p>
+            <p>phoneNumber: {{this.phoneNumber}}</p>
+            <p>address: {{this.address}}</p>
+            <p>{{this.dateOfBirth}}</p>
+            
+            <img src="{{this.artworkUrl}}" />
+            <p>Artwork Name: {{this.artworkName}}</p>
+            <p>Description: {{this.description}} </p>
+            <p>Art Type: {{this.artType}}</p>
+            <p>Wall Size: {{this.wallSize}}</p>
+            <p> {{this.chooseWeek}} </p>
+            <p>Application Status: {{this.applicationStatus}}</p>
+
+    {{/each}}
+    <button><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button>

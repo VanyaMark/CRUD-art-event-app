@@ -2,6 +2,20 @@
   <h2>Edit your application details</h2>
   <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST">
 
+    <input
+        type="text"
+        name="_id"
+        value="{{artistApptoEdit._id}}"
+        readonly
+      />
+     <input
+        type="text"
+        name="user"
+        value="{{artistApptoEdit.user}}"
+        readonly
+      />
+
+
     <label>
       First Name
       <input
@@ -67,6 +81,10 @@
     <label>
       Artwork Name
     <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}"/>
+    </label>
+
+    <label>Application Status: 
+      <input type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly/>
     </label>
 
     <label>
