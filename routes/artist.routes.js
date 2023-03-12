@@ -16,7 +16,7 @@ const {
   } = require('../middleware/route-guard');
 
   router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artist/application-history"});
+    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artistOrderHistory"});
   })
 
   router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
@@ -93,19 +93,6 @@ const {
           })
       })
 
-/*  router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, (req, res) => { 
-    User.findById(req.session.currentUser._id)
-    .then((user)=>{
-      console.log('user: ', user)
-    Exhibition.find()
-      .then((exhibitionToJoin) => {
-        console.log('exhibitionToJoin: ', exhibitionToJoin)
-        if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
-          res.render('artist/artist-app-form', {user, exhibitionToJoin})
-        }
-      })
-    })   
-}) */
 
   router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
     let exhibition = await Exhibition.find()
@@ -126,7 +113,13 @@ const {
             })
       })
 
-
+router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const user = req.session.currentUser;
+  ArtistApplication.find({user})
+  .then((altArtistApp) => {
+    res.render('artist/artist-cart', {altArtistApp})
+  })
+} )
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res) => {
     const user = req.session.currentUser._id
@@ -327,6 +320,23 @@ for (let i = 0; i < exhibition.length; i++) {
 await ArtistApplication.findOneAndDelete({user})
 
   res.render('artist/artist-submit-app')
+})
+
+router.get('/artistOrderHistory', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const user = req.session.currentUser._id;
+  let applicationsArray = [];
+
+  Exhibition.find()
+  .then((exhibitionsArray) => {
+      for(let exhibition of exhibitionsArray) {
+        for(let application of exhibition.artistApplication)
+        {if (application.user === user) {
+          console.log('application.email: ', application.email)
+          applicationsArray.push(application)
+        }}
+      }
+      res.render('artist/order-history', {applicationsArray})
+  })
 })
 
 module.exports = router;

@@ -46,82 +46,21 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
         })
 })
 
-router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin,  (req, res) => {
-    const { id } = req.params;
-    const { exhibitionStatus, archived, artistApplication, applicationStatus } = req.body;
-    console.log('id: ', id)
-//----------------------------------------array
-console.log('req.body: ', req.body)// 
-console.log('req.body.applicationStatus: ', req.body.applicationStatus)//[approved, unapproved, tobeapproved]
-
-Exhibition.findById(id)
- .then((exhibition) => {
-   /* for (let i=0; i<exhibition.artistApplication.length; i++) {
-        Exhibition.updateOne()
-    } */
-//                     ---!!!!!! WORKING ON THIS BIT !!!!! -----
-    console.log('exhibition.artistApplication: ', exhibition.artistApplication)
-     for (let i=0; i<exhibition.artistApplication.length; i++){
-                 Exhibition.updateOne(
-                     {'_id': 'ObjectId(id)', "artistApplication._id" : exhibition.artistApplication[i]._id},
-                     {$set:{"artistApplication.$.applicationStatus": req.body.applicationStatus[i]}}
-                 )
-             }     
- })  
-
-})
- //   let exhibitionToUpdate = await Exhibition.findById(id)
- //   exhibitionToUpdate.artistApplication
-// [a, b, c]  req.body.applicationStatus[i]
-
-/*  Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived, artistApplication, applicationStatus}, {new: true} )
-        .then(()=>{res.redirect('/findExhibition')}) 
-})
-[{a : John},{a: Tom }, {a: Harry}] => [{a: Diana}, {a: Meghan}, {a: Kate}]
-
- function updateApplicationStatusArray (err) {
-    if (err) throw err;
-    //const collection = db.collection(‘myCollection’);
-
-    Exhibition.updateOne(
-      { id, `artistApplication.indexOf(${i})`: `${i}` },
-      { $set: { "artistApplication.$.applicationStatus": `${req.body.applicationStatus[0]}` } }
-      function(err, result) {
-        if (err) throw err
-        console.log(result);
-     
-      }
-    );
-    } */
-
-   /* MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        const collection = db.collection(‘myCollection’);
-        collection.updateOne(
-          { _id: ObjectId("617a04e00a774c0e41a0a3d1"), "hobbies.name": “swimming” },
-          { $set: { “hobbies.$.level”: “expert” } },
-          function(err, result) {
-            if (err) throw err;
-            console.log(result);
-            db.close();
-          }
-        );
-      });*/
+router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+  const { exhibitionStatus, archived, applicationStatus } = req.body;
+ 
+for(let i =0; i<applicationStatus.length;i++){
+  let set = {};
+  set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
+  await Exhibition.updateOne({ _id: id },{ $set: set })
+}
+await Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived}, {new:true})   
+res.redirect(`/exhibition/${id}`)
+});
 
 
 
-
-/*router.post('/createExhibition', isUserLoggedIn, isAdmin, (req, res) => {
-    const {exhibitionName, artType, exhibitionWeek } = req.body;
-    Exhibition.create({
-        exhibitionName,
-        artType,
-        exhibitionWeek,
-    })
-    .then(newExhibition => {
-        console.log('New Exhibition: ', newExhibition)
-        res.render('exhibition/created-exhibition', {newExhibition} )
-    })
-})*/
 
 module.exports = router;

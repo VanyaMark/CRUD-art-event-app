@@ -1,3 +1,5 @@
+<h2>Application Cart</h2>
+
 {{#if errMsg}}
   <p>{{errMsg}}</p>
   <button><a href="/artistCart"> Pending Application Here </a></button>
@@ -34,9 +36,10 @@
   <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
     <button>Delete Application</button>
   </form>
-
 {{/if}}
 
+
+{{#if editedItem}}
 {{#each editedItem}}
 
   <form action="/artistSubmitApp" method="POST">
@@ -69,5 +72,49 @@
   <form action="/artistCart/{{this._id}}/delete" method="POST">
     <button>Delete Application</button>
   </form>
+{{/each}}
+{{/if}}
+
+
+{{#if altArtistApp}}
+{{#each altArtistApp}}
+
+  <form action="/artistSubmitApp" method="POST">
+
+    <input name="_id" value="{{this._id}}" readonly />
+    <input name="user" value="{{this.user}}" readonly />
+
+    <input name="firstName" value="{{this.firstName}}"/>
+    <input name="lastName" value="{{this.lastName}}" />
+    <input name="email" value= "{{this.email}}"/>
+
+    <input name="phoneNumber" value= "{{this.phoneNumber}}"/>
+    <input name="address" value= "{{this.address}}"/>
+    <input name="dateOfBirth" value= "{{this.dateOfBirth}}"/>
+
+    <input name="artworkName" value="{{this.artworkName}}"/>
+    <input type="text" name="applicationStatus" value="{{this.applicationStatus}}"/>
+    <input name="artworkUrl" value="{{this.artworkUrl}}" />
+    <input name="artType" value="{{this.artType}}"/>
+    <input name="wallSize" value="{{this.wallSize}}"/>
+    <input name="description" value="{{this.description}}"/>
+    <input name="chooseWeek" value="{{this.chooseWeek}}"/>
+
+
+    <button type="submit">Submit</button>
+
+  </form>
+
+  <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
+
+  <form action="/artistCart/{{this._id}}/delete" method="POST">
+    <button>Delete Application</button>
+  </form>
 
 {{/each}}
+
+{{/if}}
+
+  <div>
+    {{>buttonsPartial}}
+  </div>
