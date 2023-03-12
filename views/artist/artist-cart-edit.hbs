@@ -1,6 +1,6 @@
 <div id="form">
   <h2>Edit your application details</h2>
-  <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST">
+  <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
 
     <input
         type="text"
@@ -70,31 +70,29 @@
     </label>
 
     <label>
-      Profile picture:
-      <input
-        type="text"
-        name="profilePicUrl"
-        value="{{artistApptoEdit.profilePicUrl}}"
-      />
+      Artwork Name
+    <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}"/>
     </label>
 
     <label>
-      Artwork Name
-    <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}"/>
+      Artwork Image:
+      <input
+        type="file"
+        name="artworkUrl"
+      />
+      <input
+        type="text"
+        name="existingImage"
+        hidden value="{{artistApptoEdit.artworkUrl}}"
+      />
     </label>
 
     <label>Application Status: 
       <input type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly/>
     </label>
 
-    <label>
-      Artwork Image URL
-      <input
-        type="text"
-        name="artworkUrl"
-        value="{{artistApptoEdit.artworkUrl}}"
-      />
-    </label>
+    <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
+
 
     <label>
       Art Type:

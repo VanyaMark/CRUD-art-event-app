@@ -9,7 +9,7 @@
 
   <h2>Artist Application Form</h2>
 
-  <form action="/artistCart" method="POST">
+  <form action="/artistCart" method="POST" enctype="multipart/form-data">
 
     <label>
       First Name:
@@ -23,7 +23,7 @@
 
     <label>
       email:
-      <input type="email" name="email" value="{{user.email}}" />
+      <input type="email" name="email" value="{{user.email}}" readonly/>
     </label>
 
     <label>
@@ -42,18 +42,9 @@
     </label>
 
     <label>
-      Profile picture:
-      <input
-        type="text"
-        name="profilePicUrl"
-        placeholder="Enter Image URL Here"
-      />
-    </label>
-
-    <label>
       Links to artwork image:
       <input
-        type="string"
+        type="file"
         name="artworkUrl"
         placeholder="Enter Artwork URL Here"
       />

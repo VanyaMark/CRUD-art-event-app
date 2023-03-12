@@ -6,6 +6,8 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const Exhibition = require('../models/Exhibition.model')
 const ArtistApplication = require('../models/ArtistApplication.model');
+const fileUploader = require('../config/cloudinary.config')
+
 const {
     isUserLoggedIn,
     isUserLoggedOut,
@@ -126,20 +128,29 @@ const {
 
 
 
-router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res) => {
     const user = req.session.currentUser._id
-    const {firstName, lastName, email, dateOfBirth, artType, profilePicUrl, address, phoneNumber, artworkName, artworkUrl, wallSize, description, chooseWeek, applicationStatus } = req.body;
-    ArtistApplication.create({user,
+    const {firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
+    
+    await User.findByIdAndUpdate(user, {firstName,
+      lastName, address, phoneNumber, dateOfBirth}, {new: true})
+    
+      if (req.file) {
+        artworkUrl = req.file.path;
+      } else {
+        artworkUrl = existingImage;
+     };
+
+    await ArtistApplication.create({user,
         firstName,
         lastName,
         email,
         dateOfBirth,
         artType,
-        profilePicUrl,
         address,
         phoneNumber,
         artworkName,
-        artworkUrl,
+        artworkUrl: req.file.path,
         wallSize, 
         description, 
         chooseWeek,
@@ -207,7 +218,7 @@ router.get('/artistCart/:id/edit', async (req, res) => {
     }) */
 
 
-router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, next) =>{
+router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'),(req, res, next) =>{
     const { id } = req.params;
     let user=req.session.currentUser._id;
 
@@ -215,22 +226,38 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res, 
       lastName,
       email,
       dateOfBirth,
-      profilePicUrl,
       address,
       phoneNumber,
       artworkName,
-      artworkUrl,
+      existingImage,
       artType, 
       wallSize, 
       description, 
       chooseWeek,
       applicationStatus } = req.body;
-      ArtistApplication.findByIdAndUpdate(id,{ id, user,
+
+      //Updating artwork image
+    let artworkUrl;
+
+    if (req.file) {
+          artworkUrl = req.file.path;
+        } else {
+          artworkUrl = existingImage;
+    };
+
+    User.findByIdAndUpdate(user, {
+      firstName,
+      lastName,
+      address,
+      phoneNumber,
+      dateOfBirth
+    }, {new: true})
+
+    ArtistApplication.findByIdAndUpdate(id,{ id, user,
           firstName,
           lastName,
           email,
           dateOfBirth,
-          profilePicUrl,
           address,
           phoneNumber,
           artworkName,
