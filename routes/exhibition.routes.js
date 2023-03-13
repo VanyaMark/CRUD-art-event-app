@@ -10,11 +10,31 @@ const {
     isUserLoggedOut,
     isAdmin,
     isArtistOrAdmin
-  } = require('../middleware/route-guard');
+} = require('../middleware/route-guard');
 
-  router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
+router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
     res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "working", linkB: "/artist/favourites", buttonC: "working", linkC: "/artist/application-history"});
+})
+
+//Renders the page on which the admin can create new exhibitions
+
+router.get('/exhibition/create',isUserLoggedIn, isAdmin, (req, res, next) => {
+    res.render('exhibition/exhibition-create-form')
+});
+
+//Obtains the exhibition information entered by admin on form and saves new exhibition to database
+
+router.post('/exhibition/create', isUserLoggedIn, isAdmin,(req, res, next) => {
+    const {exhibitionName, exhibitionDescription, startDay, firstDate,lastDate, endDay, maxSpeed} = req.body;
+    let exhibitionWeek = `${startDay}-${firstDate}-${endDay}-${lastDate}`
+    Exhibition.create({exhibitionName,exhibitionDescription, exhibitionWeek, maxSpeed})
+    .then(()=> res.redirect('/findExhibition'))
+    .catch(err => {
+      if (err.code === 11000) {
+        res.render('exhibition/exhibition-create-form', {errMsg: "Exhibition already exists. Create a new one."}) 
+      }
   })
+});
 
 //Get Route for Each Exhibition Details
 
@@ -58,6 +78,26 @@ router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => {
           res.render('exhibition/exhibition-details', {exhibition} )
       })      
 }) 
+
+//Delete an exhibition
+
+router.post('/exhibition/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const { id } = req.params;
+  console.log('tiger')
+  Exhibition.findById(id)
+    .then((exhibitionToDelete) => {
+      console.log('exhibitionToDelete: ', exhibitionToDelete)
+      if (exhibitionToDelete.artistApplication.length === 0) {
+        console.log('monkey')
+          Exhibition.findByIdAndDelete(exhibitionToDelete.id)
+            .then(() => {
+              res.redirect('/findExhibition')
+            })
+      } else {
+        res.render('exhibition/each-exhibition-details', {errorMessage: 'Cannot delete exhibitions cointaining applications', exhibitionToDelete})
+      }
+    })
+})
 
 
 module.exports = router;

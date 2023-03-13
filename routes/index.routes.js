@@ -17,7 +17,7 @@ router.get("/fineArtImg", (req, res, next) => {
   Exhibition.find()
   .then((exhibitionToDisplay) => {
     for (let item of exhibitionToDisplay) {
-        if (item.exhibitionStatus === "open" && item.archived === false) {
+        if (item.exhibitionStatus !== "cancelled" && item.archived === false) {
           exhibitionArray.push(item)
         }
     }
@@ -35,7 +35,7 @@ router.get("/photographyImg", (req, res, next) => {
   Exhibition.find()
   .then((exhibitionToDisplay) => {
     for (let item of exhibitionToDisplay) {
-        if (item.exhibitionStatus === "open" && item.archived === false) {
+        if (item.exhibitionStatus !== "cancelled" && item.archived === false) {
           exhibitionArray.push(item)
         }
     }
@@ -51,7 +51,7 @@ router.get("/plasticArtImg", (req, res, next) => {
   Exhibition.find()
   .then((exhibitionToDisplay) => {
     for (let item of exhibitionToDisplay) {
-        if (item.exhibitionStatus === "open" && item.archived === false) {
+        if (item.exhibitionStatus !== "cancelled" && item.archived === false) {
           exhibitionArray.push(item)
         }
     }
@@ -80,7 +80,7 @@ router.post('/searchArtType', (req, res) => {
       for(let exhibition of exhibitionsArr) {
         for(let application of exhibition.artistApplication)
         {if (application.artType === artType &&
-          exhibition.exhibitionStatus === "open" && exhibition.archived === false) {
+          exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false) {
           exhibitionsArray.push(exhibition)
           applicationsArray.push(application)
         }}
@@ -103,6 +103,8 @@ router.get("/plasticArtBlog", (req, res, next) => {
 
   res.render("plasticArtBlog");
 });
+
+
 
 
 module.exports = router;

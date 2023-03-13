@@ -1,0 +1,21 @@
+
+{{#if errMsg}}
+    {{errMsg}}
+{{/if}}
+
+<form action="/exhibition/create" method="POST">
+
+    <label>Name of Exhibition</label><br>
+    <input name="exhibitionName"><br>
+    <label>Description</label><br>
+    <input name="exhibitionDescription"><br>
+    <input name="startDay" value="Mon" hidden><br>
+    <label>Start Date</label><br>
+    <input name="firstDate" type="date"><br>
+    <input name="endDay" value="Sun" hidden><br>
+    <label>End Date</label><br>
+    <input name="lastDate" type="date"><br>
+    <button class='btn btn-primary'type="submit">Create Exhibition</button>
+
+</form>
+

@@ -1,3 +1,38 @@
+    {{#if errorMessage}}
+    {{errorMessage}}
+
+     <p>Exhibition Name: {{exhibitionToDelete.exhibitionName}}</p>
+
+    <p>Exhibition Week: {{exhibitionToDelete.exhibitionWeek}}</p>
+
+    <p>Exhibition Status: {{exhibitionToDelete.exhibitionStatus}}</p>
+    <p>Visitors that attended: {{exhibitionToDelete.usersAttended}}</p>
+
+{{#each exhibitionToDelete.artistApplication}}
+            <img src="{{this.profilePicUrl}}"/>
+            <p>Artist: {{this.firstName}} {{this.lastName}}</p>
+            <p>email: {{this.email}}</p>
+            <p>phoneNumber: {{this.phoneNumber}}</p>
+            <p>address: {{this.address}}</p>
+            <p>{{this.dateOfBirth}}</p>
+            
+            <img src="{{this.artworkUrl}}" />
+            <p>Artwork Name: {{this.artworkName}}</p>
+            <p>Description: {{this.description}} </p>
+            <p>Art Type: {{this.artType}}</p>
+            <p>Wall Size: {{this.wallSize}}</p>
+            <p> {{this.chooseWeek}} </p>
+            <p>Application Status: {{this.applicationStatus}}</p>
+
+    {{/each}}
+    <button><a href="/exhibition/{{exhibitionToDelete._id}}/edit">Edit Exhibition Details</a></button>
+    <form action="/exhibition/{{exhibitionToDelete._id}}/delete" method="POST">
+    <button>Delete Exhibition</button>
+    </form>
+
+    {{/if}}
+
+    {{#if exhibition}}
     <p>Exhibition Name: {{exhibition.exhibitionName}}</p>
 
     <p>Exhibition Week: {{exhibition.exhibitionWeek}}</p>
@@ -23,3 +58,7 @@
 
     {{/each}}
     <button><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button>
+    <form action="/exhibition/{{exhibition._id}}/delete" method="POST">
+    <button>Delete Exhibition</button>
+    </form>
+    {{/if}}
