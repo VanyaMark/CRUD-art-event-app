@@ -36,9 +36,6 @@ app.use("/", authRoutes);
 const visitorRoutes = require("./routes/visitor.routes");
 app.use("/", visitorRoutes);
 
-const adminRoutes = require("./routes/admin.routes");
-app.use("/", adminRoutes);
-
 const artistRoutes = require("./routes/artist.routes");
 app.use("/", artistRoutes); 
 

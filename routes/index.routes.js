@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Exhibition = require('../models/Exhibition.model')
 
+//All the open routes accessible by anyone, are on this route.
 /* GET home page */
+
 router.get("/", (req, res, next) => {
-
     res.render("index", {message:"Welcome To Europe's Leading Art Gallery", image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC:`/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
-
 });
 
-
-
 /* GET route to Fine Art Page*/
+//Search forms are pre-filled only with the exhibitions which are not archived
+
 router.get("/fineArtImg", (req, res, next) => {
   let exhibitionArray = []
   Exhibition.find()
@@ -21,7 +21,6 @@ router.get("/fineArtImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
     }
-    
     res.render("fineArtImg",{ exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg'});
   })
     
@@ -29,6 +28,8 @@ router.get("/fineArtImg", (req, res, next) => {
 
 
 /* GET route to Photography Page*/
+//Search forms are pre-filled only with the exhibitions which are not archived
+
 router.get("/photographyImg", (req, res, next) => {
   let exhibitionArray = []
   Exhibition.find()
@@ -43,6 +44,8 @@ router.get("/photographyImg", (req, res, next) => {
 });
 
 /* GET route to Plastic Art Page*/
+//Search forms are pre-filled only with the exhibitions which are not archived
+
 router.get("/plasticArtImg", (req, res, next) => {
   let exhibitionArray = []
   Exhibition.find()
@@ -56,6 +59,8 @@ router.get("/plasticArtImg", (req, res, next) => {
   })
 });
 
+//Search forms: on clicking search, it looks for the specific exhibition in the data base and renders them on the search page
+
 router.post('/search', (req, res) => {
   const { exhibitionName } = req.body;
   Exhibition.findOne({exhibitionName})
@@ -63,6 +68,8 @@ router.post('/search', (req, res) => {
     res.render('search-results', {displayedExhibition})
   })
 })
+
+//Finds the exhibition by artType and renders it
 
 router.post('/searchArtType', (req, res) => {
   const {artType} = req.body;
@@ -74,7 +81,6 @@ router.post('/searchArtType', (req, res) => {
         for(let application of exhibition.artistApplication)
         {if (application.artType === artType &&
           exhibition.exhibitionStatus === "open" && exhibition.archived === false) {
-          console.log('application.email: ', application.email)
           exhibitionsArray.push(exhibition)
           applicationsArray.push(application)
         }}
@@ -82,24 +88,6 @@ router.post('/searchArtType', (req, res) => {
       res.render('search-artType', {exhibitionsArray, applicationsArray})
   })
 })
-
-
-/*router.get('/artistOrderHistory', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-  const user = req.session.currentUser._id;
-  let applicationsArray = [];
-
-  Exhibition.find()
-  .then((exhibitionsArray) => {
-      for(let exhibition of exhibitionsArray) {
-        for(let application of exhibition.artistApplication)
-        {if (application.user === user) {
-          console.log('application.email: ', application.email)
-          applicationsArray.push(application)
-        }}
-      }
-      res.render('artist/order-history', {applicationsArray})
-  })
-}) */
 
 router.get("/fineArtBlog", (req, res, next) => {
 
@@ -115,9 +103,6 @@ router.get("/plasticArtBlog", (req, res, next) => {
 
   res.render("plasticArtBlog");
 });
-
-
-
 
 
 module.exports = router;

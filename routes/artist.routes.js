@@ -7,7 +7,6 @@ const saltRounds = 10;
 const Exhibition = require('../models/Exhibition.model')
 const ArtistApplication = require('../models/ArtistApplication.model');
 const fileUploader = require('../config/cloudinary.config')
-
 const {
     isUserLoggedIn,
     isUserLoggedOut,
@@ -15,103 +14,75 @@ const {
     isArtistOrAdmin
   } = require('../middleware/route-guard');
 
-  router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artistOrderHistory"});
-  })
+//This renders the artist's dashboard
 
-  router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    const { id } = req.params;
+router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artistOrderHistory"});
+})
+
+//This renders the artist's details according to their id
   
-    User.findById(id)
-        .then(user => {
-          console.log(`user from get artist id route: ${user}` )
-            res.render('artist/artist-details', { userInSession: req.session.currentUser, user })
+router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then(user => {
+      res.render('artist/artist-details', { userInSession: req.session.currentUser, user })
+    })
+})
+
+//This renders artist details on to a form which can then be edited
+
+router.get('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then(user => {
+        res.render('artist/artist-edit', { userInSession: req.session.currentUser, user })
+    })
+})
+
+//This obtains the artist's edited details from the form and saves it on the database
+
+router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const { id } = req.params;
+  const { username, firstName, lastName, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
+
+  User.findByIdAndUpdate(id, {
+    firstName,
+    lastName,
+    address, 
+    phoneNumber, 
+    avatarUrl, 
+    dateOfBirth, 
+    gender, 
+    nationality
+      }, {new:true})
+        .then(userFromDB => {
+          req.session.currentUser = userFromDB;
+          res.redirect(`/artist/${userFromDB.id}`)
         })
-
-  })
-
-  router.get('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    const { id } = req.params;
-   console.log(`get edit route id ${id}`)
-    User.findById(id)
-        .then(user => {
-          console.log(`***user from get edit route: ${user}`)
-            res.render('artist/artist-edit', { userInSession: req.session.currentUser, user })
+        .catch(error => {
+          next(error);
         })
-  })
+})
 
-  router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-    const { id } = req.params;
-    
-    const { username, firstName, lastName, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
-    
-    /*const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-    if (!regex.test(password)) {
-      res
-        .status(500)
-        .render('artist/artist-edit', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
-      return;
-    }
-   
-      bcryptjs
-      .genSalt(saltRounds)
-      .then(salt => bcryptjs.hash(password, salt))
-      .then(hashedPassword => {
-        if (!username || !email || !password) {
-          res.render('artist/artist-edit', { errorMessage: 'Please ensure username, email and password fields are complete.' });
-          return;
-        }*/
-        console.log(`post edit user id ${id}`)
-    
-          User.findByIdAndUpdate(id, {
-           // username,
-            firstName,
-            lastName,
-           // email,
-           // passwordHash: hashedPassword,
-            address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality
-       
-          }, {new:true})
-          
-          .then(userFromDB => {
-            req.session.currentUser = userFromDB;
-            console.log('The updated user is: ', userFromDB);
-            res.redirect(`/artist/${userFromDB.id}`)
-          })
-          .catch(error => {
-            /*  if (error instanceof mongoose.Error.ValidationError) {
-                res.status(500).render('auth/user-signup', { errorMessage: error.message });
-            } 
-            else if (error.code === 11000) {
-              res.status(500).render('auth/user-signup', {
-                 errorMessage: 'Username and email need to be unique. Either username or email is already used.'
-              })
-            } */
-            
-                next(error);
-            
-          })
+//This pre-fills the artists application form
+
+router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
+  let exhibition = await Exhibition.find()
+  let exhibitionArray = []
+  let user = await User.findById(req.session.currentUser._id)
+  Promise.all([user, exhibition])
+    .then((values) => { 
+      values[1].forEach((item)=> {
+        if (item.exhibitionStatus === "open" && item.archived === false) {
+          exhibitionArray.push(item)
+        }
       })
+      res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray})
+    })
+})
 
-
-  router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
-    let exhibition = await Exhibition.find()
-    let exhibitionArray = [];
-
-     // if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
-          let user = await User.findById(req.session.currentUser._id)
-
-          Promise.all([user, exhibition])
-            .then((values) => { console.log("values:",values)
-            values[1].forEach((item)=> {
-              console.log('item: ', item);
-              if (item.exhibitionStatus === "open" && item.archived === false) {
-                  exhibitionArray.push(item)
-                }
-              })
-              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray})
-            })
-      })
+//This pre-fills the artists cart if the cart is entered from a different page other than the application page
 
 router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const user = req.session.currentUser;
@@ -119,21 +90,20 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   .then((altArtistApp) => {
     res.render('artist/artist-cart', {altArtistApp})
   })
-} )
+})
+
+//This obtains the details filled on the application form and renders it onto the artist cart
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res) => {
     const user = req.session.currentUser._id
     const {firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
-    
     await User.findByIdAndUpdate(user, {firstName,
       lastName, address, phoneNumber, dateOfBirth}, {new: true})
-    
       if (req.file) {
         artworkUrl = req.file.path;
       } else {
         artworkUrl = existingImage;
      };
-
     await ArtistApplication.create({user,
         firstName,
         lastName,
@@ -150,41 +120,35 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single(
         applicationStatus
     })
     .then(artistApp => {
-        console.log('New Artist cart: ', artistApp)
         res.render('artist/artist-cart', {artistApp} )
     })
    .catch(async (err)=> {
-      console.log('err code: ', typeof err.code)
-
- if (err._message === 'ArtistApplication validation failed') {
-  let exhibitionToJoin = await Exhibition.find()
-  let exhibitionArray = [];
-    console.log('exhibitionToJoin: ', exhibitionToJoin)
-
-          let user = await User.findById(req.session.currentUser._id)
-            console.log('user: ', user)
-          Promise.all([user, exhibitionToJoin])
-            .then((values) => {
-              values[1].forEach((item)=> {
-                if (item.exhibitionStatus === "open" && item.archived === false) {
-                  exhibitionArray.push(item)
-                }
-              })
-              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete."})
+      if (err._message === 'ArtistApplication validation failed') {
+        let exhibitionToJoin = await Exhibition.find()
+        let exhibitionArray = [];
+        let user = await User.findById(req.session.currentUser._id)
+        Promise.all([user, exhibitionToJoin])
+          .then((values) => {
+            values[1].forEach((item)=> {
+              if (item.exhibitionStatus === "open" && item.archived === false) {
+                exhibitionArray.push(item)
+              }
             })
-    }
-      else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one."}) 
-   }
-}) 
+            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete."})
+          })
+        }
+          else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one."}) 
+      }
+    }) 
 })
 
+//This pre-fills the artist's application form which is to be edited according to the application id
 
 router.get('/artistCart/:id/edit', async (req, res) => {
   const { id } = req.params;
   let artistApptoEdit = await ArtistApplication.findById(id)
   let exhibitionToJoin = await Exhibition.find()
   let exhibitionArray = [];
-  
   Promise.all([artistApptoEdit, exhibitionToJoin])
     .then((values => {
       values[1].forEach((item)=> {
@@ -196,25 +160,11 @@ router.get('/artistCart/:id/edit', async (req, res) => {
     }))
 })
 
-
-/*router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, res) => { 
-  let exhibitionToJoin = await Exhibition.find()
-  console.log('exhibitionToJoin: ', exhibitionToJoin)
-  //  if (exhibitionToJoin.exhibitionStatus === "open" && exhibitionToJoin.archived === false) {
-        let user = await User.findById(req.session.currentUser._id)
-          console.log('user: ', user)
-        Promise.all([user, exhibitionToJoin])
-          .then((values) => {
-            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: values[1]})
-          })
-    //  }
-    }) */
-
+//This renders the edited application form details onto the artist cart and also saves it in the database
 
 router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'),(req, res, next) =>{
     const { id } = req.params;
     let user=req.session.currentUser._id;
-
     const {firstName,
       lastName,
       email,
@@ -228,16 +178,12 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploade
       description, 
       chooseWeek,
       applicationStatus } = req.body;
-
-      //Updating artwork image
     let artworkUrl;
-
     if (req.file) {
           artworkUrl = req.file.path;
         } else {
           artworkUrl = existingImage;
     };
-
     User.findByIdAndUpdate(user, {
       firstName,
       lastName,
@@ -245,7 +191,6 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploade
       phoneNumber,
       dateOfBirth
     }, {new: true})
-
     ArtistApplication.findByIdAndUpdate(id,{ id, user,
           firstName,
           lastName,
@@ -262,76 +207,71 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploade
           applicationStatus
       }, {new: true})
       .then(()=>{res.redirect('/artistCart')})
-  
 } )
+
+//This renders the edited artist application on to the artist cart
+
+router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+  const user = req.session.currentUser._id
+  ArtistApplication.find({user})
+  .then((editedItem)=>{    
+    res.render('artist/artist-cart', {editedItem})
+  })      
+})
+
+//A filled application form can be deleted before submission
 
 router.post('/artistCart/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const { id } = req.params;
-  console.log('delete: ', id);
-
   ArtistApplication.findByIdAndDelete(id)
     .then(() => {
       res.redirect('/artist')
     })
 })
 
-router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-  const user = req.session.currentUser._id
-  ArtistApplication.find({user})
-  .then((editedItem)=>{
-    
-    console.log('flonkey: ', editedItem);
-    
-    res.render('artist/artist-cart', {editedItem})
-  })
-      
-    })
+//This renders the application submission confirmation page
 
 router.get('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   res.render('artist/artist-submit-app')
 })
 
-async function addArtistAppObject(theExhibitionToUpdate, newArtistApp) {
-  let updatedExhibition = await Exhibition.updateOne(
-    theExhibitionToUpdate, 
-    {$push: {artistApplication: newArtistApp}});
-    console.log('Updated Exhibiton:', updatedExhibition)
+//This function is called in the router below it. It pushes artist applications into the application array
+//in the exhibition model
 
+async function addArtistAppObject(theExhibitionToUpdate, newArtistApp) {
+    let updatedExhibition = await Exhibition.updateOne(
+    theExhibitionToUpdate, 
+    {$push: {artistApplication: newArtistApp}}); 
 }
+
+//On submission of form, cart gets deleted on database but a copy of the artist application
+//manually gets populated into the exhibition model (see 'addArtistAppObject' function above)
 
 router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res) => {
-  const { id } = req.session.currentUser._id
-  console.log('session.currentUser: ',req.session.currentUser)
-
-//  let applicationId = await ArtistApplication.find({id})
-const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek, applicationStatus} = req.body;
-  console.log('monkey')
-  console.log("req.body: ", req.body)
-  const user = req.session.currentUser;
-  let exhibition = await Exhibition.find()
-for (let i = 0; i < exhibition.length; i++) {
-    if (exhibition[i].exhibitionWeek == chooseWeek.slice(chooseWeek.length-29,chooseWeek.length)) {
-    console.log('exhibition: ', exhibition[i])
-    let artistApplication = JSON.parse(JSON.stringify(req.body)) 
-    addArtistAppObject(exhibition[i], artistApplication)
-  } 
-}
-
-await ArtistApplication.findOneAndDelete({user})
-
-  res.render('artist/artist-submit-app')
+    const { id } = req.session.currentUser._id
+    const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek, applicationStatus} = req.body;
+    const user = req.session.currentUser;
+    let exhibition = await Exhibition.find()
+    for (let i = 0; i < exhibition.length; i++) {
+      if (exhibition[i].exhibitionWeek == chooseWeek.slice(chooseWeek.length-29,chooseWeek.length)) {
+        let artistApplication = JSON.parse(JSON.stringify(req.body)) 
+        addArtistAppObject(exhibition[i], artistApplication)
+      } 
+    }
+    await ArtistApplication.findOneAndDelete({user})
+    res.render('artist/artist-submit-app')
 })
+
+//This displays the artist's exhibition application history
 
 router.get('/artistOrderHistory', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const user = req.session.currentUser._id;
   let applicationsArray = [];
-
   Exhibition.find()
   .then((exhibitionsArray) => {
       for(let exhibition of exhibitionsArray) {
         for(let application of exhibition.artistApplication)
         {if (application.user === user) {
-          console.log('application.email: ', application.email)
           applicationsArray.push(application)
         }}
       }

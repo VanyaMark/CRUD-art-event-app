@@ -11,15 +11,14 @@ const {
   isUserLoggedOut,
 } = require('../middleware/route-guard');
 
+//renders the page on which the sign-up form is found
 
 router.get('/userSignup',isUserLoggedOut,(req, res, nex) => res.render('auth/user-signup'));
 
+//accepts details from the sign-up form and sends to database for storage only if they are valid
+
 router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
     const { username, email, password, role } = req.body;
-
-    console.log(req.body)
-   
-
 
        const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
@@ -44,7 +43,6 @@ router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
             role
           })
           .then(userFromDB => {
-            console.log('Newly created user is: ', userFromDB);
             res.redirect('/user')
           })
           .catch(error => {
@@ -64,6 +62,9 @@ router.post('/userSignup',isUserLoggedOut, (req, res, next) => {
       })
   });
 
+//on successful login, user is taken to a landing page from which they can go to either the
+//visitor dashboard, artist dashboard or admin dashboard, depending on their role
+
 router.get('/user',isUserLoggedIn, (req, res) => {
 
   if(req.session.currentUser.role === "visitor"){
@@ -80,10 +81,13 @@ router.get('/user',isUserLoggedIn, (req, res) => {
   ;
 })
 
+//Log in route only renders when user is logged out
+
 router.get('/login', isUserLoggedOut,(req, res, next) => {
   res.render('auth/user-login')
- // .catch((err)=> next(err))
 });
+
+//Log in details are accepted from the from and compared with the database
 
 router.post('/login', isUserLoggedOut,(req, res, next) => {
   console.log('SESSION =====> ', req.session);
@@ -110,41 +114,13 @@ router.post('/login', isUserLoggedOut,(req, res, next) => {
     .catch(error => next(error));
 });
 
+//Logout route only renders when user is logged in
+
 router.post('/userLogout', isUserLoggedIn, (req, res, next) => {
   req.session.destroy(err => {
     if (err) next(err);
     res.redirect('/');
   })
 });
-
-/*
-
-// GET route to add User's details (Role, Age, etc...)
-router.get('/user/:id', isUserLoggedIn, (req, res, next) => {
-  const { id } = req.params;
-  User.findById(id)
-    .then(user => {
-      if (req.session.currentUser.role == "visitor") {
-        res.render('visitor')
-      }
-    })
-  res.render('auth/user-login')
-})
-
-//POST route to add Users details (Role, Age, etc...)
-router.post('/landing', isUserLoggedIn,(req, res, next) => {
-  console.log('SESSION =====> ', req.session);
-  const { role, age, gender, nationality,  } = req.body;
-
-  User.findOneAndUpdate({ email })
-    .then(user => {
-
-})
-.catch(error => next(error));
-*/
-
-
-
-
 
 module.exports = router;

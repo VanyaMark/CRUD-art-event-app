@@ -8,9 +8,10 @@ const {
     isAdmin
   } = require('../middleware/route-guard');
 
-router.get('/visitor', isUserLoggedIn, (req, res) => {
-    res.render('visitor/visitor-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, buttonA: "Upcoming Exhibitions", linkA: "/visitor/exhibitions", buttonB: "Favourites", linkB: "/visitor/favourites", buttonC: "Exhibitions Attended", linkC: "/visitor/exhibitions-attended"});
-  })
+//Visitor dashboard - left as a placeholder for further CRUD practice after the course
 
+router.get('/visitor', isUserLoggedIn, (req, res) => {
+    res.render('visitor/visitor-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, site is currently under construction. Please bear with us and it will be launched in no time!`, buttonA: "Purchase Tickets", linkA: "/purchaseTickets", buttonB: "Favourites", linkB: "/favourites", buttonC: "Exhibitions Attended", linkC: "/exhibitionsAttended"});
+  })
 
 module.exports = router;
