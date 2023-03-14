@@ -42,9 +42,16 @@ router.get('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
 //This obtains the artist's edited details from the form and saves it on the database
 
-router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
+router.post('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('avatarUrl'), (req, res) => {
   const { id } = req.params;
-  const { username, firstName, lastName, email, password, address, phoneNumber, avatarUrl, dateOfBirth, gender, nationality } = req.body;
+  const { firstName, lastName, address, phoneNumber, existingAvatar, dateOfBirth, gender, nationality } = req.body;
+  
+  let avatarUrl;
+  if (req.file) {
+    avatarUrl = req.file.path;
+  } else {
+    avatarUrl = existingAvatar;
+};
 
   User.findByIdAndUpdate(id, {
     firstName,
@@ -96,7 +103,7 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res) => {
     const user = req.session.currentUser._id
-    const {firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
+    const {avatarUrl, firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
     await User.findByIdAndUpdate(user, {firstName,
       lastName, address, phoneNumber, dateOfBirth}, {new: true})
       if (req.file) {
@@ -105,6 +112,7 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single(
         artworkUrl = existingImage;
      };
     await ArtistApplication.create({user,
+        avatarUrl,
         firstName,
         lastName,
         email,
@@ -165,7 +173,7 @@ router.get('/artistCart/:id/edit', async (req, res) => {
 router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'),(req, res, next) =>{
     const { id } = req.params;
     let user=req.session.currentUser._id;
-    const {firstName,
+    const {avatarUrl,firstName,
       lastName,
       email,
       dateOfBirth,
@@ -185,6 +193,7 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploade
           artworkUrl = existingImage;
     };
     User.findByIdAndUpdate(user, {
+      avatarUrl,
       firstName,
       lastName,
       address,
@@ -192,6 +201,7 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploade
       dateOfBirth
     }, {new: true})
     ArtistApplication.findByIdAndUpdate(id,{ id, user,
+          avatarUrl,
           firstName,
           lastName,
           email,
@@ -249,7 +259,7 @@ async function addArtistAppObject(theExhibitionToUpdate, newArtistApp) {
 
 router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res) => {
     const { id } = req.session.currentUser._id
-    const {profilePicUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek, applicationStatus} = req.body;
+    const {avatarUrl, firstName, lastName, email, phoneNumber, address, dateOfBirth, artworkUrl, artType, wallSize, description, chooseWeek, applicationStatus} = req.body;
     const user = req.session.currentUser;
     let exhibition = await Exhibition.find()
     for (let i = 0; i < exhibition.length; i++) {

@@ -15,6 +15,10 @@ const artistApplicationSchema = new Schema(
       trim: true,
       required: true,
     },
+    avatarUrl:{
+      type:String,
+      required:true
+    },
     email: {
         type: String,
         required: true,

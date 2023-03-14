@@ -10,7 +10,10 @@
   <h2>Artist Application Form</h2>
 
   <form action="/artistCart" method="POST" enctype="multipart/form-data">
-
+    <label>
+      First Name:
+      <input type="text" name="avatarUrl" value="{{user.avatarUrl}}" />
+    </label>
     <label>
       First Name:
       <input type="text" name="firstName" value="{{user.firstName}}" />

@@ -40,6 +40,7 @@ const userSchema = new Schema(
     },
     avatarUrl: {
       type: String,
+      default: '../images/avatar.jpg',
       trim: true
     }, 
     dateOfBirth: {
