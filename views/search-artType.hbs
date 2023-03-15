@@ -1,9 +1,14 @@
-<h2>Search Result</h2>
 
-{{#each applicationsArray}}
-<p>{{this.chooseWeek}}</p>
-<p>{{this.artworkName}}</p>
-<p>{{this.artType}}</p>
-<img src="{{this.artworkUrl}}">
-<p>{{this.description}}</p>
-{{/each}}
+<div class="inner-body-div">
+    {{#each applicationsArray}}
+        <p>{{this.chooseWeek}}</p>
+        <p>{{this.artworkName}}</p>
+        <p>{{this.artType}}</p>
+        <img src="{{this.artworkUrl}}">
+        <p>{{this.description}}</p>
+    {{/each}}
+</div>
+
+<div>
+     {{>buttonsPartial}}
+</div>

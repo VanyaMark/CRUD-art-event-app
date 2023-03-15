@@ -1,5 +1,5 @@
 
-
+<div class="inner-body-div">
 {{#if errorMessage}}
   <p>{{errorMessage}}</p>
 
@@ -11,47 +11,47 @@
 
   <form action="/artistCart" method="POST" enctype="multipart/form-data">
     <label>
-      First Name:
-      <input type="text" name="avatarUrl" value="{{user.avatarUrl}}" />
-    </label>
+      Avatar URL: (To change this image, go to your account details)
+      <input type="text" name="avatarUrl" value="{{user.avatarUrl}}" readonly/>
+    </label><br><br>
     <label>
       First Name:
       <input type="text" name="firstName" value="{{user.firstName}}" />
-    </label>
+    </label><br><br>
 
     <label>
       Last Name:
       <input type="text" name="lastName" value="{{user.lastName}}" />
-    </label>
+    </label><br><br>
 
     <label>
       email:
       <input type="email" name="email" value="{{user.email}}" readonly/>
-    </label>
+    </label><br><br>
 
     <label>
       Address:
       <input type="text" name="address" value="{{user.address}}" />
-    </label>
+    </label><br><br>
 
     <label>
       Phone Number:
       <input type="number" name="phoneNumber" value="{{user.phoneNumber}}" />
-    </label>
+    </label><br><br>
 
     <label>
       Date of Birth:
       <input type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
-    </label>
+    </label><br><br>
 
     <label>
-      Links to artwork image:
+      Upload artwork image:
       <input
         type="file"
         name="artworkUrl"
         placeholder="Enter Artwork URL Here"
       />
-    </label>
+    </label><br><br>
 
     <label>
       Art Type:
@@ -61,11 +61,11 @@
         <option value="Photography">Photography</option>
         <option value="Plastic Art">Plastic Art</option>
       </select>
-    </label>
+    </label><br><br>
 
     <label for="w3review">Description:</label>
     <textarea name="description" rows="4" cols="50">
-    </textarea>
+    </textarea><br><br>
 
     <label>Artwork Title:
       <input
@@ -73,11 +73,11 @@
         name="artworkName"
         placeholder="Enter Artwork Title Here"
       />
-    </label>
+    </label><br><br>
 
     <label>Application Status: 
       <input type="text" name="applicationStatus" value="to be approved" readonly/>
-    </label>
+    </label><br><br>
 
     <label>
       Wall Size:
@@ -86,7 +86,7 @@
         <option value="2m space - €120 per week">2m space - €120 per week</option>
         <option value="3m space - €150 per week">3m space - €150 per week</option>
       </select>
-    </label>
+    </label><br><br>
 
     <label>
       Choose Week:
@@ -97,14 +97,14 @@
           >{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
         {{/each}}
       </select>
-    </label>
+    </label><br><br>
 
-    <button type="submit">View Application</button>
+    <button type="submit">Go To Application Cart</button>
 
   </form>
 
 </div>
-
+</div>
   <div>
     {{>buttonsPartial}}
   </div>

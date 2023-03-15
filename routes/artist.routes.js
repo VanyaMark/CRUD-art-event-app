@@ -26,7 +26,7 @@ router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const { id } = req.params;
   User.findById(id)
     .then(user => {
-      res.render('artist/artist-details', { userInSession: req.session.currentUser, user })
+      res.render('artist/artist-details', { userInSession: req.session.currentUser, user, buttonA: "Back To Dashboard", linkA: `/artist`, buttonB: "Edit Account Details", linkB: `/artist/${req.session.currentUser._id}/edit`, buttonC: "", linkC: "" })
     })
 })
 
@@ -287,6 +287,48 @@ router.get('/artistOrderHistory', isUserLoggedIn, isArtistOrAdmin, (req, res) =>
       }
       res.render('artist/order-history', {applicationsArray})
   })
+})
+
+async function addFavouriteArtworkToUser(userToUpdate, favouriteArtwork) {
+  let updatedUser = await User.updateOne(
+    userToUpdate, 
+  {$push: {favourites: favouriteArtwork}}); 
+}
+
+//Get rote to render the page on which 
+
+router.get('/artistFavourites', isUserLoggedIn, (req, res) => {
+  res.render('artist/artist-favourites')
+})
+
+router.post('/artistFavourites', isUserLoggedIn, async (req, res) => {
+
+  const id = req.session.currentUser._id;
+
+  const {artworkUrl} = req.body;
+
+  let favourites = JSON.parse(JSON.stringify(req.body))
+  let user = await User.findById(id)
+  let favArtworkArray= []
+  
+      if (user.favourites.length === 0) {
+      addFavouriteArtworkToUser(user, favourites)
+      console.log('monkey')} 
+      else {
+        console.log('artworkUrl: ', artworkUrl)
+        for (let i=0; i<user.favourites.length; i++) {
+          favArtworkArray.push(user.favourites[i].artworkUrl)
+        }
+        const duplicate = favArtworkArray.some(item => item === artworkUrl)
+        if (duplicate) {
+          console.log('duplicate')
+        } else {
+          addFavouriteArtworkToUser(user, favourites)
+          console.log('added to favourites')
+        }
+      }
+
+  res.redirect('/allArtworks')
 })
 
 module.exports = router;

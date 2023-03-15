@@ -1,11 +1,20 @@
 
 
+<div class="inner-body-div">
 
-<button type="button" class="btn btn-primary col-md-4"><a class="button-b-link"href="/artist/{{userInSessionsId}}">See Account Details</a></button>
-<button type="button" class="btn btn-primary col-md-4"><a class="button-b-link"href="/usernameEmailUpdate">Update Login Details</a></button>
 
   {{#with userInSession}}
   {{>welcomePartial}}
     {{/with}}
+    <div>
+    <a class="button-b-link" href="/artist/{{userInSessionsId}}">See Account Details</a>
+   
+    <a class="button-b-link" href="/usernameEmailUpdate">Update Login Details</a>
+    </div>
+     <img class="box-img"src="images/placeholder-box.jpg">
+</div>
 
+
+<div>
 {{>buttonsPartial}}
+</div>

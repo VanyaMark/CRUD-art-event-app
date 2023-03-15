@@ -1,3 +1,4 @@
+<div class="inner-body-div">
 <div id="form">
   <h2>Fill in your details</h2>
   <form action="/artist/{{userInSession._id}}/edit" method="POST" enctype="multipart/form-data">
@@ -296,3 +297,11 @@
 {{#if errorMessage}}
   {{this.errorMessage}}
 {{/if}}
+
+</div>
+
+<div >
+  {{>buttonsPartial}}
+  
+  </div>
+
