@@ -1,0 +1,24 @@
+<h2>All artworks</h2>
+{{#if errorMsg}}
+    {{errorMsg}}
+
+{{/if}}
+
+
+
+
+{{#each applicationsArray}}
+<form action="/allArtworks" method="POST">
+<input name="artworkName" value= "{{this.artworkName}}"/>
+<input name="artworkUrl" value="{{this.artworkUrl}}" hidden/>
+<img src="{{this.artworkUrl}}">
+
+<input name="description" value="{{this.description}}"/>
+
+<input name="firstName" value="{{this.firstName}}" />
+<input name="lastName" value="{{this.lastName}}" />
+ <button type="submit">Add to Favourites</button>
+</form>
+<hr>
+
+{{/each}}

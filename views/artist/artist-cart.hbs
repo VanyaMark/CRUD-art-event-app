@@ -92,11 +92,11 @@
             <div class="col-50">
               <h3>Billing Address</h3>
               <label for="fname"> Full Name</label><br>
-              <input class="fname"type="text" id="fname" name="fullName" placeholder="John M. Doe"><br>
+              <input class="fname"type="text" id="fname" name="fullName" placeholder="John M. Doe" required><br>
               <label for="email">Email</label><br>
-              <input class="formEmail" type="text" id="email" name="email" placeholder="john@example.com"><br>
+              <input class="formEmail" type="text" id="email" name="email" placeholder="john@example.com" required><br>
               <label for="adr">Address</label><br>
-              <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"><br>
+              <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street" required><br>
             </div>
           <label>
             <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
@@ -105,13 +105,13 @@
               <h3>Payment</h3>
               <label for="fname">Accepted Cards</label><br>
              
-              <input  type="radio" id="age1" name="age" value="Mastercard">
+              <input  type="radio" id="age1" name="card" value="Mastercard" required>
               <label for="age1">Mastercard</label>
-              <input type="radio" id="age2" name="Visa" value="60">
+              <input type="radio" id="age2" name="card" value="60" required>
               <label for="age2">Visa</label>
-              <input type="radio" id="age3" name="American Express" value="100">
+              <input type="radio" id="age3" name="card" value="100" required>
               <label for="age3">American Express</label>
-              <input type="radio" id="age4" name="Visa Debit" value="100">
+              <input type="radio" id="age4" name="card" value="100" required>
               <label for="age4">Visa Debit</label><br><br>
       
               <label for="cname">Name on Card</label><br>

@@ -59,9 +59,9 @@ const userSchema = new Schema(
     exhibitionsAttended:[{
       type: Schema.Types.ObjectId, ref:"Exhibition"
     }],
-    favourites: {
-      type: Schema.Types.ObjectId, ref:"Artwork"
-    }
+    favourites: [{
+      type: Schema.Types.Mixed,
+    }]
   },
   { 
     timestamps: true

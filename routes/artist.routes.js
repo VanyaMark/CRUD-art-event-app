@@ -101,40 +101,57 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
 //This obtains the details filled on the application form and renders it onto the artist cart
 
+
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res,next) => {
     const user = req.session.currentUser._id
     const {avatarUrl, firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
     await User.findByIdAndUpdate(user, {firstName,
       lastName, address, phoneNumber, dateOfBirth}, {new: true})
 
-      if (req.file) {
-        artworkUrl = req.file.path;
-      } else {
-        artworkUrl = existingImage;
-      };
-    await ArtistApplication.create({user,
-        avatarUrl,
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        artType,
-        address,
-        phoneNumber,
-        artworkName,
-        artworkUrl: req.file.path,
-        wallSize, 
-        description, 
-        chooseWeek,
-        applicationStatus
-    })
-    .then(artistApp => {
-        res.render('artist/artist-cart', {artistApp, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"} )
-    })
-   .catch(async (err)=> {
-    console.log("monkey:",err)
-      if (err._message === 'ArtistApplication validation failed') {
-        let exhibitionToJoin = await Exhibition.find()
+    if (req.file) {
+
+      await ArtistApplication.create({user,
+          avatarUrl,
+          firstName,
+          lastName,
+          email,
+          dateOfBirth,
+          artType,
+          address,
+          phoneNumber,
+          artworkName,
+          artworkUrl: req.file.path,
+          wallSize, 
+          description, 
+          chooseWeek,
+          applicationStatus
+      })
+      .then(artistApp => {
+          res.render('artist/artist-cart', {artistApp, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"} )
+      })
+    .catch(async (err)=> {
+      console.log("monkey:",err)
+        if (err._message === 'ArtistApplication validation failed'|| err instanceof TypeError) {
+          let exhibitionToJoin = await Exhibition.find()
+          let exhibitionArray = [];
+          let user = await User.findById(req.session.currentUser._id)
+          Promise.all([user, exhibitionToJoin])
+            .then((values) => {
+              values[1].forEach((item)=> {
+                if (item.exhibitionStatus === "open" && item.archived === false) {
+                  exhibitionArray.push(item)
+                }
+              })
+              res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
+            })
+          }
+            else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"}) 
+        }
+        else{next(err)}
+      }) 
+    } 
+    else {
+    let exhibitionToJoin = await Exhibition.find()
         let exhibitionArray = [];
         let user = await User.findById(req.session.currentUser._id)
         Promise.all([user, exhibitionToJoin])
@@ -144,16 +161,13 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single(
                 exhibitionArray.push(item)
               }
             })
-            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
+            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure an image is uploaded.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
           })
-        }
-          else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"}) 
-      }
-      else{next(err)}
-    }) 
+  }
 })
 
 //This pre-fills the artist's application form which is to be edited according to the application id
+
 
 router.get('/artistCart/:id/edit', async (req, res) => {
   const { id } = req.params;
@@ -193,7 +207,7 @@ router.post('/artistCart/:id/edit', isUserLoggedIn, isArtistOrAdmin, fileUploade
     if (req.file) {
           artworkUrl = req.file.path;
         } else {
-          artworkUrl = existingImage;
+         artworkUrl = existingImage;
     };
     User.findByIdAndUpdate(user, {
       avatarUrl,
@@ -298,13 +312,29 @@ async function addFavouriteArtworkToUser(userToUpdate, favouriteArtwork) {
   {$push: {favourites: favouriteArtwork}}); 
 }
 
-//Get rote to render the page on which 
+router.get('/allArtworks', isUserLoggedIn, (req, res) =>  {
+  const user = req.session.currentUser;
+  let exhibitionsArray = []
+  let applicationsArray = []
+  Exhibition.find()
+    .then((exhibitionsArr) => {
+      for(let exhibition of exhibitionsArr) {
+        for(let application of exhibition.artistApplication)
+        {if (exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false) {
+          exhibitionsArray.push(exhibition)
+          applicationsArray.push(application)
+        }}
+      }
+      res.render('artworks', {exhibitionsArray, applicationsArray})
+    })
+})
+
 
 router.get('/artistFavourites', isUserLoggedIn, (req, res) => {
   res.render('artist/artist-favourites',{buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Application History", linkB: "/artistOrderHistory", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
 })
 
-router.post('/artistFavourites', isUserLoggedIn, async (req, res) => {
+router.post('/allArtworks', isUserLoggedIn, async (req, res) => {
 
   const id = req.session.currentUser._id;
 
@@ -316,6 +346,7 @@ router.post('/artistFavourites', isUserLoggedIn, async (req, res) => {
   
       if (user.favourites.length === 0) {
       addFavouriteArtworkToUser(user, favourites)
+      res.redirect('/allArtworks')
       console.log('monkey')} 
       else {
         console.log('artworkUrl: ', artworkUrl)
@@ -324,14 +355,28 @@ router.post('/artistFavourites', isUserLoggedIn, async (req, res) => {
         }
         const duplicate = favArtworkArray.some(item => item === artworkUrl)
         if (duplicate) {
-          console.log('duplicate')
+          let exhibitionsArray = []
+          let applicationsArray = []
+          Exhibition.find()
+            .then((exhibitionsArr) => {
+              for(let exhibition of exhibitionsArr) {
+                for(let application of exhibition.artistApplication)
+                  {if (exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false) {
+                    exhibitionsArray.push(exhibition)
+                    applicationsArray.push(application)
+                }}
+              }
+      res.render('artworks', {exhibitionsArray, applicationsArray, errorMsg:"Already added to favourites. Pick new Image"})
+    })
+      
         } else {
           addFavouriteArtworkToUser(user, favourites)
+          res.redirect('/allArtworks')
           console.log('added to favourites')
         }
       }
 
-  res.redirect('/allArtworks')
+ 
 })
 
 module.exports = router;

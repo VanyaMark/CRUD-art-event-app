@@ -2,20 +2,22 @@
 <div id="form">
   <h2>Edit your application details</h2>
   <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
-
+  <label> Application ID   
     <input
         type="text"
         name="_id"
         value="{{artistApptoEdit._id}}"
         readonly
       />
+    </label><br><br>
+    <label>User ID
      <input
         type="text"
         name="user"
         value="{{artistApptoEdit.user}}"
         readonly
       />
-
+</label><br><br>
        <label>
       Avatar URl
       <input
@@ -24,7 +26,7 @@
         value="{{artistApptoEdit.avatarUrl}}"
         readonly
       />
-    </label>
+    </label><br><br>
 
     <label>
       First Name
@@ -34,7 +36,7 @@
         value="{{artistApptoEdit.firstName}}"
         readonly
       />
-    </label>
+    </label><br><br>
 
     <label>
       Last Name
@@ -44,7 +46,7 @@
         value="{{artistApptoEdit.lastName}}"
         readonly
       />
-    </label>
+    </label><br><br>
 
     <label>
       Email
@@ -54,12 +56,12 @@
         value="{{artistApptoEdit.email}}"
         readonly
       />
-    </label>
+    </label><br><br>
 
     <label>
       Address
       <input type="text" name="address" value="{{artistApptoEdit.address}}" />
-    </label>
+    </label><br><br>
 
     <label>
       Phone Number
@@ -68,7 +70,7 @@
         name="phoneNumber"
         value="{{artistApptoEdit.phoneNumber}}"
       />
-    </label>
+    </label><br><br>
 
     <label>
       Date of Birth
@@ -77,31 +79,30 @@
         name="dateOfBirth"
         value="{{artistApptoEdit.dateOfBirth}}"
       />
-    </label>
+    </label><br><br>
 
     <label>
       Artwork Name
     <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}"/>
-    </label>
+    </label><br><br>
 
     <label>
       Artwork Image:
       <input
         type="file"
         name="artworkUrl"
+        placeholder="{{artistApptoEdit.artworkUrl}}"
       />
       <input
         type="text"
         name="existingImage"
         hidden value="{{artistApptoEdit.artworkUrl}}"
       />
-    </label>
+    </label><br><br>
 
     <label>Application Status: 
       <input type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly/>
-    </label>
-
-    <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
+    </label><br><br>
 
 
     <label>
@@ -113,7 +114,7 @@
         <option value="Photography">Photography</option>
         <option value="Plastic Art">Plastic Art</option>
       </select>
-    </label>
+    </label><br><br>
 
     <label>
       Wall Size:
@@ -124,14 +125,14 @@
         <option value="2m space - €120 per week">2m space - €120 per week</option>
         <option value="3m space - €150 per week">3m space - €150 per week</option>
       </select>
-    </label>
+    </label><br><br>
 
     <label for="w3review">Description:</label>
     <textarea
       name="description"
       rows="4"
       cols="50"
-    >{{artistApptoEdit.description}}</textarea>
+    >{{artistApptoEdit.description}}</textarea><br><br>
 
     <label>
       Choose Week:
@@ -146,7 +147,7 @@
           >{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
         {{/each}}
       </select>
-    </label>
+    </label><br><br>
 
     <button type="submit">Update Application</button>
 
