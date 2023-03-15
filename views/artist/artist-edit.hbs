@@ -3,47 +3,37 @@
   <h2>Fill in your details</h2>
   <form action="/artist/{{userInSession._id}}/edit" method="POST" enctype="multipart/form-data">
 
-    <!--<label>
-      Username
-      <input type="text" name="username" value="{{userInSession.username}}" />
-    </label>-->
-
     <label>
       First Name
       <input type="text" name="firstName" value="{{userInSession.firstName}}" />
-    </label>
+    </label><br><br>
+
 
     <label>
       Last Name
       <input type="text" name="lastName" value="{{userInSession.lastName}}" />
-    </label>
- 
-    <!--<label>
-      Email
-      <input type="email" name="email" value="{{userInSession.email}}" />
-    </label>-->
-
-    <!--<label>
-      Password
-      <input type="password" name="password" placeholder="*********"/>
-    </label>-->
+    </label><br><br>
 
     <label>
       Address
       <input type="text" name="address" value="{{userInSession.address}}" />
-    </label>
+    </label><br><br>
+
     <label>
       Phone number
       <input type="number" name="phoneNumber" value="{{userInSession.phoneNumber}}"/>
-    </label>
+    </label><br><br>
+
     <label>
       Avatar URl
       <input type="file" name="avatarUrl" value="{{userInSession.avatarUrl}}" />
-    </label>
+    </label><br><br>
+
     <label>
       Date of Birth
       <input type="date" name="dateOfBirth" value="{{userInSession.dateOfBirth}}" />
-    </label>
+    </label><br><br>
+
     <label> Gender
       <select name="gender"> 
         <option>Select One</option>
@@ -51,8 +41,9 @@
         <option value="Male">Male</option>
         <option  value="Non-Binary">Non Binary</option>
         <option  value="Rather Not Say">Rather not say</option>
-      </select>     
-    </label>
+      </select>  
+    </label><br><br> 
+
     <label>Nationality
         <select id="nationality" name="nationality" data-name="nationality"  ms-field="nationality" data-parsley-required-message="Please let us know your nationality." class="select-field w-select">
             <option value="{{userInSession.nationality}}">{{userInSession.nationality}}</option>
@@ -281,17 +272,12 @@
             <option value='zambian'>Zambian</option>
             <option value='zimbabwean'>Zimbabwean</option>
         </select>
-    </label>
+    </label><br><br> 
 
     <button type="submit">Update account</button>
 
-    {{! error message will be added here }}
-   <!--
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-    -->
   </form>
+  
 </div>
 
 {{#if errorMessage}}

@@ -17,7 +17,7 @@ const {
 //This renders the artist's dashboard
 
 router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-  res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artist/favourites", buttonC: "Application History", linkC: "/artistOrderHistory"});
+  res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"});
 })
 
 //This renders the artist's details according to their id
@@ -26,7 +26,7 @@ router.get('/artist/:id', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const { id } = req.params;
   User.findById(id)
     .then(user => {
-      res.render('artist/artist-details', { userInSession: req.session.currentUser, user, buttonA: "Back To Dashboard", linkA: `/artist`, buttonB: "Edit Account Details", linkB: `/artist/${req.session.currentUser._id}/edit`, buttonC: "", linkC: "" })
+      res.render('artist/artist-details', { userInSession: req.session.currentUser, user, buttonA: "Back To Dashboard", linkA: `/artist`, buttonB: "Edit Account Details", linkB: `/artist/${req.session.currentUser._id}/edit`, buttonC: "Application History", linkC: "/artistOrderHistory" })
     })
 })
 
@@ -85,7 +85,7 @@ router.get('/artistApplication', isUserLoggedIn, isArtistOrAdmin, async (req, re
           exhibitionArray.push(item)
         }
       })
-      res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray})
+      res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
     })
 })
 
@@ -95,22 +95,23 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const user = req.session.currentUser;
   ArtistApplication.find({user})
   .then((altArtistApp) => {
-    res.render('artist/artist-cart', {altArtistApp})
+    res.render('artist/artist-cart', {altArtistApp, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
   })
 })
 
 //This obtains the details filled on the application form and renders it onto the artist cart
 
-router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res) => {
+router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res,next) => {
     const user = req.session.currentUser._id
     const {avatarUrl, firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
     await User.findByIdAndUpdate(user, {firstName,
       lastName, address, phoneNumber, dateOfBirth}, {new: true})
+
       if (req.file) {
         artworkUrl = req.file.path;
       } else {
         artworkUrl = existingImage;
-     };
+      };
     await ArtistApplication.create({user,
         avatarUrl,
         firstName,
@@ -128,9 +129,10 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single(
         applicationStatus
     })
     .then(artistApp => {
-        res.render('artist/artist-cart', {artistApp} )
+        res.render('artist/artist-cart', {artistApp, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"} )
     })
    .catch(async (err)=> {
+    console.log("monkey:",err)
       if (err._message === 'ArtistApplication validation failed') {
         let exhibitionToJoin = await Exhibition.find()
         let exhibitionArray = [];
@@ -142,11 +144,12 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single(
                 exhibitionArray.push(item)
               }
             })
-            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete."})
+            res.render('artist/artist-app-form', {user: values[0], exhibitionToJoin: exhibitionArray, errorMessage: "Error: Please, ensure all fields are complete.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
           })
         }
-          else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one."}) 
+          else if (err.code === 11000) {res.render('artist/artist-cart', {errMsg: "You have an application pending. Please, update and submit or delete pending application before starting a new one.", buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"}) 
       }
+      else{next(err)}
     }) 
 })
 
@@ -164,7 +167,7 @@ router.get('/artistCart/:id/edit', async (req, res) => {
           exhibitionArray.push(item)
         }
       })
-      res.render('artist/artist-cart-edit', {artistApptoEdit: values[0], exhibitionToJoin: exhibitionArray})
+      res.render('artist/artist-cart-edit', {artistApptoEdit: values[0], exhibitionToJoin: exhibitionArray, buttonA: "Back To Cart", linkA: "/artistCart", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
     }))
 })
 
@@ -225,7 +228,7 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const user = req.session.currentUser._id
   ArtistApplication.find({user})
   .then((editedItem)=>{    
-    res.render('artist/artist-cart', {editedItem})
+    res.render('artist/artist-cart', {editedItem, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
   })      
 })
 
@@ -269,7 +272,7 @@ router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res
       } 
     }
     await ArtistApplication.findOneAndDelete({user})
-    res.render('artist/artist-submit-app')
+    res.render('artist/artist-submit-app',{buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory"})
 })
 
 //This displays the artist's exhibition application history
@@ -285,7 +288,7 @@ router.get('/artistOrderHistory', isUserLoggedIn, isArtistOrAdmin, (req, res) =>
           applicationsArray.push(application)
         }}
       }
-      res.render('artist/order-history', {applicationsArray})
+      res.render('artist/artist-application-history', {applicationsArray,buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
   })
 })
 
@@ -298,7 +301,7 @@ async function addFavouriteArtworkToUser(userToUpdate, favouriteArtwork) {
 //Get rote to render the page on which 
 
 router.get('/artistFavourites', isUserLoggedIn, (req, res) => {
-  res.render('artist/artist-favourites')
+  res.render('artist/artist-favourites',{buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Application History", linkB: "/artistOrderHistory", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
 })
 
 router.post('/artistFavourites', isUserLoggedIn, async (req, res) => {

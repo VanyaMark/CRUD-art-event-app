@@ -8,108 +8,415 @@
 
 {{#if artistApp}}
 
-  <form action="/artistSubmitApp" method="POST">
-    <input name="_id" value="{{artistApp._id}}" readonly />
-    <input name="user" value="{{artistApp.user}}" readonly />
-    <input name="avatarUrl" value="{{artistApp.avatarUrl}}"/>
-    <input name="firstName" value="{{artistApp.firstName}}"/>
-    <input name="lastName" value="{{artistApp.lastName}}" />
-    <input name="email" value= "{{artistApp.email}}"/>
-
-    <input name="phoneNumber" value= "{{artistApp.phoneNumber}}"/>
-    <input name="address" value= "{{artistApp.address}}"/>
-    <input name="dateOfBirth" value= "{{artistApp.dateOfBirth}}"/>
-
-    <input name="artworkName" value="{{artistApp.artworkName}}"/>
-
-    <input type="text" name="applicationStatus" value="{{artistApp.applicationStatus}}"/>
-    <input name="artworkUrl" value="{{artistApp.artworkUrl}}" />
-    <input name="artType" value="{{artistApp.artType}}"/>
-    <input name="wallSize" value="{{artistApp.wallSize}}"/>
-    <input name="description" value="{{artistApp.description}}"/>
-    <input name="chooseWeek" value="{{artistApp.chooseWeek}}"/>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button>
+<div>
+  <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button><br><br>
 
   <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
     <button>Delete Application</button>
   </form>
+</div><br><br>
+
+  <form action="/artistSubmitApp" method="POST">
+
+  <label>Application ID
+    <input name="_id" value="{{artistApp._id}}" readonly />
+</label><br><br>
+
+    <label>User ID
+    <input name="user" value="{{artistApp.user}}" readonly />
+</label><br><br>
+
+    <label>Avatar URL
+    <input name="avatarUrl" value="{{artistApp.avatarUrl}}"/>
+</label><br><br>
+
+    <label>First Name
+    <input name="firstName" value="{{artistApp.firstName}}"/>
+</label><br><br>
+
+    <label>Last Name
+    <input name="lastName" value="{{artistApp.lastName}}" />
+</label>
+
+    <label>Email
+    <input name="email" value= "{{artistApp.email}}"/>
+</label><br><br>
+
+    <label>Phone Number
+    <input name="phoneNumber" value= "{{artistApp.phoneNumber}}"/>
+</label><br><br>
+
+    <label>Address
+    <input name="address" value= "{{artistApp.address}}"/>
+</label>
+
+    <label>Date Of Birth
+    <input name="dateOfBirth" value= "{{artistApp.dateOfBirth}}"/>
+</label><br><br>
+
+<label>Artwork Name
+    <input name="artworkName" value="{{artistApp.artworkName}}"/>
+</label><br><br>
+
+<label>Application Status
+    <input type="text" name="applicationStatus" value="{{artistApp.applicationStatus}}"/>
+</label><br><br>
+
+    <label>Artwork URL
+    <input name="artworkUrl" value="{{artistApp.artworkUrl}}" />
+</label><br><br>
+
+    <label>Art Type
+    <input name="artType" value="{{artistApp.artType}}"/>
+</label><br><br>
+
+    <label>Wall Size
+    <input name="wallSize" value="{{artistApp.wallSize}}"/>
+</label><br><br>
+
+    <label>Description
+    <input name="description" value="{{artistApp.description}}"/>
+</label><br><br>
+
+    <label>Week of Exhibition
+    <input name="chooseWeek" value="{{artistApp.chooseWeek}}"/>
+</label><br><br>
+<hr>
+    <div class="container">
+  <div class="row">
+    <div class="col-75">
+      <div class="container">
+        <form>
+
+          <div class="row">
+            <div class="col-50">
+              <h3>Billing Address</h3>
+              <label for="fname"> Full Name</label><br>
+              <input class="fname"type="text" id="fname" name="fullName" placeholder="John M. Doe"><br>
+              <label for="email">Email</label><br>
+              <input class="formEmail" type="text" id="email" name="email" placeholder="john@example.com"><br>
+              <label for="adr">Address</label><br>
+              <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"><br>
+            </div>
+          <label>
+            <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+          </label>
+            <div class="col-50">
+              <h3>Payment</h3>
+              <label for="fname">Accepted Cards</label><br>
+             
+              <input  type="radio" id="age1" name="age" value="Mastercard">
+              <label for="age1">Mastercard</label>
+              <input type="radio" id="age2" name="Visa" value="60">
+              <label for="age2">Visa</label>
+              <input type="radio" id="age3" name="American Express" value="100">
+              <label for="age3">American Express</label>
+              <input type="radio" id="age4" name="Visa Debit" value="100">
+              <label for="age4">Visa Debit</label><br><br>
+      
+              <label for="cname">Name on Card</label><br>
+              <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
+              <label for="ccnum">Credit card number</label><br>
+              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required><br>
+              <label for="expmonth">Exp Month</label><br>
+              <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
+
+              <div class="row">
+                <div class="col-50">
+                  <label for="expyear">Exp Year</label><br>
+                  <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                </div>
+                <div class="col-50">
+                  <label for="cvv">CVV</label><br>
+                  <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                </div>
+              </div>
+            </div>
+
+          </div>
+     
+          <hr>
+          <p>Cart Total <span class="price" style="color:black"><b>$<span id="cart-total">0</span></b></span></p>
+          <hr>
+           <button type="submit">Submit Payment</button>
+  </form>
+
 {{/if}}
 
 
 {{#if editedItem}}
 {{#each editedItem}}
-
-  <form action="/artistSubmitApp" method="POST">
-
-    <input name="_id" value="{{this._id}}" readonly />
-    <input name="user" value="{{this.user}}" readonly />
-    <input name="avatarUrl" value="{{this.avatarUrl}}"/>
-    <input name="firstName" value="{{this.firstName}}"/>
-    <input name="lastName" value="{{this.lastName}}" />
-    <input name="email" value= "{{this.email}}"/>
-
-    <input name="phoneNumber" value= "{{this.phoneNumber}}"/>
-    <input name="address" value= "{{this.address}}"/>
-    <input name="dateOfBirth" value= "{{this.dateOfBirth}}"/>
-
-    <input name="artworkName" value="{{this.artworkName}}"/>
-    <input type="text" name="applicationStatus" value="{{this.applicationStatus}}"/>
-    <input name="artworkUrl" value="{{this.artworkUrl}}" />
-    <input name="artType" value="{{this.artType}}"/>
-    <input name="wallSize" value="{{this.wallSize}}"/>
-    <input name="description" value="{{this.description}}"/>
-    <input name="chooseWeek" value="{{this.chooseWeek}}"/>
-
-    <button type="submit">Submit</button>
-
-  </form>
-
-  <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
+<div>
+  <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button><br><br>
 
   <form action="/artistCart/{{this._id}}/delete" method="POST">
     <button>Delete Application</button>
   </form>
+  </div><br><br>
+  <form action="/artistSubmitApp" method="POST">
+
+  <label>Application ID
+    <input name="_id" value="{{this._id}}" readonly />
+    </label><br><br>
+
+      <label>User ID
+    <input name="user" value="{{this.user}}" readonly />
+    </label><br><br>
+
+      <label>Avatar URL
+    <input name="avatarUrl" value="{{this.avatarUrl}}"/>
+    </label><br><br>
+
+      <label>First Name
+    <input name="firstName" value="{{this.firstName}}"/>
+    </label><br><br>
+
+      <label>Last Name
+    <input name="lastName" value="{{this.lastName}}" />
+    </label><br><br>
+
+      <label>Email
+    <input name="email" value= "{{this.email}}"/>
+    </label><br><br>
+
+      <label>Phone Number
+    <input name="phoneNumber" value= "{{this.phoneNumber}}"/>
+    </label><br><br>
+
+      <label>Address
+    <input name="address" value= "{{this.address}}"/>
+    </label><br><br>
+
+      <label>Date of Birth
+    <input name="dateOfBirth" value= "{{this.dateOfBirth}}"/>
+    </label><br><br>
+
+  <label>Artwork Name
+    <input name="artworkName" value="{{this.artworkName}}"/>
+    </label><br><br>
+
+      <label>Application Status
+    <input type="text" name="applicationStatus" value="{{this.applicationStatus}}"/>
+    </label><br><br>
+
+      <label>Artwork URL
+    <input name="artworkUrl" value="{{this.artworkUrl}}" />
+    </label><br><br>
+
+      <label>Art Type
+    <input name="artType" value="{{this.artType}}"/>
+    </label><br><br>
+
+      <label>Wall Size
+    <input name="wallSize" value="{{this.wallSize}}"/>
+    </label><br><br>
+
+      <label>Description
+    <input name="description" value="{{this.description}}"/>
+    </label><br><br>
+
+      <label>Week of Exhibition
+    <input name="chooseWeek" value="{{this.chooseWeek}}"/>
+    </label><br><br>
+    <hr>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-75">
+      <div class="container">
+        <form>
+
+          <div class="row">
+            <div class="col-50">
+              <h3>Billing Address</h3>
+              <label for="fname"> Full Name</label><br>
+              <input class="fname"type="text" id="fname" name="fullName" placeholder="John M. Doe"><br>
+              <label for="email">Email</label><br>
+              <input class="formEmail" type="text" id="email" name="email" placeholder="john@example.com"><br>
+              <label for="adr">Address</label><br>
+              <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"><br>
+            </div>
+          <label>
+            <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+          </label>
+            <div class="col-50">
+              <h3>Payment</h3>
+              <label for="fname">Accepted Cards</label><br>
+             
+              <input  type="radio" id="age1" name="age" value="Mastercard">
+              <label for="age1">Mastercard</label>
+              <input type="radio" id="age2" name="Visa" value="60">
+              <label for="age2">Visa</label>
+              <input type="radio" id="age3" name="American Express" value="100">
+              <label for="age3">American Express</label>
+              <input type="radio" id="age4" name="Visa Debit" value="100">
+              <label for="age4">Visa Debit</label><br><br>
+      
+              <label for="cname">Name on Card</label><br>
+              <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
+              <label for="ccnum">Credit card number</label><br>
+              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required><br>
+              <label for="expmonth">Exp Month</label><br>
+              <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
+
+              <div class="row">
+                <div class="col-50">
+                  <label for="expyear">Exp Year</label><br>
+                  <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                </div>
+                <div class="col-50">
+                  <label for="cvv">CVV</label><br>
+                  <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                </div>
+              </div>
+            </div>
+
+          </div>
+     
+          <hr>
+          <p>Cart Total <span class="price" style="color:black"><b>$<span id="cart-total">0</span></b></span></p>
+          <hr>
+           <button type="submit">Submit Payment</button>
+
+  </form>
+
 {{/each}}
 {{/if}}
 
 
 {{#if altArtistApp}}
 {{#each altArtistApp}}
-
-  <form action="/artistSubmitApp" method="POST">
-
-    <input name="_id" value="{{this._id}}" readonly />
-    <input name="user" value="{{this.user}}" readonly />
-    <input name="avatarUrl" value="{{this.avatarUrl}}"/>
-    <input name="firstName" value="{{this.firstName}}"/>
-    <input name="lastName" value="{{this.lastName}}" />
-    <input name="email" value= "{{this.email}}"/>
-
-    <input name="phoneNumber" value= "{{this.phoneNumber}}"/>
-    <input name="address" value= "{{this.address}}"/>
-    <input name="dateOfBirth" value= "{{this.dateOfBirth}}"/>
-
-    <input name="artworkName" value="{{this.artworkName}}"/>
-    <input type="text" name="applicationStatus" value="{{this.applicationStatus}}"/>
-    <input name="artworkUrl" value="{{this.artworkUrl}}" />
-    <input name="artType" value="{{this.artType}}"/>
-    <input name="wallSize" value="{{this.wallSize}}"/>
-    <input name="description" value="{{this.description}}"/>
-    <input name="chooseWeek" value="{{this.chooseWeek}}"/>
-
-
-    <button type="submit">Submit</button>
-
-  </form>
-
-  <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button>
+<div>
+  <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button><br><br>
 
   <form action="/artistCart/{{this._id}}/delete" method="POST">
     <button>Delete Application</button>
+  </form>
+</div><br><br>
+  <form action="/artistSubmitApp" method="POST">
+
+    <label>Application ID
+    <input name="_id" value="{{this._id}}" readonly />
+    </label><br><br>
+
+    <label>User ID
+    <input name="user" value="{{this.user}}" readonly />
+    </label><br><br>
+
+    <label>Avatar URL
+    <input name="avatarUrl" value="{{this.avatarUrl}}"/>
+    </label><br><br>
+
+    <label>First Name
+    <input name="firstName" value="{{this.firstName}}"/>
+    </label><br><br>
+
+    <label>Last Name
+    <input name="lastName" value="{{this.lastName}}" />
+    </label><br><br>
+
+    <label>Email
+    <input name="email" value= "{{this.email}}"/>
+    </label><br><br>
+
+    <label>Phone Number
+    <input name="phoneNumber" value= "{{this.phoneNumber}}"/>
+    </label><br><br>
+
+    <label>Address
+    <input name="address" value= "{{this.address}}"/>
+    </label><br><br>
+
+    <label>Date of Birth
+    <input name="dateOfBirth" value= "{{this.dateOfBirth}}"/>
+    </label><br><br>
+
+    <label>Artwork Name
+    <input name="artworkName" value="{{this.artworkName}}"/>
+    </label><br><br>
+
+    <label>Application Status
+    <input type="text" name="applicationStatus" value="{{this.applicationStatus}}"/>
+    </label><br><br>
+
+    <label>Artwork URL
+    <input name="artworkUrl" value="{{this.artworkUrl}}" />
+    </label><br><br>
+
+    <label>Art Type
+    <input name="artType" value="{{this.artType}}"/>
+    </label><br><br>
+
+    <label>Wall Size
+    <input name="wallSize" value="{{this.wallSize}}"/>
+    </label><br><br>
+
+    <label>Description
+    <input name="description" value="{{this.description}}"/>
+    </label><br><br>
+
+    <label>Week of Exhibiton
+    <input name="chooseWeek" value="{{this.chooseWeek}}"/>
+    </label><br><br>
+  <hr>
+    <div class="container">
+  <div class="row">
+    <div class="col-75">
+      <div class="container">
+        <form>
+
+          <div class="row">
+            <div class="col-50">
+              <h3>Billing Address</h3>
+              <label for="fname"> Full Name</label><br>
+              <input class="fname"type="text" id="fname" name="fullName" placeholder="John M. Doe"><br>
+              <label for="email">Email</label><br>
+              <input class="formEmail" type="text" id="email" name="email" placeholder="john@example.com"><br>
+              <label for="adr">Address</label><br>
+              <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"><br>
+            </div>
+          <label>
+            <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+          </label>
+            <div class="col-50">
+              <h3>Payment</h3>
+              <label for="fname">Accepted Cards</label><br>
+             
+              <input  type="radio" id="age1" name="age" value="Mastercard">
+              <label for="age1">Mastercard</label>
+              <input type="radio" id="age2" name="Visa" value="60">
+              <label for="age2">Visa</label>
+              <input type="radio" id="age3" name="American Express" value="100">
+              <label for="age3">American Express</label>
+              <input type="radio" id="age4" name="Visa Debit" value="100">
+              <label for="age4">Visa Debit</label><br><br>
+      
+              <label for="cname">Name on Card</label><br>
+              <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
+              <label for="ccnum">Credit card number</label><br>
+              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required><br>
+              <label for="expmonth">Exp Month</label><br>
+              <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
+
+              <div class="row">
+                <div class="col-50">
+                  <label for="expyear">Exp Year</label><br>
+                  <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                </div>
+                <div class="col-50">
+                  <label for="cvv">CVV</label><br>
+                  <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                </div>
+              </div>
+            </div>
+
+          </div>
+     
+          <hr>
+          <p>Cart Total <span class="price" style="color:black"><b>$<span id="cart-total">0</span></b></span></p>
+          <hr>
+           <button type="submit">Submit Payment</button>
+
   </form>
 
 {{/each}}

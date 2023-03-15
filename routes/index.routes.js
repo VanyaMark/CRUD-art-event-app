@@ -6,7 +6,7 @@ const Exhibition = require('../models/Exhibition.model')
 /* GET home page */
 
 router.get("/", (req, res, next) => {
-    res.render("index", {message:"Welcome To Europe's Leading Art Gallery", image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC:`/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
+    res.render("index", {message:"Welcome To Europe's Finest Art Gallery", image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC:`/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
 });
 
 /* GET route to Fine Art Page*/
