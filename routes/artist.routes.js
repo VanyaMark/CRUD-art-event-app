@@ -331,7 +331,12 @@ router.get('/allArtworks', isUserLoggedIn, (req, res) =>  {
 
 
 router.get('/artistFavourites', isUserLoggedIn, (req, res) => {
-  res.render('artist/artist-favourites',{buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Application History", linkB: "/artistOrderHistory", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
+  let id = req.session.currentUser._id
+  User.findById(id)
+  .then((user)=>{
+
+    res.render('artist/artist-favourites',{user,buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Application History", linkB: "/artistOrderHistory", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
+  })
 })
 
 router.post('/allArtworks', isUserLoggedIn, async (req, res) => {
