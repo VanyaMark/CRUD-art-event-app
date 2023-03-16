@@ -3,14 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("CRUD-art-event-app JS imported successfully!");
 });
 
-let input = [...document.getElementsByTagName("input")];
+/*let input = [...document.getElementsByTagName("input")];
 input.forEach((input)=>{
   input.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
     }
   });
-})
+})*/
 
 let wallSizeValue = [...document.querySelectorAll('.price-by-wall-size')]
 

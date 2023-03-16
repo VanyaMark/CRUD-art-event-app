@@ -1,9 +1,9 @@
 {{!-- views/auth/login.hbs --}}
-
+<div class="inner-body-div">
 <div id="form">
   <h2>Login</h2>
 
-  <form action="/login" method="POST">
+  <form action="/user" method="POST">
 
     <label> Email
       <input type="email" name="email" placeholder="rockstar@ironhack.com" />
@@ -19,4 +19,13 @@
       <p class="error">{{errorMessage}}</p>
     {{/if}}
   </form>
+</div>
+
+<a class="button-b-link" href="/forgotPassword"> >>Forgot Password</a>
+</div>
+
+<div>
+
+{{>buttonsPartial}}
+
 </div>

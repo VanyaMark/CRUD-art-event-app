@@ -18,13 +18,13 @@ const {
 //renders the admin dashboard
 
 router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
-    res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/emailSent"});
+    res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail"});
 })
 
 //Renders the page on which the admin can create new exhibitions
 
 router.get('/exhibition/create',isUserLoggedIn, isAdmin, (req, res, next) => {
-    res.render('exhibition/exhibition-create-form', {buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/emailSent"})
+    res.render('exhibition/exhibition-create-form', {buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/sendEmail"})
 });
 
 //Obtains the exhibition information entered by admin on form and saves new exhibition to database
@@ -36,7 +36,7 @@ router.post('/exhibition/create', isUserLoggedIn, isAdmin,(req, res, next) => {
     .then(()=> res.redirect('/findExhibition'))
     .catch(err => {
       if (err.code === 11000) {
-        res.render('exhibition/exhibition-create-form', {errMsg: "Exhibition already exists. Create a new one.", buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/emailSent"}) 
+        res.render('exhibition/exhibition-create-form', {errMsg: "Exhibition already exists. Create a new one.", buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/sendEmail"}) 
       }
   })
 });
@@ -89,7 +89,7 @@ router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => {
   Exhibition.find()
   .then((exhibition) => {
 
-          res.render('exhibition/exhibition-details', {exhibition, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/emailSent"} )
+          res.render('exhibition/exhibition-details', {exhibition, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail"} )
       })      
 }) 
 
@@ -115,7 +115,7 @@ router.post('/exhibition/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res
 
 //renders the page on which the email form is so that the admin can email clients from this form
 
-router.get('/emailSent',isUserLoggedIn, isAdmin, (req,res,next)=>{
+router.get('/sendEmail',isUserLoggedIn, isAdmin, (req,res,next)=>{
   res.render('admin/admin-email',{buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"})
 })
 
@@ -144,7 +144,7 @@ router.post('/emailSent',isUserLoggedIn, isAdmin, async(req, res, next) => {
     text: message,
     html: emailtemplate.emailBody(message)
   })
-  .then(info => res.render('admin/email-success', {email, subject, message, info}))
+  .then(info => res.render('admin/email-success', {email, subject, message, info, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"}))
   .catch(error => console.log(error));
 });
 

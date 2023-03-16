@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const ArtistApplication = require('../models/ArtistApplication.model');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
+const nodemailer = require('nodemailer')
+const emailtemplate = require('../templates/email')
 const {
   isUserLoggedIn,
   isUserLoggedOut,
@@ -89,7 +91,7 @@ router.get('/login', isUserLoggedOut,(req, res, next) => {
 
 //Log in details are accepted from the from and compared with the database
 
-router.post('/login', isUserLoggedOut,(req, res, next) => {
+router.post('/user', isUserLoggedOut,(req, res, next) => {
   console.log('SESSION =====> ', req.session);
   const { email, password } = req.body;
   if (email === '' || password === '') {
@@ -180,5 +182,100 @@ router.post('/usernameEmailUpdate',isUserLoggedIn, (req, res, next) => {
         }
       })
   });
+
+//Renders a form to enter email if someone forgets their password
+
+  router.get('/forgotPassword',isUserLoggedOut,(req,res,next)=>{
+    res.render('auth/enter-email-password-reset')
+  })
+  
+//This emails a password reset link to the user so they can paste it on their browser's address bar to access
+//the form where they can enter their new password
+
+  router.post('/resetPasswordLink',isUserLoggedOut, async(req, res, next) => {
+    let { email } = req.body;
+  
+    let transporter = nodemailer.createTransport({
+
+      host: process.env.MAIL_HOST,
+      service: "yahoo",
+      secure:false,
+      auth: {
+        user: 'subarnapaul@rocketmail.com',
+        pass: process.env.MAIL_PASSWORD
+      }
+    });
+  
+    User.find({email})
+      .then((user)=>{
+        
+        transporter.sendMail({
+  
+          from: '"Subarna Paul at ArtBox" <subarnapaul@rocketmail.com>',
+          to: email, 
+      
+          subject: 'Password Reset Link', 
+      
+          text: 'Click on this link, or paste it on your address bar to go to the password link page: localhost:3001/resetPasswordLink',
+      
+          html: emailtemplate.emailBody(`Click on this link, or paste it on your address bar to go to the password reset page: localhost:3001/resetPassword/${user[0]._id}/edit`)
+      
+        })
+        .then(info => res.render('auth/check-your-email', {message:'Check your email for link to reset your password'}))
+      
+        .catch(error => console.log(error));
+      
+      });
+    })
+  
+  //The link emailed to the user, renders the page on which they can update their password  
+  
+    router.get('/resetPassword/:id/edit',isUserLoggedOut, (req,res,next)=>{
+      const {id} = req.params
+      res.render('auth/reset-password',{id})
+    })
+  
+  //This collects the new password and updates it on the system as well as redirects user to login page.
+
+    router.post('/resetPassword/:id/edit',isUserLoggedOut, (req,res,next)=>{
+      const {id} = req.params
+      const {password} = req.body
+  
+      const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+      if (!regex.test(password)) {
+        res
+          .status(500)
+          .render('auth/reset-password', {id, errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+        return;
+      }
+      bcryptjs
+        .genSalt(saltRounds)
+        .then(salt => bcryptjs.hash(password, salt))
+        .then(hashedPassword => {
+          if (!password) {
+            res.render('auth/reset-password', { id, errorMessage: 'Please provide your password.' });
+            return;
+          }
+          else{
+              User.findByIdAndUpdate(id, {
+              passwordHash: hashedPassword,
+            } ,{new:true})
+  
+            .then(userFromDB => {
+              console.log('Newly updated user is: ', userFromDB);
+              res.redirect('/login')
+            })
+            .catch(error => {
+                if (error instanceof mongoose.Error.ValidationError) {
+                  res.status(500).render('artist/reset-password', {id, errorMessage: error.message });
+              } 
+              else {
+                  next(error);
+              }
+            })
+          }
+        })
+  
+    })
 
 module.exports = router;

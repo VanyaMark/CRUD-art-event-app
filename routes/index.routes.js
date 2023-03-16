@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Exhibition = require('../models/Exhibition.model')
 
-//All the open routes accessible by anyone, are on this route.
+
 /* GET home page */
+//All the open routes accessible by anyone, are on this route.
 
 router.get("/", (req, res, next) => {
     res.render("index", {message:"Welcome To Europe's Finest Art Gallery", image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC:`/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
@@ -103,8 +104,5 @@ router.get("/plasticArtBlog", (req, res, next) => {
 
   res.render("plasticArtBlog");
 });
-
-
-
 
 module.exports = router;
