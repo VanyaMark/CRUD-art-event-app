@@ -14,6 +14,9 @@ const {
     isArtistOrAdmin
 } = require('../middleware/route-guard');
 
+
+//renders the admin dashboard
+
 router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
     res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/emailSent"});
 })
@@ -57,6 +60,8 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
         })
 })
 
+//collects edited information about exhibition and updates the database
+
 router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) => {
   const { id } = req.params;
   const { exhibitionStatus, archived, applicationStatus } = req.body;
@@ -77,7 +82,6 @@ router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) =>
  
 })
 
-
 //Renders all exhibitions
 
 router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => { 
@@ -89,7 +93,7 @@ router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => {
       })      
 }) 
 
-//Delete an exhibition
+//Deletes an exhibition
 
 router.post('/exhibition/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const { id } = req.params;
@@ -109,16 +113,20 @@ router.post('/exhibition/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res
     })
 })
 
+//renders the page on which the email form is so that the admin can email clients from this form
+
 router.get('/emailSent',isUserLoggedIn, isAdmin, (req,res,next)=>{
   res.render('admin/admin-email',{buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"})
 })
+
+//Collect information entered in form and emails it to receipient.
+//Service yahoo has been used as gmail no longer provides app passwords for security reasons
 
 router.post('/emailSent',isUserLoggedIn, isAdmin, async(req, res, next) => {
   let { email, subject, message } = req.body;
 
   let transporter = nodemailer.createTransport({
 
-   
     service: "yahoo",
     //secure:true,
     //port: 465,
@@ -139,7 +147,5 @@ router.post('/emailSent',isUserLoggedIn, isAdmin, async(req, res, next) => {
   .then(info => res.render('admin/email-success', {email, subject, message, info}))
   .catch(error => console.log(error));
 });
-
-
 
 module.exports = router;

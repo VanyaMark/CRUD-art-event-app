@@ -101,7 +101,6 @@ router.get('/artistCart', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
 
 //This obtains the details filled on the application form and renders it onto the artist cart
 
-
 router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single('artworkUrl'), async(req, res,next) => {
     const user = req.session.currentUser._id
     const {avatarUrl, firstName, lastName, email, dateOfBirth, artType, address, phoneNumber, artworkName, wallSize, description, chooseWeek, applicationStatus } = req.body;
@@ -167,7 +166,6 @@ router.post('/artistCart', isUserLoggedIn, isArtistOrAdmin, fileUploader.single(
 })
 
 //This pre-fills the artist's application form which is to be edited according to the application id
-
 
 router.get('/artistCart/:id/edit', async (req, res) => {
   const { id } = req.params;
@@ -271,8 +269,9 @@ async function addArtistAppObject(theExhibitionToUpdate, newArtistApp) {
     {$push: {artistApplication: newArtistApp}}); 
 }
 
-//On submission of form, cart gets deleted on database but a copy of the artist application
-//manually gets populated into the exhibition model (see 'addArtistAppObject' function above)
+/*On submission of form, cart gets deleted on database but a copy of the artist application
+manually gets populated into the exhibition model (see 'addArtistAppObject' function above)
+It was manually done because once the cart gets deleted, the regular .populate() no longer functions. Cart needs to be deleted at the end of each transaction as some of the fields are declared are unique in the model so results in duplication error if those fields are repeated, as well as keeps on rendering old carts on the page even after submission has happened.*/
 
 router.post('/artistSubmitApp', isUserLoggedIn, isArtistOrAdmin, async (req, res) => {
     const { id } = req.session.currentUser._id
@@ -306,11 +305,7 @@ router.get('/artistOrderHistory', isUserLoggedIn, isArtistOrAdmin, (req, res) =>
   })
 })
 
-async function addFavouriteArtworkToUser(userToUpdate, favouriteArtwork) {
-  let updatedUser = await User.updateOne(
-    userToUpdate, 
-  {$push: {favourites: favouriteArtwork}}); 
-}
+//Renders all artworks by all artists
 
 router.get('/allArtworks', isUserLoggedIn, (req, res) =>  {
   const user = req.session.currentUser;
@@ -329,15 +324,8 @@ router.get('/allArtworks', isUserLoggedIn, (req, res) =>  {
     })
 })
 
-
-router.get('/artistFavourites', isUserLoggedIn, (req, res) => {
-  let id = req.session.currentUser._id
-  User.findById(id)
-  .then((user)=>{
-
-    res.render('artist/artist-favourites',{user,buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Application History", linkB: "/artistOrderHistory", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
-  })
-})
+//Collects the favourites picked and saves to the user's favourites array in teh user model
+//However, if the favourite already exists, error message is thrown to pick a different favourite
 
 router.post('/allArtworks', isUserLoggedIn, async (req, res) => {
 
@@ -365,23 +353,42 @@ router.post('/allArtworks', isUserLoggedIn, async (req, res) => {
           Exhibition.find()
             .then((exhibitionsArr) => {
               for(let exhibition of exhibitionsArr) {
-                for(let application of exhibition.artistApplication)
-                  {if (exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false) {
+                for(let application of exhibition.artistApplication){
+                  if (exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false) {
                     exhibitionsArray.push(exhibition)
                     applicationsArray.push(application)
-                }}
+                  }
+                }
               }
-      res.render('artworks', {exhibitionsArray, applicationsArray, errorMsg:"Already added to favourites. Pick new Image"})
-    })
-      
-        } else {
+              res.render('artworks', {exhibitionsArray, applicationsArray, errorMsg:"Already added to favourites. Pick new Image"})
+            })
+        } 
+        else {
           addFavouriteArtworkToUser(user, favourites)
           res.redirect('/allArtworks')
           console.log('added to favourites')
         }
       }
-
- 
 })
+
+//Function to push favourite artwork picked into the favourite's array in the user model
+
+async function addFavouriteArtworkToUser(userToUpdate, favouriteArtwork) {
+  let updatedUser = await User.updateOne(
+    userToUpdate, 
+  {$push: {favourites: favouriteArtwork}}); 
+}
+
+//Renders all the favourite artwork chosen by a specific user
+
+router.get('/artistFavourites', isUserLoggedIn, (req, res) => {
+  let id = req.session.currentUser._id
+  User.findById(id)
+  .then((user)=>{
+
+    res.render('artist/artist-favourites',{user,buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Application History", linkB: "/artistOrderHistory", buttonC: "Apply for Exhibition", linkC: "/artistApplication"})
+  })
+})
+
 
 module.exports = router;
