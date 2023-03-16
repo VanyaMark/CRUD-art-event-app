@@ -2,22 +2,22 @@
 
   <h1>List of All Exhibitions</h1>
 
-    {{#each exhibition}}
-      <p>Exhibition Name: {{this.exhibitionName}}</p>
+  {{#each exhibition}}
+  <p>Exhibition Name: {{this.exhibitionName}}</p>
 
-      <p>Exhibition Week: {{this.exhibitionWeek}}</p>
+  <p>Exhibition Week: {{this.exhibitionWeek}}</p>
 
-      <p>Exhibition Status: {{this.exhibitionStatus}}</p>
-      <p>Visitors that attended: {{this.usersAttended}}</p>
+  <p>Exhibition Status: {{this.exhibitionStatus}}</p>
+  <p>Visitors that attended: {{this.usersAttended}}</p>
 
-    
-      <button><a href="/exhibition/{{this._id}}">See Exhibition Details</a></button>
 
-      <hr>
-    {{/each}}
-    
+  <button><a href="/exhibition/{{this._id}}">See Exhibition Details</a></button>
+
+  <hr>
+  {{/each}}
+
 </div>
 
-<div >
+<div>
   {{>buttonsPartial}}
 </div>

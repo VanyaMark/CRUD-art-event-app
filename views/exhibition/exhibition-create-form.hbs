@@ -1,11 +1,11 @@
 <div class="inner-body-div">
 
- <h1>Create New Exhibition</h1>   
-{{#if errMsg}}
-    {{errMsg}}
-{{/if}}
+  <h1>Create New Exhibition</h1>
+  {{#if errMsg}}
+  {{errMsg}}
+  {{/if}}
 
-<form action="/exhibition/create" method="POST">
+  <form action="/exhibition/create" method="POST">
 
     <label>Name of Exhibition</label><br>
     <input name="exhibitionName"><br>
@@ -17,15 +17,14 @@
     <input name="endDay" value="Sun" hidden><br>
     <label>End Date</label><br>
     <input name="lastDate" type="date"><br>
-    <button class='btn btn-primary'type="submit">Create Exhibition</button>
+    <button class='btn btn-primary' type="submit">Create Exhibition</button>
 
-</form>
+  </form>
 
 </div>
 
-<div >
+<div>
 
   {{>buttonsPartial}}
-  
-</div>
 
+</div>

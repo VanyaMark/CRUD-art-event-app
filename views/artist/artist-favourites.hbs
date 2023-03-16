@@ -1,17 +1,15 @@
-
 <div class="inner-body-div">
 
-{{#each user.favourites}}
+  {{#each user.favourites}}
   <p>{{this.artworkName}}</p>
   <img src="{{this.artworkUrl}}">
   <p>By: {{this.firstName}} {{this.lastName}}</p>
   <p>Description: {{this.description}}</p>
-{{/each}}
+  {{/each}}
 
 </div>
 
-<div >
+<div>
   {{>buttonsPartial}}
-  
-  </div>
 
+</div>

@@ -1,68 +1,66 @@
-    <div class="inner-body-div">
-    
-    <section class="search-section h-20">
+<div class="inner-body-div">
 
-                <div class="container">
+   <section class="search-section h-20">
 
-                    <div class="row">
+      <div class="container">
 
-                        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
+         <div class="row">
 
-                           <form action='/search' method='POST'>
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
 
-                              <select name='exhibitionName'>
+               <form action='/search' method='POST'>
 
-                              
-                                 <option>Select One</option>
-
-                                 {{#each exhibitionArray}}
-
-                                 <option value='{{this.exhibitionName}}'>{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
-
-                                 {{/each}}
-
-                              </select>
-
-                              <button type='submit'>Search for Exhibition by Week</button>
-
-                           </form>   
-                            
-                        </div>
-
-                        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
-
-                           <form action='/searchArtType' method='POST'>
-
-                              <select name='artType' >
-
-                              
-                                 <option>Select One</option>
-
-                                 <option value='Fine Art'>Fine Art</option>
-                                 <option value='Photography'>Photography</option>
-                                 <option value='Plastic Art'>Plastic Art</option>
-
-                              </select>
-
-                              <button type='submit'>Search for Artwork by Type</button>
-
-                           </form>   
-
-                        </div>
+                  <select name='exhibitionName'>
 
 
-                    </div>
+                     <option>Select One</option>
 
-                </div>
+                     {{#each exhibitionArray}}
 
-            </section>
-    
-    
-    <div class="carouselPartial">
-    {{>carouselPartial}}
-</div>
+                     <option value='{{this.exhibitionName}}'>{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
+
+                     {{/each}}
+
+                  </select>
+
+                  <button type='submit'>Search for Exhibition by Week</button>
+
+               </form>
+
+            </div>
+
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
+
+               <form action='/searchArtType' method='POST'>
+
+                  <select name='artType'>
+
+
+                     <option>Select One</option>
+
+                     <option value='Fine Art'>Fine Art</option>
+                     <option value='Photography'>Photography</option>
+                     <option value='Plastic Art'>Plastic Art</option>
+
+                  </select>
+
+                  <button type='submit'>Search for Artwork by Type</button>
+
+               </form>
+
+            </div>
+
+         </div>
+
+      </div>
+
+   </section>
+
+   <div class="carouselPartial">
+      {{>carouselPartial}}
    </div>
+</div>
 
-    <div class="buttonsPartial"> 
-    {{>buttonsPartial}}
-    </div> 
+<div class="buttonsPartial">
+   {{>buttonsPartial}}
+</div>

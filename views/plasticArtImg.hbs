@@ -1,69 +1,63 @@
-        
-        <div class="inner-body-div">
-        <section class="search-section h-20">
+<div class="inner-body-div">
+   <section class="search-section h-20">
 
-                <div class="container">
+      <div class="container">
 
-                    <div class="row">
+         <div class="row">
 
-                        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
 
-                           <form action='/search' method='POST'>
+               <form action='/search' method='POST'>
 
-                              <select name='exhibitionName'>
+                  <select name='exhibitionName'>
 
-                              
-                                 <option>Select One</option>
+                     <option>Select One</option>
 
-                                 {{#each exhibitionArray}}
+                     {{#each exhibitionArray}}
 
-                                 <option value='{{this.exhibitionName}}'>{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
+                     <option value='{{this.exhibitionName}}'>{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
 
-                                 {{/each}}
-                       
-                              </select>
+                     {{/each}}
 
-                              <button type='submit'>Search for Exhibition by Week</button>
+                  </select>
 
-                           </form>   
-                            
-                        </div>
+                  <button type='submit'>Search for Exhibition by Week</button>
 
-                        <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
+               </form>
 
-                           <form action='/searchArtType' method='POST'>
+            </div>
 
-                              <select name='artType' >
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
 
-                              
-                                 <option>Select One</option>
+               <form action='/searchArtType' method='POST'>
 
-                                 <option value='Fine Art'>Fine Art</option>
-                                 <option value='Photography'>Photography</option>
-                                 <option value='Plastic Art'>Plastic Art</option>
+                  <select name='artType'>
 
-                              </select>
+                     <option>Select One</option>
 
-                              <button type='submit'>Search for Artwork by Type</button>
+                     <option value='Fine Art'>Fine Art</option>
+                     <option value='Photography'>Photography</option>
+                     <option value='Plastic Art'>Plastic Art</option>
 
-                           </form>   
-  
+                  </select>
 
-                        </div>
+                  <button type='submit'>Search for Artwork by Type</button>
 
+               </form>
 
-                    </div>
+            </div>
 
-                </div>
+         </div>
 
-            </section>
+      </div>
 
-    <div class="carouselPartial">
-    {{>carouselPartial}}
-    </div>
+   </section>
+
+   <div class="carouselPartial">
+      {{>carouselPartial}}
+   </div>
 </div>
 
-
-    <div>
-    {{>buttonsPartial}}
-    </div>
+<div>
+   {{>buttonsPartial}}
+</div>

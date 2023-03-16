@@ -1,161 +1,90 @@
 <div class="inner-body-div">
-<div id="form">
-  <h2>Edit your application details</h2>
-  <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
-  <label> Application ID   
-    <input
-        type="text"
-        name="_id"
-        value="{{artistApptoEdit._id}}"
-        readonly
-      />
-    </label><br><br>
-    <label>User ID
-     <input
-        type="text"
-        name="user"
-        value="{{artistApptoEdit.user}}"
-        readonly
-      />
-</label><br><br>
-       <label>
-      Avatar URl
-      <input
-        type="text"
-        name="avatarUrl"
-        value="{{artistApptoEdit.avatarUrl}}"
-        readonly
-      />
-    </label><br><br>
-
-    <label>
-      First Name
-      <input
-        type="text"
-        name="firstName"
-        value="{{artistApptoEdit.firstName}}"
-        readonly
-      />
-    </label><br><br>
-
-    <label>
-      Last Name
-      <input
-        type="text"
-        name="lastName"
-        value="{{artistApptoEdit.lastName}}"
-        readonly
-      />
-    </label><br><br>
-
-    <label>
-      Email
-      <input
-        type="email"
-        name="email"
-        value="{{artistApptoEdit.email}}"
-        readonly
-      />
-    </label><br><br>
-
-    <label>
-      Address
-      <input type="text" name="address" value="{{artistApptoEdit.address}}" />
-    </label><br><br>
-
-    <label>
-      Phone Number
-      <input
-        type="number"
-        name="phoneNumber"
-        value="{{artistApptoEdit.phoneNumber}}"
-      />
-    </label><br><br>
-
-    <label>
-      Date of Birth
-      <input
-        type="date"
-        name="dateOfBirth"
-        value="{{artistApptoEdit.dateOfBirth}}"
-      />
-    </label><br><br>
-
-    <label>
-      Artwork Name
-    <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}"/>
-    </label><br><br>
-
-    <label>
-      Artwork Image:
-      <input
-        type="file"
-        name="artworkUrl"
-        placeholder="{{artistApptoEdit.artworkUrl}}"
-      />
-      <input
-        type="text"
-        name="existingImage"
-        hidden value="{{artistApptoEdit.artworkUrl}}"
-      />
-    </label><br><br>
-
-    <label>Application Status: 
-      <input type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly/>
-    </label><br><br>
-
-
-    <label>
-      Art Type:
-      <select name="artType">
-        <option selected value="{{artistApptoEdit.artType}}">Selected -
-          {{artistApptoEdit.artType}}</option>
-        <option value="Fine Art">Fine Art</option>
-        <option value="Photography">Photography</option>
-        <option value="Plastic Art">Plastic Art</option>
-      </select>
-    </label><br><br>
-
-    <label>
-      Wall Size:
-      <select name="wallSize">
-        <option selected value="{{artistApptoEdit.wallSize}}">Selected -
-          {{artistApptoEdit.wallSize}}</option>
-        <option value="1m space - €80 per week">1m space - €80 per week</option>
-        <option value="2m space - €120 per week">2m space - €120 per week</option>
-        <option value="3m space - €150 per week">3m space - €150 per week</option>
-      </select>
-    </label><br><br>
-
-    <label for="w3review">Description:</label>
-    <textarea
-      name="description"
-      rows="4"
-      cols="50"
-    >{{artistApptoEdit.description}}</textarea><br><br>
-
-    <label>
-      Choose Week:
-      <select name="chooseWeek">
-        <option
-          selected
-          value="{{artistApptoEdit.chooseWeek}}"
-        >{{artistApptoEdit.exhibitionName}}-{{artistApptoEdit.chooseWeek}}</option>
-        {{#each exhibitionToJoin}}
-          <option
-            value="{{this.exhibitionName}}-{{this.exhibitionWeek}}"
-          >{{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
-        {{/each}}
-      </select>
-    </label><br><br>
-
-    <button type="submit">Update Application</button>
-
-  </form>
-</div>
-
-</div>
-
-  <div>
-    {{>buttonsPartial}}
+  <div id="form">
+    <h2>Edit your application details</h2>
+    <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
+      <label> Application ID
+        <input type="text" name="_id" value="{{artistApptoEdit._id}}" readonly />
+      </label><br><br>
+      <label>User ID
+        <input type="text" name="user" value="{{artistApptoEdit.user}}" readonly />
+      </label><br><br>
+      <label>
+        Avatar URl
+        <input type="text" name="avatarUrl" value="{{artistApptoEdit.avatarUrl}}" readonly />
+      </label><br><br>
+      <label>
+        First Name
+        <input type="text" name="firstName" value="{{artistApptoEdit.firstName}}" readonly />
+      </label><br><br>
+      <label>
+        Last Name
+        <input type="text" name="lastName" value="{{artistApptoEdit.lastName}}" readonly />
+      </label><br><br>
+      <label>
+        Email
+        <input type="email" name="email" value="{{artistApptoEdit.email}}" readonly />
+      </label><br><br>
+      <label>
+        Address
+        <input type="text" name="address" value="{{artistApptoEdit.address}}" />
+      </label><br><br>
+      <label>
+        Phone Number
+        <input type="number" name="phoneNumber" value="{{artistApptoEdit.phoneNumber}}" />
+      </label><br><br>
+      <label>
+        Date of Birth
+        <input type="date" name="dateOfBirth" value="{{artistApptoEdit.dateOfBirth}}" />
+      </label><br><br>
+      <label>
+        Artwork Name
+        <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}" />
+      </label><br><br>
+      <label>
+        Artwork Image:
+        <input type="file" name="artworkUrl" placeholder="{{artistApptoEdit.artworkUrl}}" />
+        <input type="text" name="existingImage" hidden value="{{artistApptoEdit.artworkUrl}}" />
+      </label><br><br>
+      <label>Application Status:
+        <input type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly />
+      </label><br><br>
+      <label>
+        Art Type:
+        <select name="artType">
+          <option selected value="{{artistApptoEdit.artType}}">Selected -
+            {{artistApptoEdit.artType}}</option>
+          <option value="Fine Art">Fine Art</option>
+          <option value="Photography">Photography</option>
+          <option value="Plastic Art">Plastic Art</option>
+        </select>
+      </label><br><br>
+      <label>
+        Wall Size:
+        <select name="wallSize">
+          <option selected value="{{artistApptoEdit.wallSize}}">Selected -
+            {{artistApptoEdit.wallSize}}</option>
+          <option value="1m space - €80 per week">1m space - €80 per week</option>
+          <option value="2m space - €120 per week">2m space - €120 per week</option>
+          <option value="3m space - €150 per week">3m space - €150 per week</option>
+        </select>
+      </label><br><br>
+      <label for="w3review">Description:</label>
+      <textarea name="description" rows="4" cols="50">{{artistApptoEdit.description}}</textarea><br><br>
+      <label>
+        Choose Week:
+        <select name="chooseWeek">
+          <option selected value="{{artistApptoEdit.chooseWeek}}">
+            {{artistApptoEdit.exhibitionName}}-{{artistApptoEdit.chooseWeek}}</option>
+          {{#each exhibitionToJoin}}
+          <option value="{{this.exhibitionName}}-{{this.exhibitionWeek}}">
+            {{this.exhibitionName}}-{{this.exhibitionWeek}}</option>
+          {{/each}}
+        </select>
+      </label><br><br>
+      <button type="submit">Update Application</button>
+    </form>
   </div>
+</div>
+<div>
+  {{>buttonsPartial}}
+</div>

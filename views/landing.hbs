@@ -1,16 +1,10 @@
+<div class="inner-body-div">
+  {{#with userInSession}}
+  {{>welcomePartial}}
+  {{/with}}
+  <img class="box-img" src="images/placeholder-box.jpg">
+</div>
 
-
-
-  <div class="inner-body-div">
-    {{#with userInSession}}
-    {{>welcomePartial}}
-    {{/with}}
-    <img class="box-img"src="images/placeholder-box.jpg">
-  </div>
-    
-  <div >
-    {{>buttonsPartial}}
-  </div>
-
-
-
+<div>
+  {{>buttonsPartial}}
+</div>

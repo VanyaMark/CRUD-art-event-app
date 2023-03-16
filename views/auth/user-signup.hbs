@@ -1,37 +1,39 @@
-{{!-- views/auth/signup.hbs --}}
+<div class="inner-body-div">
+  <div id="form">
+    <h2>Signup</h2>
+    <form action="/userSignup" method="POST">
 
-<div id="form">
-  <h2>Signup</h2>
-  <form action="/userSignup" method="POST">
+      <label> Username
+        <input type="text" name="username" placeholder="ironhacker" />
+      </label>
 
-    <label> Username
-      <input type="text" name="username" placeholder="ironhacker" />
-    </label>
+      <label> Email
+        <input type="email" name="email" placeholder="rockstar@ironhack.com" />
+      </label>
 
-    <label> Email
-      <input type="email" name="email" placeholder="rockstar@ironhack.com" />
-    </label>
+      <label> Password
+        <input type="password" name="password" placeholder="********" />
+      </label>
 
-    <label> Password
-      <input type="password" name="password" placeholder="********" />
-    </label>
+      <label> Reason for signing in
 
-    <label> Reason for signing in 
-      <!-- -->
-     
-      <select name="role"> 
-        <option value="visitor">Visitor</option>
-        <option  value="artist">Artist</option>
-      </select>
-      
-    </label>
+        <select name="role">
+          <option value="visitor">Visitor</option>
+          <option value="artist">Artist</option>
+        </select>
 
-    <button type="submit">Create account</button>
+      </label>
 
-    {{!-- error message will be added here --}}
-  {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-  {{/if}}
+      <button type="submit">Create account</button>
 
-  </form>
+      {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+      {{/if}}
+
+    </form>
+  </div>
+</div>
+
+<div>
+  {{>buttonsPartial}}
 </div>

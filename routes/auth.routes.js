@@ -1,4 +1,5 @@
 // routes/auth.routes.js
+
 const { Router } = require('express');
 const router = new Router();
 const User = require('../models/User.model');
@@ -189,8 +190,11 @@ router.post('/usernameEmailUpdate',isUserLoggedIn, (req, res, next) => {
     res.render('auth/enter-email-password-reset')
   })
   
-//This emails a password reset link to the user so they can paste it on their browser's address bar to access
-//the form where they can enter their new password
+/* This emails a password reset link to the user so they can paste it on their browser's address bar to access
+the form where they can enter their new password. Most probably not the safest way to do this as the users 
+receive the same link everytime. More security is needed. However at a very basic level one can reset their 
+password this way */
+
 
   router.post('/resetPasswordLink',isUserLoggedOut, async(req, res, next) => {
     let { email } = req.body;

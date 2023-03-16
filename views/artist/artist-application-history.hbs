@@ -1,20 +1,14 @@
-
 <div class="inner-body-div">
-    <h2>Artist Application History</h2>
-
-    <hr>
-   
-    {{#each applicationsArray}}
-      <p>{{this.email}}</p>
-      <p>{{this.artworkName}}</p>
-      <p>{{this.chooseWeek}}</p>
-      <hr>
-    {{/each}}
-    
+  <h2>Artist Application History</h2>
+  <hr>
+  {{#each applicationsArray}}
+  <p>{{this.email}}</p>
+  <p>{{this.artworkName}}</p>
+  <p>{{this.chooseWeek}}</p>
+  <hr>
+  {{/each}}
 </div>
-
 <div>
-
   {{>buttonsPartial}}
-  
+
 </div>
