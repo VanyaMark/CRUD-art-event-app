@@ -44,7 +44,7 @@ router.get('/exhibition/:id', isUserLoggedIn, isAdmin, (req, res) => {
     const { id } = req.params
     Exhibition.findById(id)
         .then((exhibition) => {
-            res.render('exhibition/each-exhibition-details', {exhibition})
+            res.render('exhibition/each-exhibition-details', {exhibition,buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin"})
         })
 })
 
@@ -53,22 +53,30 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
     const { id } = req.params;
     Exhibition.findById(id)
         .then((exhibitionToEdit) => {
-            res.render('exhibition/edit-exhibition', {exhibitionToEdit})
+            res.render('exhibition/edit-exhibition', {exhibitionToEdit,buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin"})
         })
 })
 
 router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) => {
   const { id } = req.params;
   const { exhibitionStatus, archived, applicationStatus } = req.body;
+  if(!applicationStatus) { 
+    await Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived}, {new:true})   
+    res.redirect(`/exhibition/${id}`)
+   }
+  else if(applicationStatus.length>0){
+    for(let i =0; i<applicationStatus.length;i++){
+      let set = {};
+      set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
+      await Exhibition.updateOne({ _id: id },{ $set: set })
+    }
+    await Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived}, {new:true})   
+    res.redirect(`/exhibition/${id}`)
+    
+  }
  
-for(let i =0; i<applicationStatus.length;i++){
-  let set = {};
-  set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
-  await Exhibition.updateOne({ _id: id },{ $set: set })
-}
-await Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived}, {new:true})   
-res.redirect(`/exhibition/${id}`)
-});
+})
+
 
 //Renders all exhibitions
 

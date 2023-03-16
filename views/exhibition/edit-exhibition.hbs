@@ -1,18 +1,18 @@
 <div class="inner-body-div">
 
-<h2>Edit Exhibition</h2>
-<form action="/exhibition/{{exhibitionToEdit._id}}/edit" method="POST">
-    <label>Exhibition Name
-        <input type="text" name="exhibitionName" value="{{exhibitionToEdit.exhibitionName}}" readonly/>
-    </label>
-    <label>Exhibition Week
-        <input type="text" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly/>
-    </label>
+    <h2>Edit Exhibition</h2>
+    <form action="/exhibition/{{exhibitionToEdit._id}}/edit" method="POST">
+        <label>Exhibition Name
+            <input type="text" name="exhibitionName" value="{{exhibitionToEdit.exhibitionName}}" readonly/>
+        </label>
+        <label>Exhibition Week
+            <input type="text" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly/>
+        </label>
+   
+    {{#each exhibitionToEdit.artistApplication}}
 
+    <div>
 
-
-         {{#each exhibitionToEdit.artistApplication}}
-<div>
          <label>Artist's First and Last Name
           <input type="text" name="firstName" value="{{this.firstName}}" readonly/>
          </label>
@@ -29,33 +29,34 @@
         <option selected value="{{this.applicationStatus}}">{{this.applicationStatus}}</option>
         <option value="approved">Approved</option>
         <option  value="unapproved">Unapproved</option>
+        <option  value="cancelled">Unapproved</option>
         </select>
-</div>
-        {{/each}}
 
+    </div>
 
-    
+    {{/each}}
     
     <label>Exhibition Status Released
         <select name="exhibitionStatus"> 
-        <option selected value="{{exhibitionToEdit.exhibitionStatus}}">{{exhibitionToEdit.exhibtionStatus}}</option>
-        <option value="open">Open</option>
-        <option  value="closed">Closed</option>
-        <option  value="cancelled">Cancelled</option>   
-    </select>
+            <option selected value="{{exhibitionToEdit.exhibitionStatus}}">{{exhibitionToEdit.exhibtionStatus}}</option>
+            <option value="open">Open</option>
+            <option  value="closed">Closed</option>
+            <option  value="cancelled">Cancelled</option>   
+        </select>
 
+        </label>
+        <label>Is Archived
+            <input type="checkbox" name="archived" readonly/>
+        </label>
 
+        <button type="submit">Edit Exhibition</button>
 
-    </label>
-    <label>Is Archived
-        <input type="checkbox" name="archived" readonly/>
-    </label>
+    </form>
 
-    <button type="submit">Edit Exhibition</button>
-
-</form>
 </div>
+
 <div >
+
   {{>buttonsPartial}}
   
-  </div>
+</div>
