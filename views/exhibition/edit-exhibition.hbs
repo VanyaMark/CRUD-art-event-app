@@ -3,25 +3,25 @@
     <h2>Edit Exhibition</h2>
     <form action="/exhibition/{{exhibitionToEdit._id}}/edit" method="POST">
         <label>Exhibition Name
-            <input type="text" name="exhibitionName" value="{{exhibitionToEdit.exhibitionName}}" readonly />
-        </label>
+            <input type="text" name="exhibitionName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{exhibitionToEdit.exhibitionName}}" readonly />
+        </label><br><br>
         <label>Exhibition Week
-            <input type="text" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly />
-        </label>
+            <input type="text"style="background-color: rgba(0, 255, 255, 0.5);" name="exhibitionWeek" value="{{exhibitionToEdit.exhibitionWeek}}" readonly />
+        </label><br><br>
 
         {{#each exhibitionToEdit.artistApplication}}
 
         <div>
 
             <label>Artist's First and Last Name
-                <input type="text" name="firstName" value="{{this.firstName}}" readonly />
-            </label>
+                <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName" value="{{this.firstName}}" readonly />
+            </label><br><br>
             <label>
-                <input type="text" name="lastName" value="{{this.lastName}}" readonly />
-            </label>
+                <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName" value="{{this.lastName}}" readonly />
+            </label><br><br>
             <label>Artwork Title
-                <input type="text" name="artworkName" value="{{this.artworkName}}" readonly />
-            </label>
+                <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="artworkName" value="{{this.artworkName}}" readonly />
+            </label><br><br>
 
             <label>Application Status
                 <select name="applicationStatus">
@@ -30,7 +30,7 @@
                     <option value="approved">Approved</option>
                     <option value="unapproved">Unapproved</option>
                     <option value="cancelled">Unapproved</option>
-                </select>
+                </select><br><br>
 
         </div>
 
@@ -44,11 +44,10 @@
                 <option value="closed">Closed</option>
                 <option value="cancelled">Cancelled</option>
             </select>
-
-        </label>
+        </label><br><br>
         <label>Is Archived
             <input type="checkbox" name="archived" readonly />
-        </label>
+        </label><br><br>
 
         <button type="submit">Edit Exhibition</button>
 
@@ -61,3 +60,4 @@
     {{>buttonsPartial}}
 
 </div>
+<!--buttons-->

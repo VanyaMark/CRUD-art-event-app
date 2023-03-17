@@ -22,7 +22,7 @@ router.get("/fineArtImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
     }
-    res.render("fineArtImg",{ exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg'});
+    res.render("fineArtImg",{ exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg',linkA: `/`, linkB: `/userSignup`, linkC:`/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in`});
   })
     
 });
@@ -40,7 +40,7 @@ router.get("/photographyImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
     }
-  res.render("photographyImg", {exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg'});
+  res.render("photographyImg", {exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg',linkA: `/`, linkB: `/userSignup`, linkC:`/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in`});
   })
 });
 
@@ -56,23 +56,23 @@ router.get("/plasticArtImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
     }
-  res.render("plasticArtImg", {exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg'});
+  res.render("plasticArtImg", {exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4:'../images/slider-4.jpg', linkA: `/`, linkB: `/userSignup`, linkC:`/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in`});
   })
 });
 
 //Search forms: on clicking search, it looks for the specific exhibition in the data base and renders them on the search page
 
-router.post('/search', (req, res) => {
+router.post('/search', (req, res,next) => {
   const { exhibitionName } = req.body;
   Exhibition.findOne({exhibitionName})
   .then((displayedExhibition) => {
-    res.render('search-results', {displayedExhibition})
+    res.render('search-results', {displayedExhibition, linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC:`/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art`})
   })
 })
 
 //Finds the exhibition by artType and renders it
 
-router.post('/searchArtType', (req, res) => {
+router.post('/searchArtType', (req, res,next) => {
   const {artType} = req.body;
   let exhibitionsArray = []
   let applicationsArray = []
@@ -86,23 +86,14 @@ router.post('/searchArtType', (req, res) => {
           applicationsArray.push(application)
         }}
       }
-      res.render('search-artType', {exhibitionsArray, applicationsArray})
+      res.render('search-artType', {exhibitionsArray, applicationsArray,linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC:`/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art`})
   })
 })
 
-router.get("/fineArtBlog", (req, res, next) => {
+router.get("/contact", (req, res, next) => {
 
-  res.render("fineArtBlog");
+  res.render("contact", {linkA: `/`, linkB: `/userSignup`, linkC:`/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in`});
 });
 
-router.get("/photographyBlog", (req, res, next) => {
-
-  res.render("photographyBlog");
-});
-
-router.get("/plasticArtBlog", (req, res, next) => {
-
-  res.render("plasticArtBlog");
-});
 
 module.exports = router;

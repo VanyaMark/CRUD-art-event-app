@@ -6,8 +6,9 @@
     <h2>Artist Application Form</h2>
     <form action="/artistCart" method="POST" enctype="multipart/form-data">
       <label>
-        Avatar URL: (To change this image, go to your account details)
-        <input type="text" name="avatarUrl" value="{{user.avatarUrl}}" readonly />
+        Profile Picture: 
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl" value="{{user.avatarUrl}}" readonly />
+        <p>To change your profile picture, go to your account details</p>
       </label><br><br>
       <label>
         First Name:
@@ -19,7 +20,8 @@
       </label><br><br>
       <label>
         email:
-        <input type="email" name="email" value="{{user.email}}" readonly />
+        <input style="background-color: rgba(0, 255, 255, 0.5);" type="email" name="email" value="{{user.email}}" readonly />
+        <p>To change your email, go back to dashboard</p>
       </label><br><br>
       <label>
         Address:
@@ -31,7 +33,7 @@
       </label><br><br>
       <label>
         Date of Birth:
-        <input type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
+        <input class="dt" type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
       </label><br><br>
       <label>
         Upload artwork image:
@@ -53,7 +55,7 @@
         <input type="text" name="artworkName" placeholder="Enter Artwork Title Here" />
       </label><br><br>
       <label>Application Status:
-        <input type="text" name="applicationStatus" value="to be approved" readonly />
+        <input style="background-color: rgba(0, 255, 255, 0.5);"  type="text" name="applicationStatus" value="to be approved" readonly />
       </label><br><br>
       <label>
         Wall Size:
@@ -79,3 +81,4 @@
 <div>
   {{>buttonsPartial}}
 </div>
+<!--buttons-->

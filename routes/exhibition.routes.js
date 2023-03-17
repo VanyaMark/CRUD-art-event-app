@@ -8,56 +8,56 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer')
 const emailtemplate = require('../templates/email')
 const {
-    isUserLoggedIn,
-    isUserLoggedOut,
-    isAdmin,
-    isArtistOrAdmin
+  isUserLoggedIn,
+  isUserLoggedOut,
+  isAdmin,
+  isArtistOrAdmin
 } = require('../middleware/route-guard');
 
 
 //renders the admin dashboard
 
 router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
-    res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail"});
+  res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail" });
 })
 
 //Renders the page on which the admin can create new exhibitions
 
-router.get('/exhibition/create',isUserLoggedIn, isAdmin, (req, res, next) => {
-    res.render('exhibition/exhibition-create-form', {buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/sendEmail"})
+router.get('/exhibition/create', isUserLoggedIn, isAdmin, (req, res, next) => {
+  res.render('exhibition/exhibition-create-form', { buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/sendEmail" })
 });
 
 //Obtains the exhibition information entered by admin on form and saves new exhibition to database
 
-router.post('/exhibition/create', isUserLoggedIn, isAdmin,(req, res, next) => {
-    const {exhibitionName, exhibitionDescription, startDay, firstDate,lastDate, endDay, maxSpeed} = req.body;
-    let exhibitionWeek = `${startDay}-${firstDate}-${endDay}-${lastDate}`
-    Exhibition.create({exhibitionName,exhibitionDescription, exhibitionWeek, maxSpeed})
-    .then(()=> res.redirect('/findExhibition'))
+router.post('/exhibition/create', isUserLoggedIn, isAdmin, (req, res, next) => {
+  const { exhibitionName, exhibitionDescription, startDay, firstDate, lastDate, endDay} = req.body;
+  let exhibitionWeek = `${startDay}-${firstDate}-${endDay}-${lastDate}`
+  Exhibition.create({ exhibitionName, exhibitionDescription, exhibitionWeek, maxSpeed })
+    .then(() => res.redirect('/findExhibition'))
     .catch(err => {
       if (err.code === 11000) {
-        res.render('exhibition/exhibition-create-form', {errMsg: "Exhibition already exists. Create a new one.", buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/sendEmail"}) 
+        res.render('exhibition/exhibition-create-form', { errMsg: "Exhibition already exists. Create a new one.", buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Email Clients", linkC: "/sendEmail" })
       }
-  })
+    })
 });
 
 //Get Route for Each Exhibition Details
 
 router.get('/exhibition/:id', isUserLoggedIn, isAdmin, (req, res) => {
-    const { id } = req.params
-    Exhibition.findById(id)
-        .then((exhibition) => {
-            res.render('exhibition/each-exhibition-details', {exhibition,buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin"})
-        })
+  const { id } = req.params
+  Exhibition.findById(id)
+    .then((exhibition) => {
+      res.render('exhibition/each-exhibition-details', { exhibition, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin" })
+    })
 })
 
 //Get Route to edit each exhibition details
 router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
-    const { id } = req.params;
-    Exhibition.findById(id)
-        .then((exhibitionToEdit) => {
-            res.render('exhibition/edit-exhibition', {exhibitionToEdit,buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin"})
-        })
+  const { id } = req.params;
+  Exhibition.findById(id)
+    .then((exhibitionToEdit) => {
+      res.render('exhibition/edit-exhibition', { exhibitionToEdit, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin" })
+    })
 })
 
 //collects edited information about exhibition and updates the database
@@ -65,33 +65,33 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
 router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) => {
   const { id } = req.params;
   const { exhibitionStatus, archived, applicationStatus } = req.body;
-  if(!applicationStatus) { 
-    await Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived}, {new:true})   
+  if (!applicationStatus) {
+    await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
-   }
-  else if(applicationStatus.length>0){
-    for(let i =0; i<applicationStatus.length;i++){
+  }
+  else if (applicationStatus.length > 0) {
+    for (let i = 0; i < applicationStatus.length; i++) {
       let set = {};
       set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
-      await Exhibition.updateOne({ _id: id },{ $set: set })
+      await Exhibition.updateOne({ _id: id }, { $set: set })
     }
-    await Exhibition.findByIdAndUpdate(id, {exhibitionStatus, archived}, {new:true})   
+    await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
-    
+
   }
- 
+
 })
 
 //Renders all exhibitions
 
-router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => { 
+router.get('/findExhibition', isUserLoggedIn, isAdmin, (req, res) => {
 
   Exhibition.find()
-  .then((exhibition) => {
+    .then((exhibition) => {
 
-          res.render('exhibition/exhibition-details', {exhibition, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail"} )
-      })      
-}) 
+      res.render('exhibition/exhibition-details', { exhibition, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail" })
+    })
+})
 
 //Deletes an exhibition
 
@@ -103,26 +103,26 @@ router.post('/exhibition/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res
       console.log('exhibitionToDelete: ', exhibitionToDelete)
       if (exhibitionToDelete.artistApplication.length === 0) {
         console.log('monkey')
-          Exhibition.findByIdAndDelete(exhibitionToDelete.id)
-            .then(() => {
-              res.redirect('/findExhibition')
-            })
+        Exhibition.findByIdAndDelete(exhibitionToDelete.id)
+          .then(() => {
+            res.redirect('/findExhibition')
+          })
       } else {
-        res.render('exhibition/each-exhibition-details', {errorMessage: 'Cannot delete exhibitions cointaining applications', exhibitionToDelete})
+        res.render('exhibition/each-exhibition-details', { errorMessage: 'Cannot delete exhibitions cointaining applications', exhibitionToDelete })
       }
     })
 })
 
 //renders the page on which the email form is so that the admin can email clients from this form
 
-router.get('/sendEmail',isUserLoggedIn, isAdmin, (req,res,next)=>{
-  res.render('admin/admin-email',{buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"})
+router.get('/sendEmail', isUserLoggedIn, isAdmin, (req, res, next) => {
+  res.render('admin/admin-email', { buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create" })
 })
 
 //Collect information entered in form and emails it to receipient.
 //Service yahoo has been used as gmail no longer provides app passwords for security reasons
 
-router.post('/emailSent',isUserLoggedIn, isAdmin, async(req, res, next) => {
+router.post('/emailSent', isUserLoggedIn, isAdmin, async (req, res, next) => {
   let { email, subject, message } = req.body;
 
   let transporter = nodemailer.createTransport({
@@ -130,22 +130,34 @@ router.post('/emailSent',isUserLoggedIn, isAdmin, async(req, res, next) => {
     service: "yahoo",
     //secure:true,
     //port: 465,
-    secure:false,
+    secure: false,
     auth: {
       user: 'subarnapaul@rocketmail.com',
       pass: process.env.MAIL_PASSWORD
     }
   });
- 
+
   transporter.sendMail({
     from: '"Subarna Paul at ArtBox" <subarnapaul@rocketmail.com>',
-    to: email, 
-    subject: subject, 
+    to: email,
+    subject: subject,
     text: message,
     html: emailtemplate.emailBody(message)
   })
-  .then(info => res.render('admin/email-success', {email, subject, message, info, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"}))
-  .catch(error => console.log(error));
+    .then(info => res.render('admin/email-success', { email, subject, message, info, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create" }))
+    .catch(error => console.log(error));
 });
+
+
+router.get('/statsDetails', isUserLoggedIn, isAdmin, (req, res) => {
+  User.find()
+    .then((users) => {
+      res.json(users);
+    })
+})
+
+router.get('/statistics', isUserLoggedIn, isAdmin, (req, res) => {
+  res.render('admin/gallery-stats',{buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"})
+})
 
 module.exports = router;
