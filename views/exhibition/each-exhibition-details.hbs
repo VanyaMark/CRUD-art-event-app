@@ -3,34 +3,46 @@
 
   {{#if errorMessage}}
   {{errorMessage}}
-  <button><a href="/exhibition/{{exhibitionToDelete._id}}/edit">Edit Exhibition Details</a></button>
+  <button><a href="/exhibition/{{exhibitionToDelete._id}}/edit">Edit Exhibition Details</a></button><br>
 
   <form action="/exhibition/{{exhibitionToDelete._id}}/delete" method="POST">
-    <button>Delete Exhibition</button>
+    <button>Delete Exhibition</button><br><br>
   </form>
-
-  <p>Exhibition Name: {{exhibitionToDelete.exhibitionName}}</p>
-
-  <p>Exhibition Week: {{exhibitionToDelete.exhibitionWeek}}</p>
-
-  <p>Exhibition Status: {{exhibitionToDelete.exhibitionStatus}}</p>
-  <p>Visitors that attended: {{exhibitionToDelete.usersAttended}}</p>
+  <h6>Exhibition Name: </h6>
+  <p>{{exhibitionToDelete.exhibitionName}}</p>
+  <h6>Exhibition Week: </h6>
+  <p>{{exhibitionToDelete.exhibitionWeek}}</p>
+  <h6>Exhibition Status: </h6>
+  <p>{{exhibitionToDelete.exhibitionStatus}}</p>
+  <h6>Visitors that attended: </h6>
+  <p>{{exhibitionToDelete.usersAttended}}</p>
 
   {{#each exhibitionToDelete.artistApplication}}
   <img src="{{this.profilePicUrl}}" />
-  <p>Artist: {{this.firstName}} {{this.lastName}}</p>
-  <p>email: {{this.email}}</p>
-  <p>phoneNumber: {{this.phoneNumber}}</p>
-  <p>address: {{this.address}}</p>
+  <h6>Artist: </h6>
+  <p>{{this.firstName}} {{this.lastName}}</p>
+  <h6>Email: </h6>
+  <p>{{this.email}}</p>
+  <h6>Phone Number: </h6>
+  <p>{{this.phoneNumber}}</p>
+  <h6>Address: </h6>
+  <p>{{this.address}}</p>
+  <h6>Date of Birth:</h6>
   <p>{{this.dateOfBirth}}</p>
-
+  <h6>Artwork Image:</h6>
   <img src="{{this.artworkUrl}}" />
-  <p>Artwork Name: {{this.artworkName}}</p>
-  <p>Description: {{this.description}} </p>
-  <p>Art Type: {{this.artType}}</p>
-  <p>Wall Size: {{this.wallSize}}</p>
+  <h6>Artwork Name: </h6>
+  <p>{{this.artworkName}}</p>
+  <h6>Description: </h6>
+  <p>{{this.description}} </p>
+  <h6>Art Type: </h6>
+  <p>{{this.artType}}</p>
+  <h6>Wall Size: </h6>
+  <p>{{this.wallSize}}</p>
+  <h6>Week Chosen</h6>
   <p> {{this.chooseWeek}} </p>
-  <p>Application Status: {{this.applicationStatus}}</p>
+  <h6>Application Status: </h6>
+  <p>{{this.applicationStatus}}</p>
 
   {{/each}}
 
@@ -38,33 +50,46 @@
 
   {{#if exhibition}}
 
-  <button><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button>
+  <button><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button><br>
   <form action="/exhibition/{{exhibition._id}}/delete" method="POST">
-    <button>Delete Exhibition</button>
+    <button>Delete Exhibition</button><br><br>
   </form>
-  <p>Exhibition Name: {{exhibition.exhibitionName}}</p>
-
-  <p>Exhibition Week: {{exhibition.exhibitionWeek}}</p>
-
-  <p>Exhibition Status: {{exhibition.exhibitionStatus}}</p>
-  <p>Visitors that attended: {{exhibition.usersAttended}}</p>
+  <h6>Exhibition Name: </h6>
+  <p>{{exhibition.exhibitionName}}</p>
+  <h6>Exhibition Week: </h6>
+  <p>{{exhibition.exhibitionWeek}}</p>
+  <h6>Exhibition Status: </h6>
+  <p>{{exhibition.exhibitionStatus}}</p>
+  <h6>Visitors that attended: </h6>
+  <p>{{exhibition.usersAttended}}</p>
 
   {{#each exhibition.artistApplication}}
-
   <img src="{{this.profilePicUrl}}" />
-  <p>Artist: {{this.firstName}} {{this.lastName}}</p>
-  <p>email: {{this.email}}</p>
-  <p>phoneNumber: {{this.phoneNumber}}</p>
-  <p>address: {{this.address}}</p>
+  <h6>Artist: </h6>
+  <p>{{this.firstName}} {{this.lastName}}</p>
+  <h6>Email: </h6>
+  <p>{{this.email}}</p>
+  <h6>Phone Number: </h6>
+  <p>{{this.phoneNumber}}</p>
+  <h6>Address: </h6>
+  <p>{{this.address}}</p>
+  <h6>Date of Birth:</h6>
   <p>{{this.dateOfBirth}}</p>
+  <h6>Artwork Image:</h6>
   <img src="{{this.artworkUrl}}" />
-  <p>Artwork Name: {{this.artworkName}}</p>
-  <p>Description: {{this.description}} </p>
-  <p>Art Type: {{this.artType}}</p>
-  <p>Wall Size: {{this.wallSize}}</p>
+  <h6>Artwork Name: </h6>
+  <p>{{this.artworkName}}</p>
+  <h6>Description: </h6>
+  <p>{{this.description}} </p>
+  <h6>Art Type: </h6>
+  <p>{{this.artType}}</p>
+  <h6>Wall Size: </h6>
+  <p>{{this.wallSize}}</p>
+  <h6>Week Chosen</h6>
   <p> {{this.chooseWeek}} </p>
-  <p>Application Status: {{this.applicationStatus}}</p>
-
+  <h6>Application Status: </h6>
+  <p>{{this.applicationStatus}}</p>
+  <hr>
   {{/each}}
 
   {{/if}}

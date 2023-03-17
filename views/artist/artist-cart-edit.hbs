@@ -2,42 +2,42 @@
   <div id="form">
     <h2>Edit your application details</h2>
     <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
-      <label> Application ID
+      <label> Application ID:
         <input type="text" style="background-color: rgba(0, 255, 255, 0.5);"  name="_id" value="{{artistApptoEdit._id}}" readonly />
       </label><br><br>
-      <label>User ID
+      <label>User ID:
         <input type="text" style="background-color: rgba(0, 255, 255, 0.5);"  name="user" value="{{artistApptoEdit.user}}" readonly />
       </label><br><br>
       <label>
-        Avatar URl
+        Profile Picture:
         <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl" value="{{artistApptoEdit.avatarUrl}}" readonly />
       </label><br><br>
       <label>
-        First Name
+        First Name:
         <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName" value="{{artistApptoEdit.firstName}}" readonly />
       </label><br><br>
       <label>
-        Last Name
+        Last Name:
         <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName" value="{{artistApptoEdit.lastName}}" readonly />
       </label><br><br>
       <label>
-        Email
+        Email:
         <input type="email" style="background-color: rgba(0, 255, 255, 0.5);" name="email" value="{{artistApptoEdit.email}}" readonly />
       </label><br><br>
       <label>
-        Address
+        Address:
         <input type="text" name="address" value="{{artistApptoEdit.address}}" />
       </label><br><br>
       <label>
-        Phone Number
+        Phone Number:
         <input type="number" name="phoneNumber" value="{{artistApptoEdit.phoneNumber}}" />
       </label><br><br>
       <label>
-        Date of Birth
+        Date of Birth:
         <input class="dt" type="date" name="dateOfBirth" value="{{artistApptoEdit.dateOfBirth}}" />
       </label><br><br>
       <label>
-        Artwork Name
+        Artwork Name:
         <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}" />
       </label><br><br>
       <label>

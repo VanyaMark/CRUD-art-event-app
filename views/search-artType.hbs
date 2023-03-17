@@ -1,10 +1,14 @@
 
 <div class="inner-body-div">
     {{#each applicationsArray}}
+        <h6>Exhibition Week:</h6>
         <p>{{this.chooseWeek}}</p>
+        <h6>Artwork Title:</h6>
         <p>{{this.artworkName}}</p>
+        <h6>Art Type:</h6>
         <p>{{this.artType}}</p>
         <img src="{{this.artworkUrl}}">
+        <h6>Description:</h6>
         <p>{{this.description}}</p>
     {{/each}}
 </div>

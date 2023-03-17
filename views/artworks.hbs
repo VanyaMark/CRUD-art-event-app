@@ -8,15 +8,21 @@
 
     {{#each applicationsArray}}
     <form action="/allArtworks" method="POST">
-        <input name="artworkName" value="{{this.artworkName}}" />
+
+        <h6>Artwork Title:</h6>
+        <p>{{this.artworkName}}</p>
+        <input name="artworkName" value="{{this.artworkName}}" hidden/>
         <input name="artworkUrl" value="{{this.artworkUrl}}" hidden />
         <img src="{{this.artworkUrl}}">
-
-        <input name="description" value="{{this.description}}" />
-
-        <input name="firstName" value="{{this.firstName}}" />
-        <input name="lastName" value="{{this.lastName}}" />
+        <h6>Description:</h6>
+        <p>{{this.description}}</p>
+        <input name="description" value="{{this.description}}" hidden/>
+        <h6>By:</h6>
+        <p>{{this.firstName}} {{this.lastName}}</p>
+        <input name="firstName" value="{{this.firstName}}" hidden/>
+        <input name="lastName" value="{{this.lastName}}" hidden/>
         <button type="submit">Add to Favourites</button>
+        
     </form>
     <hr>
 

@@ -1,39 +1,39 @@
 <div class="inner-body-div">
-  <div id="form">
+  <div >
     <h2>Fill in your details</h2>
     <form action="/artist/{{userInSession._id}}/edit" method="POST" enctype="multipart/form-data">
 
       <label>
-        First Name
+        First Name:
         <input type="text" name="firstName" value="{{user.firstName}}" />
       </label><br><br>
 
       <label>
-        Last Name
+        Last Name:
         <input type="text" name="lastName" value="{{user.lastName}}" />
       </label><br><br>
 
       <label>
-        Address
+        Address:
         <input type="text" name="address" value="{{user.address}}" />
       </label><br><br>
 
       <label>
-        Phone number
+        Phone number:
         <input type="number" name="phoneNumber" value="{{user.phoneNumber}}" />
       </label><br><br>
 
       <label>
-        Avatar URl
+        Avatar URl:
         <input type="file" name="avatarUrl" value="{{user.avatarUrl}}" />
       </label><br><br>
 
       <label>
-        Date of Birth
+        Date of Birth:
         <input class="dt" type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
       </label><br><br>
 
-      <label> Gender
+      <label> Gender:
         <select name="gender">
           <option selected value="{{user.gender}}">{{user.gender}}</option>
           <option value="Female">Female</option>
@@ -43,7 +43,7 @@
         </select>
       </label><br><br>
 
-      <label>Nationality
+      <label>Nationality:
         <select id="nationality" name="nationality" data-name="nationality" ms-field="nationality"
           data-parsley-required-message="Please let us know your nationality." class="select-field w-select">
           <option value="{{user.nationality}}">{{user.nationality}}</option>

@@ -1,17 +1,19 @@
 <div class="inner-body-div">
 
-  <h1>List of All Exhibitions</h1>
+  <h1>List of All Exhibitions:</h1>
 
   {{#each exhibition}}
-  <p>Exhibition Name: {{this.exhibitionName}}</p>
+  <h6>Exhibition Name: </h6>
+  <p>{{this.exhibitionName}}</p>
+  <h6>Exhibition Week: </h6>
+  <p>{{this.exhibitionWeek}}</p>
+  <h6>Exhibition Status: </h6>
+  <p>{{this.exhibitionStatus}}</p>
+  <h6>Visitors that attended: </h6>
+  <p>{{this.usersAttended}}</p>
+  
 
-  <p>Exhibition Week: {{this.exhibitionWeek}}</p>
-
-  <p>Exhibition Status: {{this.exhibitionStatus}}</p>
-  <p>Visitors that attended: {{this.usersAttended}}</p>
-
-
-  <button><a href="/exhibition/{{this._id}}">See Exhibition Details</a></button>
+  <button><a href="/exhibition/{{this._id}}">See Exhibition Details</a></button><br>
 
   <hr>
   {{/each}}

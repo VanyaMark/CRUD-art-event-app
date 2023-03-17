@@ -5,10 +5,7 @@ body {
   background: linear-gradient(to bottom, #2C3E50, #BDC3C7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width:100vw;
   height: 100vh;
-
-
 }
-
 nav{
   background:  aqua;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #2C3E50,  aqua);  /* Chrome 10-25, Safari 5.1-6 */
@@ -26,7 +23,6 @@ a {
   width:100%;
   padding:2% 10% 2% 10%;
   overflow: scroll;
-
 }
 .box-img{
   height:47vh;
@@ -66,17 +62,14 @@ button{
   flex-direction: column;
   justify-content: center;
   align-items: center;
- 
 }
 .btn{
   padding:2%;
   margin-top:2%;
 }
-
 .search-section{
   padding:2%;
 }
-
 .button-a-link{
   font-size: 20px;
   font-weight: bold;
@@ -90,7 +83,6 @@ h2{
   align-items: center;
   justify-content: center;
 }
-
 .button-b-link{
   color: rgb(2, 108, 108);
   font-size: 20px;
@@ -98,4 +90,10 @@ h2{
 }
 a:hover{
   color:rgb(48, 48, 48);
+}
+h6{
+  font-weight: bold;
+}
+label{
+  font-weight: bold;
 }

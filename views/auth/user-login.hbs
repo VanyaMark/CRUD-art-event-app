@@ -1,19 +1,19 @@
 {{!-- views/auth/login.hbs --}}
 <div class="inner-body-div">
-  <div id="form">
+  <div>
     <h2>Login</h2>
 
     <form action="/user" method="POST">
 
-      <label> Email
+      <label> Email:
         <input type="email" name="email" placeholder="rockstar@ironhack.com" />
       </label><br><br>
 
-      <label>Password
+      <label>Password:
         <input type="password" name="password" placeholder="********" />
       </label><br><br>
 
-      <button type="submit">Login</button>
+      <button type="submit">Login</button><br><br>
 
       {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

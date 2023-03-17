@@ -2,22 +2,22 @@
 
   <h1>Create New Exhibition</h1>
   {{#if errMsg}}
-  {{errMsg}}
+  <p>{{errMsg}}</p>
   {{/if}}
 
   <form action="/exhibition/create" method="POST">
 
-    <label>Name of Exhibition</label><br>
+    <label>Name of Exhibition:</label><br>
     <input name="exhibitionName" required><br>
-    <label>Description</label><br>
+    <label>Description:</label><br>
     <input name="exhibitionDescription" required><br>
     <input name="startDay" value="Mon" hidden><br>
-    <label>Start Date</label><br>
+    <label>Start Date:</label><br>
     <input name="firstDate" type="date" required><br>
     <input name="endDay" value="Sun" hidden><br>
-    <label>End Date</label><br>
-    <input name="lastDate" type="date" required><br>
-    <button class='btn btn-primary' type="submit">Create Exhibition</button>
+    <label>End Date:</label><br>
+    <input name="lastDate" type="date" required><br><br>
+    <button class='btn btn-primary' type="submit">Create Exhibition</button><br>
 
   </form>
 
