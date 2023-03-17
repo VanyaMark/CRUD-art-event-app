@@ -30,7 +30,7 @@ router.get('/exhibition/create', isUserLoggedIn, isAdmin, (req, res, next) => {
 //Obtains the exhibition information entered by admin on form and saves new exhibition to database
 
 router.post('/exhibition/create', isUserLoggedIn, isAdmin, (req, res, next) => {
-  const { exhibitionName, exhibitionDescription, startDay, firstDate, lastDate, endDay} = req.body;
+  const { exhibitionName, exhibitionDescription, startDay, firstDate, lastDate, endDay } = req.body;
   let exhibitionWeek = `${startDay}-${firstDate}-${endDay}-${lastDate}`
   Exhibition.create({ exhibitionName, exhibitionDescription, exhibitionWeek, maxSpeed })
     .then(() => res.redirect('/findExhibition'))
@@ -56,7 +56,7 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
   const { id } = req.params;
   Exhibition.findById(id)
     .then((exhibitionToEdit) => {
-      res.render('exhibition/edit-exhibition', { exhibitionToEdit, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Back To Dashboard", linkC: "/admin" })
+      res.render('exhibition/edit-exhibition', { exhibitionToEdit, buttonB: "View Exhibitions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create", buttonA: "Back To Dashboard", linkA: "/admin" })
     })
 })
 
@@ -148,6 +148,8 @@ router.post('/emailSent', isUserLoggedIn, isAdmin, async (req, res, next) => {
     .catch(error => console.log(error));
 });
 
+//This sends an array of objects via res.json which can be fetched into script.js and 
+//whose details can be used to generate charts on a statistics page
 
 router.get('/statsDetails', isUserLoggedIn, isAdmin, (req, res) => {
   User.find()
@@ -156,8 +158,10 @@ router.get('/statsDetails', isUserLoggedIn, isAdmin, (req, res) => {
     })
 })
 
+//This renders the page on which statistics is shown using my canvas
+
 router.get('/statistics', isUserLoggedIn, isAdmin, (req, res) => {
-  res.render('admin/gallery-stats',{buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create"})
+  res.render('admin/gallery-stats', { buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "View Exhibtions", linkB: "/findExhibition", buttonC: "Create New Exhibition", linkC: "/exhibition/create" })
 })
 
 module.exports = router;

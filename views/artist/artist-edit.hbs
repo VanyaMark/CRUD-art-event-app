@@ -5,37 +5,37 @@
 
       <label>
         First Name
-        <input type="text" name="firstName" value="{{userInSession.firstName}}" />
+        <input type="text" name="firstName" value="{{user.firstName}}" />
       </label><br><br>
 
       <label>
         Last Name
-        <input type="text" name="lastName" value="{{userInSession.lastName}}" />
+        <input type="text" name="lastName" value="{{user.lastName}}" />
       </label><br><br>
 
       <label>
         Address
-        <input type="text" name="address" value="{{userInSession.address}}" />
+        <input type="text" name="address" value="{{user.address}}" />
       </label><br><br>
 
       <label>
         Phone number
-        <input type="number" name="phoneNumber" value="{{userInSession.phoneNumber}}" />
+        <input type="number" name="phoneNumber" value="{{user.phoneNumber}}" />
       </label><br><br>
 
       <label>
         Avatar URl
-        <input type="file" name="avatarUrl" value="{{userInSession.avatarUrl}}" />
+        <input type="file" name="avatarUrl" value="{{user.avatarUrl}}" />
       </label><br><br>
 
       <label>
         Date of Birth
-        <input class="dt" type="date" name="dateOfBirth" value="{{userInSession.dateOfBirth}}" />
+        <input class="dt" type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
       </label><br><br>
 
       <label> Gender
         <select name="gender">
-          <option>Select One</option>
+          <option selected value="{{user.gender}}">{{user.gender}}</option>
           <option value="Female">Female</option>
           <option value="Male">Male</option>
           <option value="Non-Binary">Non Binary</option>
@@ -46,7 +46,7 @@
       <label>Nationality
         <select id="nationality" name="nationality" data-name="nationality" ms-field="nationality"
           data-parsley-required-message="Please let us know your nationality." class="select-field w-select">
-          <option value="{{userInSession.nationality}}">{{userInSession.nationality}}</option>
+          <option value="{{user.nationality}}">{{user.nationality}}</option>
           <option value='afghan'>Afghan</option>
           <option value='albanian'>Albanian</option>
           <option value='algerian'>Algerian</option>

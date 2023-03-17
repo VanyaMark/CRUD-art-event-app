@@ -9,6 +9,7 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const nodemailer = require('nodemailer')
 const emailtemplate = require('../templates/email')
+const PORT = process.env.PORT || 3000;
 const {
   isUserLoggedIn,
   isUserLoggedOut,
@@ -224,7 +225,7 @@ router.post('/resetPasswordLink', isUserLoggedOut, async (req, res, next) => {
 
           text: 'Click on this link, or paste it on your address bar to go to the password link page: localhost:3001/resetPasswordLink',
 
-          html: emailtemplate.emailBody(`Click on this link, or paste it on your address bar to go to the password reset page: localhost:3001/resetPassword/${user[0]._id}/edit`)
+          html: emailtemplate.emailBody(`Paste the following link on your browser's address bar to go to the password reset page: localhost:${PORT}/resetPassword/${user[0]._id}/edit`)
         })
           .then(info => res.render('auth/check-your-email', { message: 'Check your email for link to reset your password', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` }))
       }
@@ -236,7 +237,7 @@ router.post('/resetPasswordLink', isUserLoggedOut, async (req, res, next) => {
 
 router.get('/resetPassword/:id/edit', isUserLoggedOut, (req, res, next) => {
   const { id } = req.params
-  res.render('auth/reset-password', { id })
+  res.render('auth/reset-password', { id, linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` })
 })
 
 //This collects the new password and updates it on the system as well as redirects user to login page.
@@ -249,7 +250,7 @@ router.post('/resetPassword/:id/edit', isUserLoggedOut, (req, res, next) => {
   if (!regex.test(password)) {
     res
       .status(500)
-      .render('auth/reset-password', { id, errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+      .render('auth/reset-password', { id, errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
     return;
   }
   bcryptjs
@@ -257,7 +258,7 @@ router.post('/resetPassword/:id/edit', isUserLoggedOut, (req, res, next) => {
     .then(salt => bcryptjs.hash(password, salt))
     .then(hashedPassword => {
       if (!password) {
-        res.render('auth/reset-password', { id, errorMessage: 'Please provide your password.' });
+        res.render('auth/reset-password', { id, errorMessage: 'Please provide your password.', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
         return;
       }
       else {
@@ -271,7 +272,7 @@ router.post('/resetPassword/:id/edit', isUserLoggedOut, (req, res, next) => {
           })
           .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
-              res.status(500).render('artist/reset-password', { id, errorMessage: error.message });
+              res.status(500).render('artist/reset-password', { id, errorMessage: error.message, linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
             }
             else {
               next(error);

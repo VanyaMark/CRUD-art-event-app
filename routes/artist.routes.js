@@ -36,7 +36,7 @@ router.get('/artist/:id/edit', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
   const { id } = req.params;
   User.findById(id)
     .then(user => {
-      res.render('artist/artist-edit', { userInSession: req.session.currentUser, user,buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Apply for Exhibition", linkC: "/artistApplication"  })
+      res.render('artist/artist-edit', { userInSession: req.session.currentUser, user, buttonA: "Back To Dashboard", linkA: "/artist", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Apply for Exhibition", linkC: "/artistApplication" })
     })
 })
 
