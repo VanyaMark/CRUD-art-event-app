@@ -16,19 +16,6 @@ input.forEach((input) => {
   });
 })
 
-//Operating Checkbox
-
-function check() {
-      document.getElementById("myCheck").checked = true;
-  }
-  
-  function uncheck() {
-      document.getElementById("myCheck").checked = false;
-  }
-
-  check()
-  uncheck()
-
 //Initialization
 
 let wallSizeValue = [...document.querySelectorAll('.price-by-wall-size')]
