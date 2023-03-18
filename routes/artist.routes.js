@@ -321,7 +321,7 @@ router.get('/allArtworks', isUserLoggedIn, (req, res) => {
     .then((exhibitionsArr) => {
       for (let exhibition of exhibitionsArr) {
         for (let application of exhibition.artistApplication) {
-          if (exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false) {
+          if (exhibition.exhibitionStatus !== "cancelled" && exhibition.archived === false && application.applicationStatus === "approved") {
             exhibitionsArray.push(exhibition)
             applicationsArray.push(application)
           }
