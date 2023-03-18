@@ -225,7 +225,7 @@ router.post('/resetPasswordLink', isUserLoggedOut, async (req, res, next) => {
 
           text: 'Click on this link, or paste it on your address bar to go to the password link page: localhost:3001/resetPasswordLink',
 
-          html: emailtemplate.emailBody(`Paste the following link on your browser's address bar to go to the password reset page: https://artbox.cyclic.app/resetPassword/${user[0]._id}/edit`)
+          html: emailtemplate.emailBody(`Click on the following link or paste it on your browser's address bar to go to the password reset page: https://artbox.cyclic.app/resetPassword/${user[0]._id}/edit`)
         })
           .then(info => res.render('auth/check-your-email', { message: 'Check your email for link to reset your password', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` }))
       }
