@@ -32,7 +32,7 @@ router.get('/exhibition/create', isUserLoggedIn, isAdmin, (req, res, next) => {
 router.post('/exhibition/create', isUserLoggedIn, isAdmin, (req, res, next) => {
   const { exhibitionName, exhibitionDescription, startDay, firstDate, lastDate, endDay } = req.body;
   let exhibitionWeek = `${startDay}-${firstDate}-${endDay}-${lastDate}`
-  Exhibition.create({ exhibitionName, exhibitionDescription, exhibitionWeek, maxSpeed })
+  Exhibition.create({ exhibitionName, exhibitionDescription, exhibitionWeek })
     .then(() => res.redirect('/findExhibition'))
     .catch(err => {
       if (err.code === 11000) {
