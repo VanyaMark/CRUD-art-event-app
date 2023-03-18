@@ -34,7 +34,7 @@ function createArray(users) {
   let male = 0;
   let nonBinary = 0;
   let ratherNotSay = 0;
-  for (let i = 1; i < users.length; i++) {
+  for (let i = 0; i < users.length; i++) {
     if (users[i].gender === "Female") {
       female += 1
     }
