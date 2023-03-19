@@ -69,12 +69,17 @@ router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) =>
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
   }
-  else if (applicationStatus.length > 0) {
+  else if (applicationStatus.length === 1){
+    let set = {};
+    set[`artistApplication.${0}.applicationStatus`] = applicationStatus[0];
+    await Exhibition.updateOne({ _id: id }, { $set: set })
+  }
+  else if (applicationStatus.length > 1) {
     let set = {};
     for (let i = 0; i < applicationStatus.length; i++) {
       set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
+      await Exhibition.updateOne({ _id: id }, { $set: set })
     }
-    await Exhibition.updateOne({ _id: id }, { $set: set })
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
 
