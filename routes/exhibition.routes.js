@@ -70,10 +70,9 @@ router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) =>
     res.redirect(`/exhibition/${id}`)
   }
   else if (applicationStatus.length > 0) {
+    let set = {};
     for (let i = 0; i < applicationStatus.length; i++) {
-      let set = {};
       set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
-      
     }
     await Exhibition.updateOne({ _id: id }, { $set: set })
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
