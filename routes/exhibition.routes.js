@@ -64,28 +64,20 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
 
 router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) => {
   const { id } = req.params;
-  let set = {};
   const { exhibitionStatus, archived, applicationStatus } = req.body;
+  let set = {};
   if (!applicationStatus) {
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
   }
-  else if (applicationStatus.length === 1){
-   
-    set[`artistApplication.${0}.applicationStatus`] = applicationStatus[0];
-    await Exhibition.updateOne({ _id: id }, { $set: set })
-  }
-  else if (applicationStatus.length > 1) {
- 
+  else if (applicationStatus.length > 0) {
     for (let i = 0; i < applicationStatus.length; i++) {
       set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
-      await Exhibition.updateOne({ _id: id }, { $set: set })
     }
+    await Exhibition.updateOne({ _id: id }, { $set: set })
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
-
   }
-
 })
 
 //Renders all exhibitions
