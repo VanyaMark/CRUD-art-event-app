@@ -56,7 +56,7 @@ router.get("/plasticArtImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
       }
-      res.render("plasticArtImg", { exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4: '../images/slider-4.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
+      res.render("plasticArtImg", { exhibitionArray, image1: '../images/slider-5.jpg', image2: '../images/slider-6.jpg', image3: '../images/slider-7.jpg', image4: '../images/slider-8.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
     })
 });
 
