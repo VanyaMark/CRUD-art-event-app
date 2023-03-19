@@ -65,13 +65,21 @@ router.get('/exhibition/:id/edit', isUserLoggedIn, isAdmin, (req, res) => {
 router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) => {
   const { id } = req.params;
   const { exhibitionStatus, archived, applicationStatus } = req.body;
+  //console.log(typeof applicationStatus)
   let set = {};
   if (!applicationStatus) {
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
   }
-  else if (applicationStatus.length > 0) {
+  else if (typeof applicationStatus === 'string'){
+    set[`artistApplication.${0}.applicationStatus`] = applicationStatus;
+    await Exhibition.updateOne({ _id: id }, { $set: set })
+    await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
+    res.redirect(`/exhibition/${id}`)
+  }
+  else if (typeof applicationStatus === 'object') {
     for (let i = 0; i < applicationStatus.length; i++) {
+      console.log(applicationStatus[i])
       set[`artistApplication.${i}.applicationStatus`] = applicationStatus[i];
     }
     await Exhibition.updateOne({ _id: id }, { $set: set })
@@ -79,6 +87,7 @@ router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) =>
     res.redirect(`/exhibition/${id}`)
   }
 })
+
 
 //Renders all exhibitions
 
