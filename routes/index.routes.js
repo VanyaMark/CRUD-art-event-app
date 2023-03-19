@@ -7,7 +7,7 @@ const Exhibition = require('../models/Exhibition.model')
 //All the open routes accessible by anyone, are on this route.
 
 router.get("/", (req, res, next) => {
-  res.render("index", { message: "Welcome To Europe's Finest Art Gallery", image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4: '../images/slider-4.jpg', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art` });
+  res.render("index", { message: "Welcome To Europe's Finest Art Gallery", image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4: '../images/slider-4.jpg', linkA: `/fineArtImg`, linkB: `/photographyImg`, linkC: `/plasticArtImg`, buttonA: `Fine Art`, buttonB: `Photography`, buttonC: `Plastic Art`});
 });
 
 /* GET route to Fine Art Page*/
@@ -22,7 +22,7 @@ router.get("/fineArtImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
       }
-      res.render("fineArtImg", { exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4: '../images/slider-4.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
+      res.render("fineArtImg", { exhibitionArray, image1: '../images/slider-5.jpg', image2: '../images/slider-6.jpg', image3: '../images/slider-3.jpg', image4: '../images/slider-7.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
     })
 
 });
@@ -40,7 +40,7 @@ router.get("/photographyImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
       }
-      res.render("photographyImg", { exhibitionArray, image1: '../images/slider-1.jpg', image2: '../images/slider-2.jpg', image3: '../images/slider-3.jpg', image4: '../images/slider-4.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
+      res.render("photographyImg", { exhibitionArray, image1: '../images/slider-2.jpg', image2: '../images/slider-8.jpg', image3: '../images/slider-9.jpg', image4: '../images/slider-4.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
     })
 });
 
@@ -56,7 +56,7 @@ router.get("/plasticArtImg", (req, res, next) => {
           exhibitionArray.push(item)
         }
       }
-      res.render("plasticArtImg", { exhibitionArray, image1: '../images/slider-5.jpg', image2: '../images/slider-6.jpg', image3: '../images/slider-7.jpg', image4: '../images/slider-8.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
+      res.render("plasticArtImg", { exhibitionArray, image1: '../images/slider-5.jpg', image2: '../images/slider-8.jpg', image3: '../images/slider-10.jpg', image4: '../images/slider-9.jpg', linkA: `/`, linkB: `/userSignup`, linkC: `/login`, buttonA: `Home Page`, buttonB: `Sign Up`, buttonC: `Log in` });
     })
 });
 
