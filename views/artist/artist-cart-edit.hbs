@@ -3,26 +3,32 @@
     <h2>Edit your application details</h2>
     <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
       <label> Application ID:
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);"  name="_id" value="{{artistApptoEdit._id}}" readonly />
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="_id" value="{{artistApptoEdit._id}}"
+          readonly />
       </label><br><br>
       <label>User ID:
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);"  name="user" value="{{artistApptoEdit.user}}" readonly />
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="user"
+          value="{{artistApptoEdit.user}}" readonly />
       </label><br><br>
       <label>
         Profile Picture:
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl" value="{{artistApptoEdit.avatarUrl}}" readonly />
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl"
+          value="{{artistApptoEdit.avatarUrl}}" readonly />
       </label><br><br>
       <label>
         First Name:
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName" value="{{artistApptoEdit.firstName}}" readonly />
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName"
+          value="{{artistApptoEdit.firstName}}" readonly />
       </label><br><br>
       <label>
         Last Name:
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName" value="{{artistApptoEdit.lastName}}" readonly />
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName"
+          value="{{artistApptoEdit.lastName}}" readonly />
       </label><br><br>
       <label>
         Email:
-        <input type="email" style="background-color: rgba(0, 255, 255, 0.5);" name="email" value="{{artistApptoEdit.email}}" readonly />
+        <input type="email" style="background-color: rgba(0, 255, 255, 0.5);" name="email"
+          value="{{artistApptoEdit.email}}" readonly />
       </label><br><br>
       <label>
         Address:
@@ -81,7 +87,7 @@
           {{/each}}
         </select>
       </label><br><br>
-      <button type="submit">Update Application</button>
+      <button class="btn btn-primary" type="submit">Update Application</button>
     </form>
   </div>
 </div>

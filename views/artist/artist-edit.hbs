@@ -274,14 +274,14 @@
         </select>
       </label><br><br>
 
-      <button type="submit">Update account</button>
+      <button class="btn btn-primary" type="submit">Update account</button>
 
     </form>
 
   </div>
 
   {{#if errorMessage}}
-  {{this.errorMessage}}
+  <p class="error">{{this.errorMessage}}</p>
   {{/if}}
 
 </div>

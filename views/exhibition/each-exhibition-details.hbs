@@ -2,11 +2,11 @@
   <h1>Exhibition Details</h1>
   <hr>
   {{#if errorMessage}}
-  {{errorMessage}}
-  <button><a href="/exhibition/{{exhibitionToDelete._id}}/edit">Edit Exhibition Details</a></button><br>
+  <p class="error">{{errorMessage}}</p>
+  <button class="btn btn-primary"><a href="/exhibition/{{exhibitionToDelete._id}}/edit">Edit Exhibition Details</a></button><br>
 
   <form action="/exhibition/{{exhibitionToDelete._id}}/delete" method="POST">
-    <button>Delete Exhibition</button><br><br>
+    <button class="btn btn-primary">Delete Exhibition</button><br><br>
   </form>
   <h6>Exhibition Name: </h6>
   <p>{{exhibitionToDelete.exhibitionName}}</p>
@@ -56,9 +56,9 @@
 
   {{#if exhibition}}
 
-  <button><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button><br>
+  <button class="btn btn-primary"><a href="/exhibition/{{exhibition._id}}/edit">Edit Exhibition Details</a></button><br>
   <form action="/exhibition/{{exhibition._id}}/delete" method="POST">
-    <button>Delete Exhibition</button><br><br>
+    <button class="btn btn-primary">Delete Exhibition</button><br><br>
   </form>
   <h6>Exhibition Name: </h6>
   <p>{{exhibition.exhibitionName}}</p>

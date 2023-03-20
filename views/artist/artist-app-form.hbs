@@ -1,13 +1,14 @@
 <div class="inner-body-div">
   {{#if errorMessage}}
-  <p>{{errorMessage}}</p>
+  <p class="error">{{errorMessage}}</p>
   {{/if}}
   <div>
     <h2>Artist Application Form</h2>
     <form action="/artistCart" method="POST" enctype="multipart/form-data">
       <label>
-        Profile Picture: 
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl" value="{{user.avatarUrl}}" readonly />
+        Profile Picture:
+        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl" value="{{user.avatarUrl}}"
+          readonly />
         <p>To change your profile picture, go to your account details</p>
       </label><br><br>
       <label>
@@ -20,7 +21,8 @@
       </label><br><br>
       <label>
         email:
-        <input style="background-color: rgba(0, 255, 255, 0.5);" type="email" name="email" value="{{user.email}}" readonly />
+        <input style="background-color: rgba(0, 255, 255, 0.5);" type="email" name="email" value="{{user.email}}"
+          readonly />
         <p>To change your email, go back to dashboard</p>
       </label><br><br>
       <label>
@@ -55,7 +57,8 @@
         <input type="text" name="artworkName" placeholder="Enter Artwork Title Here" />
       </label><br><br>
       <label>Application Status:
-        <input style="background-color: rgba(0, 255, 255, 0.5);"  type="text" name="applicationStatus" value="to be approved" readonly />
+        <input style="background-color: rgba(0, 255, 255, 0.5);" type="text" name="applicationStatus"
+          value="to be approved" readonly />
       </label><br><br>
       <label>
         Wall Size:
@@ -74,7 +77,7 @@
           {{/each}}
         </select>
       </label><br><br>
-      <button type="submit">Go To Application Cart</button>
+      <button class="btn btn-primary" type="submit">Go To Application Cart</button>
     </form>
   </div>
 </div>

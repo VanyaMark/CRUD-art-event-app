@@ -1,64 +1,75 @@
 <div class="inner-body-div">
   <h2>Application Cart</h2>
   {{#if errMsg}}
-  <p>{{errMsg}}</p>
-  <button><a href="/artistCart"> Pending Application Here </a></button>
+  <p class="error">{{errMsg}}</p>
+  <button class="btn btn-primary"><a href="/artistCart"> Pending Application Here </a></button>
   {{/if}}
   {{#if artistApp}}
   <div>
-    <button><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button><br><br>
+    <button class="btn btn-primary"><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button><br><br>
     <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
-      <button>Delete Application</button>
+      <button class="btn btn-primary">Delete Application</button>
     </form>
   </div><br><br>
   <form action="/artistSubmitApp" method="POST">
     <label>Application ID:
-      <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp._id}}" readonly />
+      <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp._id}}" readonly />
     </label><br><br>
     <label>User ID:
-      <input name="user" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.user}}" readonly />
+      <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.user}}" readonly />
     </label><br><br>
     <label>Profile Picture:
-      <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);"   value="{{artistApp.avatarUrl}}" readonly/>
+      <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.avatarUrl}}"
+        readonly />
     </label><br><br>
     <label>First Name:
-      <input name="firstName"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{artistApp.firstName}}" readonly/>
+      <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.firstName}}"
+        readonly />
     </label><br><br>
     <label>Last Name:
-      <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);"   value="{{artistApp.lastName}}" readonly/>
+      <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.lastName}}"
+        readonly />
     </label>
     <label>Email:
-      <input name="email" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.email}}"readonly />
+      <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.email}}" readonly />
     </label><br><br>
     <label>Phone Number:
-      <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"   value="{{artistApp.phoneNumber}}" readonly/>
+      <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.phoneNumber}}"
+        readonly />
     </label><br><br>
     <label>Address:
-      <input name="address" style="background-color: rgba(0, 255, 255, 0.5);"   value="{{artistApp.address}}"readonly/>
+      <input name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.address}}" readonly />
     </label>
     <label>Date Of Birth:
-      <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.dateOfBirth}}" readonly />
+      <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.dateOfBirth}}"
+        readonly />
     </label><br><br>
     <label>Artwork Name:
-      <input name="artworkName"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{artistApp.artworkName}}" readonly/>
+      <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkName}}"
+        readonly />
     </label><br><br>
     <label>Application Status:
-      <input type="text" style="background-color: rgba(0, 255, 255, 0.5);"  name="applicationStatus" value="{{artistApp.applicationStatus}}"readonly />
+      <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
+        value="{{artistApp.applicationStatus}}" readonly />
     </label><br><br>
     <label>Artwork URL:
-      <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.artworkUrl}}" readonly/>
+      <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkUrl}}"
+        readonly />
     </label><br><br>
     <label>Art Type:
-      <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.artType}}" readonly/>
+      <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artType}}" readonly />
     </label><br><br>
     <label>Wall Size:
-      <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);"  name="wallSize" value="{{artistApp.wallSize}}" readonly/>
+      <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
+        value="{{artistApp.wallSize}}" readonly />
     </label><br><br>
     <label>Description:
-      <input name="description" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.description}}" readonly/>
+      <input name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.description}}"
+        readonly />
     </label><br><br>
     <label>Week of Exhibition:
-      <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{artistApp.chooseWeek}}" readonly/>
+      <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.chooseWeek}}"
+        readonly />
     </label><br><br>
     <hr>
     <div class="container">
@@ -109,69 +120,84 @@
                 </div>
               </div>
               <hr>
-              <p>Cart Total: <span class="price" style="color:black"><b>€<span class="cart-total">0</span></b></span></p>
+              <p>Cart Total: <span class="price" style="color:black"><b>€<span class="cart-total">0</span></b></span>
+              </p>
               <hr>
               <button type="submit">Submit Payment</button>
             </form>
             {{/if}}
 
-            
+
             {{#if editedItem}}
             {{#each editedItem}}
             <div>
-              <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button><br><br>
+              <button class="btn btn-primary"><a href="/artistCart/{{this._id}}/edit">Edit Application
+                  Details</a></button><br><br>
               <form action="/artistCart/{{this._id}}/delete" method="POST">
-                <button>Delete Application</button>
+                <button class="btn btn-primary">Delete Application</button>
               </form>
             </div><br><br>
             <form action="/artistSubmitApp" method="POST">
               <label>Application ID:
-                <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this._id}}" readonly />
+                <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}" readonly />
               </label><br><br>
               <label>User ID:
-                <input name="user" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.user}}" readonly />
+                <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}" readonly />
               </label><br><br>
               <label>Profile Picture:
-                <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.avatarUrl}}" readonly/>
+                <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.avatarUrl}}"
+                  readonly />
               </label><br><br>
               <label>First Name:
-                <input name="firstName"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.firstName}}" readonly/>
+                <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.firstName}}"
+                  readonly />
               </label><br><br>
               <label>Last Name:
-                <input name="lastName"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.lastName}}" readonly/>
+                <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.lastName}}"
+                  readonly />
               </label><br><br>
               <label>Email:
-                <input name="email" style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.email}}" readonly/>
+                <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}" readonly />
               </label><br><br>
               <label>Phone Number:
-                <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.phoneNumber}}" readonly/>
+                <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.phoneNumber}}"
+                  readonly />
               </label><br><br>
               <label>Address:
-                <input name="address"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.address}}" readonly/>
+                <input name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.address}}"
+                  readonly />
               </label><br><br>
               <label>Date of Birth:
-                <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.dateOfBirth}}" readonly/>
+                <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.dateOfBirth}}"
+                  readonly />
               </label><br><br>
               <label>Artwork Name:
-                <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.artworkName}}" readonly/>
+                <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkName}}"
+                  readonly />
               </label><br><br>
               <label>Application Status:
-                <input type="text"style="background-color: rgba(0, 255, 255, 0.5);"   name="applicationStatus" value="{{this.applicationStatus}}" readonly/>
+                <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
+                  value="{{this.applicationStatus}}" readonly />
               </label><br><br>
               <label>Artwork URL:
-                <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.artworkUrl}}" readonly/>
+                <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkUrl}}"
+                  readonly />
               </label><br><br>
               <label>Art Type:
-                <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.artType}}" readonly/>
+                <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artType}}"
+                  readonly />
               </label><br><br>
               <label>Wall Size:
-                <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);"  name="wallSize" value="{{this.wallSize}}" readonly/>
+                <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
+                  value="{{this.wallSize}}" readonly />
               </label><br><br>
               <label>Description:
-                <input name="description" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.description}}" readonly/>
+                <input name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.description}}"
+                  readonly />
               </label><br><br>
               <label>Week of Exhibition:
-                <input name="chooseWeek"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.chooseWeek}}" readonly/>
+                <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.chooseWeek}}"
+                  readonly />
               </label><br><br>
               <hr>
               <div class="container">
@@ -183,7 +209,8 @@
                           <div class="col-50">
                             <h3>Billing Address:</h3>
                             <label for="fname"> Full Name:</label><br>
-                            <input class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe" required><br>
+                            <input class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe"
+                              required><br>
                             <label for="adr">Address:</label><br>
                             <input class="formAddress" type="text" id="adr" name="address"
                               placeholder="542 W. 15th Street" required><br>
@@ -235,59 +262,76 @@
                       {{#if altArtistApp}}
                       {{#each altArtistApp}}
                       <div>
-                        <button><a href="/artistCart/{{this._id}}/edit">Edit Application Details</a></button><br><br>
+                        <button class="btn btn-primary"><a href="/artistCart/{{this._id}}/edit">Edit Application
+                            Details</a></button><br><br>
                         <form action="/artistCart/{{this._id}}/delete" method="POST">
-                          <button>Delete Application</button>
+                          <button class="btn btn-primary">Delete Application</button>
                         </form>
                       </div><br><br>
                       <form action="/artistSubmitApp" method="POST">
                         <label>Application ID:
-                          <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this._id}}" readonly />
+                          <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}"
+                            readonly />
                         </label><br><br>
                         <label>User ID:
-                          <input name="user" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.user}}" readonly />
+                          <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}"
+                            readonly />
                         </label><br><br>
                         <label>Profile Picture:
-                          <input name="avatarUrl"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.avatarUrl}}" readonly/>
+                          <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.avatarUrl}}" readonly />
                         </label><br><br>
                         <label>First Name:
-                          <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.firstName}}" readonly/>
+                          <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.firstName}}" readonly />
                         </label><br><br>
                         <label>Last Name:
-                          <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.lastName}}" readonly/>
+                          <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.lastName}}" readonly />
                         </label><br><br>
                         <label>Email:
-                          <input name="email" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.email}}" readonly/>
+                          <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}"
+                            readonly />
                         </label><br><br>
                         <label>Phone Number:
-                          <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.phoneNumber}}" readonly/>
+                          <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.phoneNumber}}" readonly />
                         </label><br><br>
                         <label>Address:
-                          <input name="address" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.address}}" readonly/>
+                          <input name="address" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.address}}" readonly />
                         </label><br><br>
                         <label>Date of Birth:
-                          <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.dateOfBirth}}" readonly/>
+                          <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.dateOfBirth}}" readonly />
                         </label><br><br>
                         <label>Artwork Name:
-                          <input name="artworkName"style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.artworkName}}" readonly/>
+                          <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.artworkName}}" readonly />
                         </label><br><br>
                         <label>Application Status:
-                          <input type="text" style="background-color: rgba(0, 255, 255, 0.5);"  name="applicationStatus" value="{{this.applicationStatus}}"readonly />
+                          <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
+                            value="{{this.applicationStatus}}" readonly />
                         </label><br><br>
                         <label>Artwork URL:
-                          <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"  value="{{this.artworkUrl}}"readonly />
+                          <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.artworkUrl}}" readonly />
                         </label><br><br>
                         <label>Art Type:
-                          <input name="artType"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.artType}}" readonly/>
+                          <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.artType}}" readonly />
                         </label><br><br>
                         <label>Wall Size:
-                          <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);"  name="wallSize" value="{{this.wallSize}}" readonly/>
+                          <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);"
+                            name="wallSize" value="{{this.wallSize}}" readonly />
                         </label><br><br>
                         <label>Description:
-                          <input name="description"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.description}}" readonly/>
+                          <input name="description" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.description}}" readonly />
                         </label><br><br>
                         <label>Week of Exhibiton:
-                          <input name="chooseWeek"style="background-color: rgba(0, 255, 255, 0.5);"   value="{{this.chooseWeek}}" readonly/>
+                          <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);"
+                            value="{{this.chooseWeek}}" readonly />
                         </label><br><br>
                         <hr>
                         <div class="container">
@@ -345,7 +389,7 @@
                                   <p>Cart Total <span class="price" style="color:black"><b>€<span
                                           class="cart-total">0</span></b></span></p>
                                   <hr>
-                                  <button type="submit">Submit Payment</button>
+                                  <button class="btn btn-primary" type="submit">Submit Payment</button>
                                 </form>
                                 {{/each}}
                                 {{/if}}

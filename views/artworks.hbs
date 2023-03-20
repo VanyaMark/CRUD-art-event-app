@@ -1,9 +1,9 @@
 <div class="inner-body-div">
 
     <h2>All artwork</h2>
-    {{#if errorMsg}}
-    {{errorMsg}}
 
+    {{#if errorMsg}}
+    <p class="error">{{errorMsg}}</p>
     {{/if}}
 
     {{#each applicationsArray}}
@@ -22,11 +22,9 @@
         <p>{{this.firstName}} {{this.lastName}}</p>
         <input name="firstName" value="{{this.firstName}}" hidden/>
         <input name="lastName" value="{{this.lastName}}" hidden/>
-        <button type="submit">Add to Favourites</button>
+        <button class="btn btn-primary" type="submit">Add to Favourites</button><br><br>
         
     </form>
-    
-
     {{/each}}
 
 </div>
