@@ -71,7 +71,7 @@ router.post('/exhibition/:id/edit', isUserLoggedIn, isAdmin, async (req, res) =>
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
     res.redirect(`/exhibition/${id}`)
   }
-  else if (typeof applicationStatus === 'string'){
+  else if (typeof applicationStatus === 'string') {
     set[`artistApplication.${0}.applicationStatus`] = applicationStatus;
     await Exhibition.updateOne({ _id: id }, { $set: set })
     await Exhibition.findByIdAndUpdate(id, { exhibitionStatus, archived }, { new: true })
@@ -115,7 +115,7 @@ router.post('/exhibition/:id/delete', isUserLoggedIn, isArtistOrAdmin, (req, res
             res.redirect('/findExhibition')
           })
       } else {
-        res.render('exhibition/each-exhibition-details', { errorMessage: 'Cannot delete exhibitions cointaining applications', exhibitionToDelete })
+        res.render('exhibition/each-exhibition-details', { errorMessage: 'Cannot delete exhibitions cointaining applications', exhibitionToDelete, buttonA: "Back To Dashboard", linkA: "/admin", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail" })
       }
     })
 })

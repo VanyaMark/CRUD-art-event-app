@@ -12,7 +12,7 @@
         </label><br><br>
 
         {{#each exhibitionToEdit.artistApplication}}
-
+        <hr>
         <div>
 
             <label>Artist's First and Last Name:
@@ -41,6 +41,7 @@
 
         {{/each}}
 
+        <hr>
         <label>Exhibition Status Released:
             <select name="exhibitionStatus">
                 <option selected value="{{exhibitionToEdit.exhibitionStatus}}">{{exhibitionToEdit.exhibtionStatus}}
@@ -50,6 +51,7 @@
                 <option value="cancelled">Cancelled</option>
             </select>
         </label><br><br>
+
         {{#if exhibitionToEdit.archived}}
         <label>Is Archived (Select One):</label><br>
         <span>True &nbsp </span><input type="checkbox" name="archived" value="true" checked />

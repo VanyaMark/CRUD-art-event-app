@@ -3,6 +3,7 @@
   <h1>List of All Exhibitions:</h1>
 
   {{#each exhibition}}
+  <hr>
   <h6>Exhibition Name: </h6>
   <p>{{this.exhibitionName}}</p>
   <h6>Exhibition Week: </h6>
@@ -11,14 +12,8 @@
   <p>{{this.exhibitionStatus}}</p>
   <h6>Is Archived:</h6>
   <p>{{this.archived}}</p>
-
-  
-
   <button><a href="/exhibition/{{this._id}}">See Exhibition Details</a></button><br>
-
-  <hr>
   {{/each}}
-
 </div>
 
 <div>

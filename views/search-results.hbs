@@ -1,13 +1,22 @@
-
 <div class="inner-body-div">
-    {{#each displayedExhibition}}
-        <p>{{this.exhibitionName}}</p>
+    {{#each exhibitionsArray}}
+    <h6>Exhibition:</h6>
+    <p>{{this.exhibitionName}}</p>
+    <h6>Description:</h6>
+    <p>{{this.exhibitionDescription}}</p>
+    <h6>Exhibition Week:</h6>
+    <p>{{this.exhibitionWeek}}</p>
     {{/each}}
-
+    
+    <h6>Participating Artists:</h6>
+    {{#each applicationsArray}}
+    <hr>
+    <p>{{this.firstName}} {{this.lastName}}</p>
+    {{/each}}
 </div>
 
 <div>
-     {{>buttonsPartial}}
+    {{>buttonsPartial}}
 </div>
 
 <!--buttons-->

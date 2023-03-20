@@ -1,12 +1,13 @@
 <div class="inner-body-div">
 
-    <h2>All artworks</h2>
+    <h2>All artwork</h2>
     {{#if errorMsg}}
     {{errorMsg}}
 
     {{/if}}
 
     {{#each applicationsArray}}
+    <hr>
     <form action="/allArtworks" method="POST">
 
         <h6>Artwork Title:</h6>
@@ -24,7 +25,7 @@
         <button type="submit">Add to Favourites</button>
         
     </form>
-    <hr>
+    
 
     {{/each}}
 
