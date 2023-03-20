@@ -1,16 +1,23 @@
 <div class="inner-body-div">
   <h2>Artist Application History</h2>
-  <hr>
+  
   {{#each applicationsArray}}
-  <h6>Email:</h6>
-  <p>{{this.email}}</p>
+  <hr>
+  <h6>Application ID</h6>
+  <p>{{this._id}}</p>
+  <h6>Artist ID</h6>
+  <p>{{this.user}}</p>
+  <h6>Exhibition Name and Week:</h6>
+  <p>{{this.chooseWeek}}</p>
   <h6>Artwork Name:</h6>
   <p>{{this.artworkName}}</p>
-  <h6>Week:</h6>
-  <p>{{this.chooseWeek}}</p>
+  <h6>Artwork URL</h6>
+  <p>{{this.artworkUrl}}</p>
   <h6>Wall Size:</h6>
-  <p>{{this.wallsize}}</p>
-  <hr>
+  <p>{{this.wallSize}}</p>
+  <h6>Application Status:</h6>
+  <p>{{this.applicationStatus}}</p>
+
   {{/each}}
 </div>
 <div>
