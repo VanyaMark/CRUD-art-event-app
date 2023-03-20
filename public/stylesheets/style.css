@@ -22,7 +22,7 @@ a {
   height:80vh;
   width:100%;
   padding:2% 10% 2% 10%;
-  overflow: scroll;
+  
 }
 .box-img{
   height:47vh;
@@ -62,6 +62,7 @@ button{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
 }
 .btn{
   padding:2%;

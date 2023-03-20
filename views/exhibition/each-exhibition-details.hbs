@@ -18,32 +18,35 @@
   <p>{{exhibitionToDelete.usersAttended}}</p>
 
   {{#each exhibitionToDelete.artistApplication}}
-  <img src="{{this.profilePicUrl}}" />
+  <h6>User ID</h6>
+  <p>{{this.user}}</p>
+  <h6>Profile Picture:</h6>
+  <img src="{{this.avatarUrl}}" />
   <h6>Artist: </h6>
   <p>{{this.firstName}} {{this.lastName}}</p>
+  <h6>Date of Birth:</h6>
+  <p>{{this.dateOfBirth}}</p>
   <h6>Email: </h6>
   <p>{{this.email}}</p>
   <h6>Phone Number: </h6>
   <p>{{this.phoneNumber}}</p>
   <h6>Address: </h6>
   <p>{{this.address}}</p>
-  <h6>Date of Birth:</h6>
-  <p>{{this.dateOfBirth}}</p>
   <h6>Artwork Image:</h6>
   <img src="{{this.artworkUrl}}" />
   <h6>Artwork Name: </h6>
   <p>{{this.artworkName}}</p>
-  <h6>Description: </h6>
-  <p>{{this.description}} </p>
   <h6>Art Type: </h6>
   <p>{{this.artType}}</p>
+   <h6>Description: </h6>
+  <p>{{this.description}} </p>
   <h6>Wall Size: </h6>
   <p>{{this.wallSize}}</p>
   <h6>Week Chosen</h6>
   <p> {{this.chooseWeek}} </p>
   <h6>Application Status: </h6>
   <p>{{this.applicationStatus}}</p>
-
+  <hr>
   {{/each}}
 
   {{/if}}
@@ -62,29 +65,34 @@
   <p>{{exhibition.exhibitionStatus}}</p>
   <h6>Is Archived:</h6>
   <p>{{exhibition.archived}}</p>
+  <h6>Exhibition Description</h6>
+  <p>{{exhibition.exhibitionDescription}}</p>
   <h6>Visitors that attended: </h6>
   <p>{{exhibition.usersAttended}}</p>
 
   {{#each exhibition.artistApplication}}
-  <img src="{{this.profilePicUrl}}" />
+  <h6>User ID</h6>
+  <p>{{this.user}}</p>
+  <h6>Profile Picture:</h6>
+  <img src="{{this.avatarUrl}}" />
   <h6>Artist: </h6>
   <p>{{this.firstName}} {{this.lastName}}</p>
+  <h6>Date of Birth:</h6>
+  <p>{{this.dateOfBirth}}</p>
   <h6>Email: </h6>
   <p>{{this.email}}</p>
   <h6>Phone Number: </h6>
   <p>{{this.phoneNumber}}</p>
   <h6>Address: </h6>
   <p>{{this.address}}</p>
-  <h6>Date of Birth:</h6>
-  <p>{{this.dateOfBirth}}</p>
   <h6>Artwork Image:</h6>
   <img src="{{this.artworkUrl}}" />
   <h6>Artwork Name: </h6>
   <p>{{this.artworkName}}</p>
-  <h6>Description: </h6>
-  <p>{{this.description}} </p>
   <h6>Art Type: </h6>
   <p>{{this.artType}}</p>
+   <h6>Description: </h6>
+  <p>{{this.description}} </p>
   <h6>Wall Size: </h6>
   <p>{{this.wallSize}}</p>
   <h6>Week Chosen</h6>
