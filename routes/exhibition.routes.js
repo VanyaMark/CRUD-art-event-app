@@ -18,7 +18,7 @@ const {
 //renders the admin dashboard
 
 router.get('/admin', isUserLoggedIn, isAdmin, (req, res) => {
-  res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail" });
+  res.render('admin/admin-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "View Exhibitions", linkA: "/findExhibition", buttonB: "Create New Exhibition", linkB: "/exhibition/create", buttonC: "Email Clients", linkC: "/sendEmail" });
 })
 
 //Renders the page on which the admin can create new exhibitions

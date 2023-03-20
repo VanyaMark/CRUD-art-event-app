@@ -17,7 +17,7 @@ const {
 //This renders the artist's dashboard
 
 router.get('/artist', isUserLoggedIn, isArtistOrAdmin, (req, res) => {
-  res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}, to your personal dashboard.`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory" });
+  res.render('artist/artist-dashboard', { userInSession: `Welcome ${req.session.currentUser.username}`, userInSessionsId: req.session.currentUser._id, buttonA: "Apply for Exhibition", linkA: "/artistApplication", buttonB: "Favourites", linkB: "/artistFavourites", buttonC: "Application History", linkC: "/artistOrderHistory" });
 })
 
 //This renders the artist's details according to their id

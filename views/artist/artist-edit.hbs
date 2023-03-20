@@ -4,36 +4,36 @@
     <form action="/artist/{{userInSession._id}}/edit" method="POST" enctype="multipart/form-data">
 
       <label>
-        First Name:
+        First Name:</label>
         <input type="text" name="firstName" value="{{user.firstName}}" />
-      </label><br><br>
+      
 
       <label>
         Last Name:
+      </label>
         <input type="text" name="lastName" value="{{user.lastName}}" />
-      </label><br><br>
 
       <label>
         Address:
+      </label>
         <input type="text" name="address" value="{{user.address}}" />
-      </label><br><br>
-
       <label>
         Phone number:
+      </label>
         <input type="number" name="phoneNumber" value="{{user.phoneNumber}}" />
-      </label><br><br>
 
       <label>
         Avatar URl:
-        <input type="file" name="avatarUrl" value="{{user.avatarUrl}}" />
-      </label><br><br>
+      </label>
+        <input type="file" class="img-input" name="avatarUrl" value="{{user.avatarUrl}}" />
 
       <label>
         Date of Birth:
+      </label>
         <input class="dt" type="date" name="dateOfBirth" value="{{user.dateOfBirth}}" />
-      </label><br><br>
 
       <label> Gender:
+      </label>
         <select name="gender">
           <option selected value="{{user.gender}}">{{user.gender}}</option>
           <option value="Female">Female</option>
@@ -41,10 +41,9 @@
           <option value="Non-Binary">Non Binary</option>
           <option value="Rather Not Say">Rather not say</option>
         </select>
-      </label><br><br>
 
-      <label>Nationality:
-        <select id="nationality" name="nationality" data-name="nationality" ms-field="nationality"
+      <label>Nationality:</label>
+        <select class="nationality" name="nationality" data-name="nationality" ms-field="nationality"
           data-parsley-required-message="Please let us know your nationality." class="select-field w-select">
           <option value="{{user.nationality}}">{{user.nationality}}</option>
           <option value='afghan'>Afghan</option>
@@ -272,7 +271,7 @@
           <option value='zambian'>Zambian</option>
           <option value='zimbabwean'>Zimbabwean</option>
         </select>
-      </label><br><br>
+      
 
       <button class="btn btn-primary" type="submit">Update account</button>
 

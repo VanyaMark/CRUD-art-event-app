@@ -72,15 +72,15 @@ router.post('/userSignup', isUserLoggedOut, (req, res, next) => {
 router.get('/user', isUserLoggedIn, (req, res) => {
 
   if (req.session.currentUser.role === "visitor") {
-    res.render('landing', { userInSession: `Please click on one of the following to access your dashboard.`, linkA: `/visitor`, buttonA: `Visitor`, buttonB: `Artist`, buttonC: `Admin` })
+    res.render('landing', { userInSession: `Select your dashboard.`, linkA: `/visitor`, buttonA: `Visitor`, buttonB: `Artist`, buttonC: `Admin` })
   }
 
   else if (req.session.currentUser.role === "artist") {
-    res.render('landing', { userInSession: `Please click on one of the following to access your dashboard.`, linkA: `/visitor`, buttonA: `Visitor`, linkB: `/artist`, buttonB: `Artist`, buttonC: `Admin` })
+    res.render('landing', { userInSession: `Select your dashboard.`, linkA: `/visitor`, buttonA: `Visitor`, linkB: `/artist`, buttonB: `Artist`, buttonC: `Admin` })
   }
 
   else if (req.session.currentUser.role === "admin") {
-    res.render('landing', { userInSession: `Please click on one of the following to access your dashboard.`, linkA: `/visitor`, buttonA: `Visitor`, linkB: `/artist`, buttonB: `Artist`, linkC: `/admin`, buttonC: `Admin` })
+    res.render('landing', { userInSession: `Select your dashboard.`, linkA: `/visitor`, buttonA: `Visitor`, linkB: `/artist`, buttonB: `Artist`, linkC: `/admin`, buttonC: `Admin` })
   }
   ;
 })
