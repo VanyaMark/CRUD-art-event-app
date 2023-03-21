@@ -438,6 +438,7 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     width: 100vw;
     height: 100vh;
+    background-repeat: no-repeat;
   }
   nav {
     background: aqua;
@@ -475,10 +476,11 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
+    margin-top: 220%;
   }
   .dropdown:hover .dropdown-content {
     display: block;
@@ -555,6 +557,47 @@
     width: 30%;
     font-size: 14px;
   }
+
+  .carousel-caption {
+    background-color: rgba(240, 248, 255, 0.500);
+  }
+
+  nav .dropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .carousel-caption p {
+    color:#2C3E50;
+  }
+
+  .search-1 {
+    width: 100%;
+    display: block;
+    margin-bottom: 1%;
+  }
+
+  .search-2 {
+    width: 100%;
+  }
+
+  .search-2-btn {
+    margin-top: 8%;
+    padding: 4%;
+  }
+
+  .error {
+    background-color: rgb(225, 71, 71);
+    font-weight: bold;
+    padding: 2%;
+  }
+
+  #logo {
+    margin-left: 17%;
+  }
+
 }
 
 
@@ -573,6 +616,7 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     width: 100vw;
     height: 100vh;
+    background-repeat: no-repeat;
   }
   nav {
     background: aqua;
@@ -616,10 +660,11 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
+    margin-top: 220%;
   }
   .dropdown:hover .dropdown-content {
     display: block;
@@ -698,6 +743,35 @@
   }
   label {
     display: block;
+  }
+
+  .carousel-caption p {
+    color:#2C3E50;
+  }
+
+  .search-1 {
+    width: 100%;
+    display: block;
+    margin-bottom: 2%;
+  }
+
+  .search-2 {
+    width: 100%;
+  }
+
+  .search-2-btn {
+    margin-top: 8%;
+    padding: 4%;
+  }
+
+  .error {
+    background-color: rgb(225, 71, 71);
+    font-weight: bold;
+    padding: 2%;
+  }
+
+  .carousel-caption {
+    background-color: rgba(240, 248, 255, 0.500);
   }
 
 }
