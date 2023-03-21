@@ -1,6 +1,6 @@
 /*------------------------MOBILE ITERATION---------------------------*/
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 
   html {
     overflow-x: hidden;
@@ -113,13 +113,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1rem;
     padding-bottom: 15px;
   }
   .button-b-link {
     color: rgb(2, 108, 108);
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 10px;
+   
   }
   a:hover {
     color: rgb(48, 48, 48);
@@ -213,7 +213,7 @@
 /*------------------------TABLET ITERATION---------------------------*/
 
 
-@media screen and (max-width: 1024px) and (min-width: 769px) {
+@media screen and (max-width: 1024px) and (min-width: 768px) {
 
   html {
     overflow-x: hidden;
