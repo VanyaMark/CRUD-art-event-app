@@ -198,9 +198,15 @@
   }
 
   .search-2-btn {
-
     padding: 2.5%;
   }
+
+  .error {
+    background-color: rgb(225, 71, 71);
+    font-weight: bold;
+    padding: 2%;
+  }
+
 
 }
 
@@ -211,7 +217,7 @@
 
   html {
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: scroll;
   }
   body {
     padding: 2% 10%;
@@ -368,10 +374,10 @@
     display: block;
   }
   .ex-pic {
-    width: 200px;
+    width: 400px;
   }
   .img-input {
-    width: 80%;
+    width: 50%;
     font-size: 14px;
   }
   .nationality {
@@ -404,6 +410,12 @@
   .search-2-btn {
     margin-top: 8%;
     padding: 4%;
+  }
+
+  .error {
+    background-color: rgb(225, 71, 71);
+    font-weight: bold;
+    padding: 2%;
   }
 
 }
