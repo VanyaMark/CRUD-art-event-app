@@ -2,47 +2,48 @@
 
     <h2>Edit Exhibition:</h2>
     <form action="/exhibition/{{exhibitionToEdit._id}}/edit" method="POST">
-        <label>Exhibition Name:
+        <label>Exhibition Name:</label>
             <input type="text" name="exhibitionName" style="background-color: rgba(0, 255, 255, 0.5);"
                 value="{{exhibitionToEdit.exhibitionName}}" readonly />
-        </label><br><br>
-        <label>Exhibition Week:
+        
+        <label>Exhibition Week:</label>
             <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="exhibitionWeek"
                 value="{{exhibitionToEdit.exhibitionWeek}}" readonly />
-        </label><br><br>
+        
 
         {{#each exhibitionToEdit.artistApplication}}
         <hr>
         <div>
 
-            <label>Artist's First and Last Name:
+            <label>Artist's First Name:</label>
                 <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName"
                     value="{{this.firstName}}" readonly />
-            </label><br><br>
-            <label>
+            
+            <label>Artist's Last Name:</label>
                 <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName"
                     value="{{this.lastName}}" readonly />
-            </label><br><br>
-            <label>Artwork Title:
+            
+            <label>Artwork Title:</label>
                 <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="artworkName"
                     value="{{this.artworkName}}" readonly />
-            </label><br><br>
+            
 
-            <label>Application Status:
+            <label>Application Status:</label>
                 <select name="applicationStatus">
 
                     <option selected value="{{this.applicationStatus}}">{{this.applicationStatus}}</option>
                     <option value="approved">Approved</option>
                     <option value="unapproved">Unapproved</option>
                     <option value="to be approved">To be Approved</option>
-                </select><br><br>
+                </select>
 
         </div>
 
         {{/each}}
 
         <hr>
-        <label>Exhibition Status Released:
+        <label>Exhibition Status Released:</label>
+
             <select name="exhibitionStatus">
                 <option selected value="{{exhibitionToEdit.exhibitionStatus}}">{{exhibitionToEdit.exhibtionStatus}}
                 </option>
@@ -50,8 +51,7 @@
                 <option value="closed">Closed</option>
                 <option value="cancelled">Cancelled</option>
             </select>
-        </label><br><br>
-
+        
         {{#if exhibitionToEdit.archived}}
         <label>Is Archived (Select One):</label><br>
         <span>True &nbsp </span><input type="checkbox" name="archived" value="true" checked />
