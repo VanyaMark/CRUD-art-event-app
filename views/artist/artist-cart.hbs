@@ -6,72 +6,72 @@
   {{/if}}
   {{#if artistApp}}
   <div>
-    <button class="btn btn-primary"><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button><br><br>
-    <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
+    <button class="btn btn-primary"><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button><br>
       <button class="btn btn-primary">Delete Application</button>
     </form>
-  </div><br><br>
+  </div><br>
   <form action="/artistSubmitApp" method="POST">
-    <label>Application ID:
+    <label>Application ID:</label>
       <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp._id}}" readonly />
-    </label><br><br>
-    <label>User ID:
+    
+    <label>User ID:</label>
       <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.user}}" readonly />
-    </label><br><br>
-    <label>Profile Picture:
+    
+    <label>Profile Picture:</label>
       <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.avatarUrl}}"
         readonly />
-    </label><br><br>
-    <label>First Name:
+    
+    <label>First Name:</label>
       <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.firstName}}"
         readonly />
-    </label><br><br>
-    <label>Last Name:
+    
+    <label>Last Name:</label>
       <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.lastName}}"
         readonly />
-    </label>
-    <label>Email:
+    
+    <label>Email:</label>
       <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.email}}" readonly />
-    </label><br><br>
-    <label>Phone Number:
+    
+    <label>Phone Number:</label>
       <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.phoneNumber}}"
         readonly />
-    </label><br><br>
-    <label>Address:
+    
+    <label>Address:</label>
       <input name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.address}}" readonly />
-    </label>
-    <label>Date Of Birth:
+    
+    <label>Date Of Birth:</label>
       <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.dateOfBirth}}"
         readonly />
-    </label><br><br>
-    <label>Artwork Name:
+    
+    <label>Artwork Name:</label>
       <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkName}}"
         readonly />
-    </label><br><br>
-    <label>Application Status:
+    
+    <label>Application Status:</label>
       <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
         value="{{artistApp.applicationStatus}}" readonly />
-    </label><br><br>
-    <label>Artwork URL:
+    
+    <label>Artwork URL:</label>
       <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkUrl}}"
         readonly />
-    </label><br><br>
-    <label>Art Type:
+    
+    <label>Art Type:</label>
       <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artType}}" readonly />
-    </label><br><br>
-    <label>Wall Size:
+    
+    <label>Wall Size:</label>
       <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
         value="{{artistApp.wallSize}}" readonly />
-    </label><br><br>
-    <label>Description:
+    
+    <label>Description:</label>
       <input name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.description}}"
         readonly />
-    </label><br><br>
-    <label>Week of Exhibition:
+    
+    <label>Week of Exhibition:</label>
       <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.chooseWeek}}"
         readonly />
-    </label><br><br>
+    
     <hr>
+
     <div class="container">
       <div class="row">
         <div class="col-75">
@@ -80,19 +80,20 @@
               <div class="row">
                 <div class="col-50">
                   <h3>Billing Address:</h3>
-                  <label for="fname"> Full Name:</label><br>
+                  <label for="fname"> Full Name:</label>
                   <input class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe" required><br>
-                  <label for="adr">Address:</label><br>
+                  <label for="adr">Address:</label>
                   <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"
-                    required><br>
+                    required>
                 </div>
                 <label>
-                  <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping address same as
+                  <input class="checkbox smaller-text" type="checkbox" checked="checked" name="sameadr"> Shipping address same as
                   billing
                 </label>
+
                 <div class="col-50">
                   <h3>Payment:</h3>
-                  <label for="fname">Accepted Cards:</label><br>
+                  <label for="fname">Accepted Cards:</label>
                   <input type="radio" id="age1" name="card" value="Mastercard" required>
                   <label for="age1">Mastercard</label>
                   <input type="radio" id="age2" name="card" value="60" required>
@@ -100,20 +101,20 @@
                   <input type="radio" id="age3" name="card" value="100" required>
                   <label for="age3">American Express</label>
                   <input type="radio" id="age4" name="card" value="100" required>
-                  <label for="age4">Visa Debit</label><br><br>
-                  <label for="cname">Name on Card:</label><br>
+                  <label for="age4">Visa Debit</label><br>
+                  <label for="cname">Name on Card:</label>
                   <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
-                  <label for="ccnum">Credit card number:</label><br>
+                  <label for="ccnum">Credit card number:</label>
                   <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required><br>
-                  <label for="expmonth">Exp Month:</label><br>
+                  <label for="expmonth">Exp Month:</label>
                   <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
                   <div class="row">
                     <div class="col-50">
-                      <label for="expyear">Exp Year:</label><br>
+                      <label for="expyear">Exp Year:</label>
                       <input type="text" id="expyear" name="expyear" placeholder="2018" required>
                     </div>
                     <div class="col-50">
-                      <label for="cvv">CVV:</label><br>
+                      <label for="cvv">CVV:</label>
                       <input type="text" id="cvv" name="cvv" placeholder="352" required>
                     </div>
                   </div>
@@ -132,74 +133,75 @@
             {{#each editedItem}}
             <div>
               <button class="btn btn-primary"><a href="/artistCart/{{this._id}}/edit">Edit Application
-                  Details</a></button><br><br>
+                  Details</a></button><br>
               <form action="/artistCart/{{this._id}}/delete" method="POST">
                 <button class="btn btn-primary">Delete Application</button>
               </form>
-            </div><br><br>
+            </div><br>
             <form action="/artistSubmitApp" method="POST">
-              <label>Application ID:
+              <label>Application ID:</label>
                 <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}" readonly />
-              </label><br><br>
-              <label>User ID:
+              
+              <label>User ID:</label>
                 <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}" readonly />
-              </label><br><br>
-              <label>Profile Picture:
+              
+              <label>Profile Picture:</label>
                 <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.avatarUrl}}"
                   readonly />
-              </label><br><br>
-              <label>First Name:
+              
+              <label>First Name:</label>
                 <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.firstName}}"
                   readonly />
-              </label><br><br>
-              <label>Last Name:
+              
+              <label>Last Name:</label>
                 <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.lastName}}"
                   readonly />
-              </label><br><br>
-              <label>Email:
+              
+              <label>Email:</label>
                 <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}" readonly />
-              </label><br><br>
-              <label>Phone Number:
+              
+              <label>Phone Number:</label>
                 <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.phoneNumber}}"
                   readonly />
-              </label><br><br>
-              <label>Address:
+              
+              <label>Address:</label>
                 <input name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.address}}"
                   readonly />
-              </label><br><br>
-              <label>Date of Birth:
+              
+              <label>Date of Birth:</label>
                 <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.dateOfBirth}}"
                   readonly />
-              </label><br><br>
-              <label>Artwork Name:
+              
+              <label>Artwork Name:</label>
                 <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkName}}"
                   readonly />
-              </label><br><br>
-              <label>Application Status:
+              
+              <label>Application Status:</label>
                 <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
                   value="{{this.applicationStatus}}" readonly />
-              </label><br><br>
-              <label>Artwork URL:
+              
+              <label>Artwork URL:</label>
                 <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkUrl}}"
                   readonly />
-              </label><br><br>
-              <label>Art Type:
+              
+              <label>Art Type:</label>
                 <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artType}}"
                   readonly />
-              </label><br><br>
-              <label>Wall Size:
+              
+              <label>Wall Size:</label>
                 <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
                   value="{{this.wallSize}}" readonly />
-              </label><br><br>
-              <label>Description:
+              
+              <label>Description:</label>
                 <input name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.description}}"
                   readonly />
-              </label><br><br>
-              <label>Week of Exhibition:
+              
+              <label>Week of Exhibition:</label>
                 <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.chooseWeek}}"
                   readonly />
-              </label><br><br>
+              
               <hr>
+
               <div class="container">
                 <div class="row">
                   <div class="col-75">
@@ -208,42 +210,42 @@
                         <div class="row">
                           <div class="col-50">
                             <h3>Billing Address:</h3>
-                            <label for="fname"> Full Name:</label><br>
+                            <label for="fname"> Full Name:</label>
                             <input class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe"
                               required><br>
-                            <label for="adr">Address:</label><br>
+                            <label for="adr">Address:</label>
                             <input class="formAddress" type="text" id="adr" name="address"
-                              placeholder="542 W. 15th Street" required><br>
+                              placeholder="542 W. 15th Street" required>
                           </div>
                           <label>
-                            <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping address
+                            <input class="checkbox smaller-text" type="checkbox" checked="checked" name="sameadr"> Shipping address
                             same as billing
                           </label>
                           <div class="col-50">
                             <h3>Payment:</h3>
-                            <label for="fname">Accepted Cards:</label><br>
-                            <input type="radio" id="age1" name="age" value="Mastercard">
+                            <label for="fname">Accepted Cards:</label>
+                            <input type="radio" id="age1" name="card" value="Mastercard">
                             <label for="age1">Mastercard</label>
-                            <input type="radio" id="age2" name="Visa" value="60">
+                            <input type="radio" id="age2" name="card" value="60">
                             <label for="age2">Visa</label>
-                            <input type="radio" id="age3" name="American Express" value="100">
+                            <input type="radio" id="age3" name="card" value="100">
                             <label for="age3">American Express</label>
-                            <input type="radio" id="age4" name="Visa Debit" value="100">
+                            <input type="radio" id="age4" name="card" value="100">
                             <label for="age4">Visa Debit</label><br><br>
                             <label for="cname">Name on Card:</label><br>
                             <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
-                            <label for="ccnum">Credit card number:</label><br>
+                            <label for="ccnum">Credit card number:</label>
                             <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
                               required><br>
-                            <label for="expmonth">Exp Month:</label><br>
+                            <label for="expmonth">Exp Month:</label>
                             <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
                             <div class="row">
                               <div class="col-50">
-                                <label for="expyear">Exp Year:</label><br>
+                                <label for="expyear">Exp Year:</label>
                                 <input type="text" id="expyear" name="expyear" placeholder="2018" required>
                               </div>
                               <div class="col-50">
-                                <label for="cvv">CVV:</label><br>
+                                <label for="cvv">CVV:</label>
                                 <input type="text" id="cvv" name="cvv" placeholder="352" required>
                               </div>
                             </div>
@@ -263,77 +265,79 @@
                       {{#each altArtistApp}}
                       <div>
                         <button class="btn btn-primary"><a href="/artistCart/{{this._id}}/edit">Edit Application
-                            Details</a></button><br><br>
+                            Details</a></button><br>
                         <form action="/artistCart/{{this._id}}/delete" method="POST">
                           <button class="btn btn-primary">Delete Application</button>
                         </form>
-                      </div><br><br>
+                      </div><br>
                       <form action="/artistSubmitApp" method="POST">
-                        <label>Application ID:
+                        <label>Application ID:</label>
                           <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}"
                             readonly />
-                        </label><br><br>
-                        <label>User ID:
+                        
+                        <label>User ID:</label>
                           <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}"
                             readonly />
-                        </label><br><br>
-                        <label>Profile Picture:
+                        
+                        <label>Profile Picture:</label>
                           <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.avatarUrl}}" readonly />
-                        </label><br><br>
-                        <label>First Name:
+                        
+                        <label>First Name:</label>
                           <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.firstName}}" readonly />
-                        </label><br><br>
-                        <label>Last Name:
+                        
+                        <label>Last Name:</label>
                           <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.lastName}}" readonly />
-                        </label><br><br>
-                        <label>Email:
+                        
+                        <label>Email:</label>
                           <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}"
                             readonly />
-                        </label><br><br>
-                        <label>Phone Number:
+                        
+                        <label>Phone Number:</label>
                           <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.phoneNumber}}" readonly />
-                        </label><br><br>
-                        <label>Address:
+                        
+                        <label>Address:</label>
                           <input name="address" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.address}}" readonly />
-                        </label><br><br>
-                        <label>Date of Birth:
+                        
+                        <label>Date of Birth:</label>
                           <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.dateOfBirth}}" readonly />
-                        </label><br><br>
-                        <label>Artwork Name:
+                        
+                        <label>Artwork Name:</label>
                           <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.artworkName}}" readonly />
-                        </label><br><br>
-                        <label>Application Status:
+                        
+                        <label>Application Status:</label>
                           <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
                             value="{{this.applicationStatus}}" readonly />
-                        </label><br><br>
-                        <label>Artwork URL:
+                        
+                        <label>Artwork URL:</label>
                           <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.artworkUrl}}" readonly />
-                        </label><br><br>
-                        <label>Art Type:
+                        
+                        <label>Art Type:</label>
                           <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.artType}}" readonly />
-                        </label><br><br>
-                        <label>Wall Size:
+                        
+                        <label>Wall Size:</label>
                           <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);"
                             name="wallSize" value="{{this.wallSize}}" readonly />
-                        </label><br><br>
-                        <label>Description:
+                        
+                        <label>Description:</label>
                           <input name="description" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.description}}" readonly />
-                        </label><br><br>
+                        
                         <label>Week of Exhibiton:
                           <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.chooseWeek}}" readonly />
                         </label><br><br>
+
                         <hr>
+
                         <div class="container">
                           <div class="row">
                             <div class="col-75">
@@ -342,44 +346,44 @@
                                   <div class="row">
                                     <div class="col-50">
                                       <h3>Billing Address:</h3>
-                                      <label for="fname"> Full Name:</label><br>
+                                      <label for="fname"> Full Name:</label>
                                       <input class="fname" type="text" id="fname" name="fullName"
                                         placeholder="John M. Doe" required><br>
-                                      <label for="adr">Address:</label><br>
+                                      <label for="adr">Address:</label>
                                       <input class="formAddress" type="text" id="adr" name="address"
                                         placeholder="542 W. 15th Street" required><br>
                                     </div>
                                     <label>
-                                      <input class="checkbox" type="checkbox" checked="checked" name="sameadr"> Shipping
+                                      <input class="checkbox smaller-text" type="checkbox" checked="checked" name="sameadr"> Shipping
                                       address same as billing
                                     </label>
                                     <div class="col-50">
                                       <h3>Payment</h3>
-                                      <label for="fname">Accepted Cards:</label><br>
-                                      <input type="radio" id="age1" name="age" value="Mastercard">
+                                      <label for="fname">Accepted Cards:</label>
+                                      <input type="radio" id="age1" name="card" value="Mastercard">
                                       <label for="age1">Mastercard</label>
-                                      <input type="radio" id="age2" name="Visa" value="60">
+                                      <input type="radio" id="age2" name="card" value="60">
                                       <label for="age2">Visa</label>
-                                      <input type="radio" id="age3" name="American Express" value="100">
+                                      <input type="radio" id="age3" name="card" value="100">
                                       <label for="age3">American Express</label>
-                                      <input type="radio" id="age4" name="Visa Debit" value="100">
-                                      <label for="age4">Visa Debit</label><br><br>
-                                      <label for="cname">Name on Card:</label><br>
+                                      <input type="radio" id="age4" name="card" value="100">
+                                      <label for="age4">Visa Debit</label>
+                                      <label for="cname">Name on Card:</label>
                                       <input type="text" id="cname" name="cardname" placeholder="John More Doe"
                                         required><br>
-                                      <label for="ccnum">Credit card number:</label><br>
+                                      <label for="ccnum">Credit card number:</label>
                                       <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
                                         required><br>
-                                      <label for="expmonth">Exp Month:</label><br>
+                                      <label for="expmonth">Exp Month:</label>
                                       <input type="text" id="expmonth" name="expmonth" placeholder="September"
                                         required><br>
                                       <div class="row">
                                         <div class="col-50">
-                                          <label for="expyear">Exp Year:</label><br>
+                                          <label for="expyear">Exp Year:</label>
                                           <input type="text" id="expyear" name="expyear" placeholder="2018" required>
                                         </div>
                                         <div class="col-50">
-                                          <label for="cvv">CVV:</label><br>
+                                          <label for="cvv">CVV:</label>
                                           <input type="text" id="cvv" name="cvv" placeholder="352" required>
                                         </div>
                                       </div>
