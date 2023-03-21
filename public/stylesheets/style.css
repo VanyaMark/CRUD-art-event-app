@@ -54,15 +54,17 @@
   .dropdown {
     position: relative;
     display: inline-block;
+    margin-right: -20%;
   }
   .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
+
   }
   .dropdown:hover .dropdown-content {
     display: block;
@@ -147,7 +149,7 @@
   #menu-button {
     border-radius: 20%;
     padding: 15% 0;
-    margin-left: -110%;
+
   }
   #menu-button a {
     color: rgba(0, 0, 0);
@@ -173,6 +175,33 @@
   .smaller-text {
     font-size: 14px;
   }
+
+  .carousel-caption {
+    background-color: rgba(240, 248, 255, 0.500);
+  }
+
+  .carousel-caption p {
+    color:#2C3E50;
+  }
+
+  .search-1 {
+    width: 70%;
+  }
+
+  .search-1 option {
+    font-size: 14px;
+  }
+
+  .search-2 {
+    width: 70%;
+    margin-top: 7%;
+  }
+
+  .search-2-btn {
+
+    padding: 2.5%;
+  }
+
 }
 
 /*------------------------TABLET ITERATION---------------------------*/
@@ -237,10 +266,11 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
+
   }
   .dropdown:hover .dropdown-content {
     display: block;
@@ -324,13 +354,13 @@
   #menu-button {
     border-radius: 20%;
     padding: 15% 0;
-    margin-left: -110%;
+
   }
   #menu-button a {
     color: rgba(0, 0, 0);
   }
   .nav-row {
-    margin-left: 75%;
+    margin-left: 150%;
     margin-top: -30%;
   }
   .box-img {
@@ -350,6 +380,32 @@
   .smaller-text {
     font-size: 14px;
   }
+
+  #logo-menu-container {
+    padding-left: 10%;
+  }
+
+  .carousel-caption {
+    background-color: rgba(240, 248, 255, 0.500);
+  }
+
+  .carousel-caption p {
+    color:#2C3E50;
+  }
+
+  .search-1 {
+    width: 70%;
+  }
+
+  .search-2 {
+    width: 100%;
+  }
+
+  .search-2-btn {
+    margin-top: 8%;
+    padding: 4%;
+  }
+
 }
 
 
