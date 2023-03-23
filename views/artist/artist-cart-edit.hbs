@@ -48,7 +48,7 @@
       
       <label>
         Artwork Image:</label>
-        <input type="file" name="artworkUrl" placeholder="{{artistApptoEdit.artworkUrl}}" />
+        <input class="img-input" type="file" name="artworkUrl" placeholder="{{artistApptoEdit.artworkUrl}}" />
         <input type="text" name="existingImage" hidden value="{{artistApptoEdit.artworkUrl}}" />
       
       <label>Application Status:</label>
@@ -66,7 +66,7 @@
       
       <label>
         Wall Size:</label>
-        <select name="wallSize">
+        <select class="nationality" name="wallSize">
           <option selected value="{{artistApptoEdit.wallSize}}">Selected -
             {{artistApptoEdit.wallSize}}</option>
           <option value="1m space - €80 per week">1m space - €80 per week</option>
@@ -75,11 +75,11 @@
         </select>
       
       <label for="w3review">Description:</label>
-      <textarea name="description" rows="4" cols="50">{{artistApptoEdit.description}}</textarea>
+      <textarea name="description" rows="4" cols="30">{{artistApptoEdit.description}}</textarea>
 
       <label>
         Choose Week:</label>
-        <select name="chooseWeek">
+        <select class="nationality" name="chooseWeek">
           <option selected value="{{artistApptoEdit.chooseWeek}}">
             {{artistApptoEdit.exhibitionName}}-{{artistApptoEdit.chooseWeek}}</option>
           {{#each exhibitionToJoin}}
