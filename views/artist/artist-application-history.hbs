@@ -3,21 +3,21 @@
   
   {{#each applicationsArray}}
   <hr>
-  <h6>Application ID</h6>
-  <p>{{this._id}}</p>
-  <h6>Artist ID</h6>
-  <p>{{this.user}}</p>
-  <h6>Exhibition Name and Week:</h6>
-  <p>{{this.chooseWeek}}</p>
-  <h6>Artwork Name:</h6>
-  <p>{{this.artworkName}}</p>
-  <h6>Artwork URL</h6>
-  <img class="ex-pic" src="{{this.artworkUrl}}">
-  <h6>Wall Size:</h6>
-  <p>{{this.wallSize}}</p>
-  <h6>Application Status:</h6>
-  <p>{{this.applicationStatus}}</p>
-
+  <div class="card form-control" style="font-size: 0.8rem">
+   <div class="row">
+    <div class="container" >
+      <div class="col-md-12 col-sm-12 col card mt-2 p-1">
+        <p><strong>Application ID: </strong><span>{{this._id}}</span></p>
+        <p><strong>Artist ID: </strong><span>{{this.user}}</span></p>
+        <p><strong>Exhibition Name and Week: </strong><span>{{this.chooseWeek}}</span></p>
+        <p><strong>Artwork Name: </strong><span>{{this.artworkName}}</span></p>
+      </div>
+    </div>
+  </div>
+  <img src="{{this.artworkUrl}}">
+  <p><strong>Wall Size: </strong><span>{{this.wallSize}}</span></p>
+  <p><strong>Application Status: </strong><span>{{this.applicationStatus}}</span></p>
+</div>
   {{/each}}
 </div>
 <div>

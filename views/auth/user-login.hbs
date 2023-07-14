@@ -6,15 +6,15 @@
     <form action="/user" method="POST">
 
       <label> Email:</label>
-        <input type="email" name="email" placeholder="rockstar@ironhack.com" />
+        <input class="form-control" type="email" name="email" placeholder="rockstar@ironhack.com" />
    
       <label>Password:</label>
-        <input type="password" name="password" placeholder="********" /><br>
+        <input class="form-control" type="password" name="password" placeholder="********" /><br>
       
-      <button class="btn btn-primary" type="submit">Login</button><br>
+      <button class="btn btn-primary form-control" type="submit">Login</button><br>
 
       {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
+      <p class="error form-control mt-2">{{errorMessage}}</p>
       {{/if}}
     </form>
   </div><br><br>
