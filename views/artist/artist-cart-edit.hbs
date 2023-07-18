@@ -3,60 +3,60 @@
     <h2>Edit your application details</h2>
     <form action="/artistCart/{{artistApptoEdit._id}}/edit" method="POST" enctype="multipart/form-data">
       <label> Application ID:</label>
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="_id" value="{{artistApptoEdit._id}}"
+        <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="_id" value="{{artistApptoEdit._id}}"
           readonly />
       
       <label>User ID:</label>
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="user"
+        <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="user"
           value="{{artistApptoEdit.user}}" readonly />
       
       <label>
         Profile Picture:</label>
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl"
+        <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="avatarUrl"
           value="{{artistApptoEdit.avatarUrl}}" readonly />
       
       <label>
         First Name:</label>
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName"
+        <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="firstName"
           value="{{artistApptoEdit.firstName}}" readonly />
       
       <label>
         Last Name:</label>
-        <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName"
+        <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="lastName"
           value="{{artistApptoEdit.lastName}}" readonly />
       
       <label>
         Email:</label>
-        <input type="email" style="background-color: rgba(0, 255, 255, 0.5);" name="email"
+        <input class="form-control" type="email" style="background-color: rgba(0, 255, 255, 0.5);" name="email"
           value="{{artistApptoEdit.email}}" readonly />
       
       <label>
         Address:</label>
-        <input type="text" name="address" value="{{artistApptoEdit.address}}" />
+        <input class="form-control" type="text" name="address" value="{{artistApptoEdit.address}}" />
       
       <label>
         Phone Number:</label>
-        <input type="number" name="phoneNumber" value="{{artistApptoEdit.phoneNumber}}" />
+        <input class="form-control" type="number" name="phoneNumber" value="{{artistApptoEdit.phoneNumber}}" />
       
       <label>
         Date of Birth: </label>
-        <input class="dt" type="date" name="dateOfBirth" value="{{artistApptoEdit.dateOfBirth}}" />
+        <input class="dt form-control" type="date" name="dateOfBirth" value="{{artistApptoEdit.dateOfBirth}}" />
      
       <label>
         Artwork Name:</label>
-        <input type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}" />
+        <input class="form-control" type="text" name="artworkName" value="{{artistApptoEdit.artworkName}}" />
       
       <label>
         Artwork Image:</label>
-        <input class="img-input" type="file" name="artworkUrl" placeholder="{{artistApptoEdit.artworkUrl}}" />
+        <input class="img-input form-control" type="file" name="artworkUrl" placeholder="{{artistApptoEdit.artworkUrl}}" />
         <input type="text" name="existingImage" hidden value="{{artistApptoEdit.artworkUrl}}" />
       
       <label>Application Status:</label>
-        <input type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly />
+        <input class="form-control" type="text" name="applicationStatus" value="{{artistApptoEdit.applicationStatus}}" readonly />
     
       <label>
         Art Type:</label>
-        <select name="artType">
+        <select class="form-control" name="artType">
           <option selected value="{{artistApptoEdit.artType}}">Selected -
             {{artistApptoEdit.artType}}</option>
           <option value="Fine Art">Fine Art</option>
@@ -66,7 +66,7 @@
       
       <label>
         Wall Size:</label>
-        <select class="nationality" name="wallSize">
+        <select class="nationality form-control" name="wallSize">
           <option selected value="{{artistApptoEdit.wallSize}}">Selected -
             {{artistApptoEdit.wallSize}}</option>
           <option value="1m space - €80 per week">1m space - €80 per week</option>
@@ -75,11 +75,11 @@
         </select>
       
       <label for="w3review">Description:</label>
-      <textarea name="description" rows="4" cols="30">{{artistApptoEdit.description}}</textarea>
+      <textarea class="form-control" name="description" rows="4" cols="30">{{artistApptoEdit.description}}</textarea>
 
       <label>
         Choose Week:</label>
-        <select class="nationality" name="chooseWeek">
+        <select class="nationality form-control" name="chooseWeek">
           <option selected value="{{artistApptoEdit.chooseWeek}}">
             {{artistApptoEdit.exhibitionName}}-{{artistApptoEdit.chooseWeek}}</option>
           {{#each exhibitionToJoin}}
@@ -88,7 +88,7 @@
           {{/each}}
         </select>
       
-      <button class="btn btn-primary" type="submit">Update Application</button>
+      <button class="btn btn-primary form-control" type="submit">Update Application</button>
     </form>
   </div>
 </div>
