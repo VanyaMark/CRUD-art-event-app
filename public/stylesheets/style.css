@@ -297,7 +297,7 @@
     background: linear-gradient(to bottom, #2C3E50, #BDC3C7);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
- /* .inner-body-div {
+ .inner-body-div {
     background-color: white;
     text-align: center;
     padding: 2%;
@@ -305,7 +305,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  } */
+  } 
   .btn {
     padding: 2%;
     margin-top: 4%;
@@ -508,7 +508,7 @@
     background: linear-gradient(to bottom, #2C3E50, #BDC3C7);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
-  /*.inner-body-div {
+.inner-body-div {
     background-color: white;
     text-align: center;
     padding: 1%;
@@ -516,7 +516,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  } */
+  } 
   .btn {
     padding: 2%;
     margin-top: 2%;
