@@ -1,89 +1,96 @@
 <div class="inner-body-div">
   <h2>Application Cart</h2>
   {{#if errMsg}}
-  <p class="error">{{errMsg}}</p>
-  <button class="btn btn-primary"><a href="/artistCart"> Pending Application Here </a></button>
+  <p class="error form-control">{{errMsg}}</p>
+  <button class="form-control"><a href="/artistCart"> Pending Application Here </a></button>
   {{/if}}
   {{#if artistApp}}
-  <div>
-    <button class="btn btn-primary"><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button><br>
-      <button class="btn btn-primary">Delete Application</button>
-    </form>
-  </div><br>
-  <form action="/artistSubmitApp" method="POST">
+
+
+
+<br>
+      <div>
+      <button class="form-control"><a href="/artistCart/{{artistApp._id}}/edit">Edit Application</a></button>
+      <br>
+              <form action="/artistCart/{{artistApp._id}}/delete" method="POST">
+                <button class="form-control" >Delete Application</button>
+              </form>
+              </div>
+
+  <form class="container p-10" action="/artistSubmitApp" method="POST">
     <label>Application ID:</label>
-      <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp._id}}" readonly />
+      <input class="form-control" name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp._id}}" readonly />
     
     <label>User ID:</label>
-      <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.user}}" readonly />
+      <input class="form-control" name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.user}}" readonly />
     
     <label>Profile Picture:</label>
-      <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.avatarUrl}}"
+      <input class="form-control" name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.avatarUrl}}"
         readonly />
     
     <label>First Name:</label>
-      <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.firstName}}"
+      <input class="form-control" name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.firstName}}"
         readonly />
     
     <label>Last Name:</label>
-      <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.lastName}}"
+      <input class="form-control" name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.lastName}}"
         readonly />
     
     <label>Email:</label>
-      <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.email}}" readonly />
+      <input class="form-control" name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.email}}" readonly />
     
     <label>Phone Number:</label>
-      <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.phoneNumber}}"
+      <input class="form-control" name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.phoneNumber}}"
         readonly />
     
     <label>Address:</label>
-      <input name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.address}}" readonly />
+      <input class="form-control" name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.address}}" readonly />
     
     <label>Date Of Birth:</label>
-      <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.dateOfBirth}}"
+      <input class="form-control" name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.dateOfBirth}}"
         readonly />
     
     <label>Artwork Name:</label>
-      <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkName}}"
+      <input class="form-control" name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkName}}"
         readonly />
     
     <label>Application Status:</label>
-      <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
+      <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
         value="{{artistApp.applicationStatus}}" readonly />
     
     <label>Artwork URL:</label>
-      <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkUrl}}"
+      <input class="form-control" name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artworkUrl}}"
         readonly />
     
     <label>Art Type:</label>
-      <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artType}}" readonly />
+      <input class="form-control" name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.artType}}" readonly />
     
     <label>Wall Size:</label>
-      <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
+      <input class="form-control" class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
         value="{{artistApp.wallSize}}" readonly />
     
     <label>Description:</label>
-      <input name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.description}}"
+      <input class="form-control" name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.description}}"
         readonly />
     
     <label>Week of Exhibition:</label>
-      <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.chooseWeek}}"
+      <input class="form-control" name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{artistApp.chooseWeek}}"
         readonly />
     
     <hr>
 
-    <div class="container">
+    <div>
       <div class="row">
-        <div class="col-75">
-          <div class="container">
+        <div class="col">
+          <div>
             <form>
               <div class="row">
-                <div class="col-50">
+                <div class="col">
                   <h3>Billing Address:</h3>
                   <label for="fname"> Full Name:</label>
-                  <input class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe" required><br>
+                  <input class="form-control" class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe" required><br>
                   <label for="adr">Address:</label>
-                  <input class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"
+                  <input class="form-control" class="formAddress" type="text" id="adr" name="address" placeholder="542 W. 15th Street"
                     required>
                 </div>
                 <label>
@@ -103,19 +110,19 @@
                   <input type="radio" id="age4" name="card" value="100" required>
                   <label for="age4">Visa Debit</label><br>
                   <label for="cname">Name on Card:</label>
-                  <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
+                  <input class="form-control" type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
                   <label for="ccnum">Credit card number:</label>
-                  <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required><br>
+                  <input class="form-control" type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required><br>
                   <label for="expmonth">Exp Month:</label>
-                  <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
+                  <input class="form-control" type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
                   <div class="row">
                     <div class="col-50">
                       <label for="expyear">Exp Year:</label>
-                      <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                      <input class="form-control" type="text" id="expyear" name="expyear" placeholder="2018" required>
                     </div>
                     <div class="col-50">
                       <label for="cvv">CVV:</label>
-                      <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                      <input class="form-control" type="text" id="cvv" name="cvv" placeholder="352" required>
                     </div>
                   </div>
                 </div>
@@ -124,7 +131,9 @@
               <p>Cart Total: <span class="price" style="color:black"><b>€<span class="cart-total">0</span></b></span>
               </p>
               <hr>
-              <button type="submit">Submit Payment</button>
+
+              <button class="form-control" type="submit">Submit Payment</button>
+
             </form>
             {{/if}}
 
@@ -132,89 +141,88 @@
             {{#if editedItem}}
             {{#each editedItem}}
             <div>
-              <button class="btn btn-primary"><a href="/artistCart/{{this._id}}/edit">Edit Application
-                  Details</a></button><br>
+              <button class="form-control"><a href="/artistCart/{{this._id}}/edit">Edit Application</a></button><br>
               <form action="/artistCart/{{this._id}}/delete" method="POST">
-                <button class="btn btn-primary">Delete Application</button>
+                <button class="form-control">Delete Application</button>
               </form>
             </div><br>
-            <form action="/artistSubmitApp" method="POST">
+            <form class="container p-50" action="/artistSubmitApp" method="POST">
               <label>Application ID:</label>
-                <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}" readonly />
+                <input class="form-control" name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}" readonly />
               
               <label>User ID:</label>
-                <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}" readonly />
+                <input class="form-control" name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}" readonly />
               
               <label>Profile Picture:</label>
-                <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.avatarUrl}}"
+                <input class="form-control" name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.avatarUrl}}"
                   readonly />
               
               <label>First Name:</label>
-                <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.firstName}}"
+                <input class="form-control" name="firstName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.firstName}}"
                   readonly />
               
               <label>Last Name:</label>
-                <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.lastName}}"
+                <input class="form-control" name="lastName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.lastName}}"
                   readonly />
               
               <label>Email:</label>
-                <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}" readonly />
+                <input class="form-control" name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}" readonly />
               
               <label>Phone Number:</label>
-                <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.phoneNumber}}"
+                <input class="form-control" name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.phoneNumber}}"
                   readonly />
               
               <label>Address:</label>
-                <input name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.address}}"
+                <input class="form-control" name="address" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.address}}"
                   readonly />
               
               <label>Date of Birth:</label>
-                <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.dateOfBirth}}"
+                <input class="form-control" name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.dateOfBirth}}"
                   readonly />
               
               <label>Artwork Name:</label>
-                <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkName}}"
+                <input class="form-control" name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkName}}"
                   readonly />
               
               <label>Application Status:</label>
-                <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
+                <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
                   value="{{this.applicationStatus}}" readonly />
               
               <label>Artwork URL:</label>
-                <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkUrl}}"
+                <input class="form-control" name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artworkUrl}}"
                   readonly />
               
               <label>Art Type:</label>
-                <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artType}}"
+                <input class="form-control" name="artType" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.artType}}"
                   readonly />
               
               <label>Wall Size:</label>
-                <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
+                <input class="price-by-wall-size form-control" style="background-color: rgba(0, 255, 255, 0.5);" name="wallSize"
                   value="{{this.wallSize}}" readonly />
               
               <label>Description:</label>
-                <input name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.description}}"
+                <input class="form-control" name="description" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.description}}"
                   readonly />
               
               <label>Week of Exhibition:</label>
-                <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.chooseWeek}}"
+                <input class="form-control" name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.chooseWeek}}"
                   readonly />
               
               <hr>
 
-              <div class="container">
+              <div>
                 <div class="row">
-                  <div class="col-75">
-                    <div class="container">
+                  <div class="col">
+                    <div>
                       <form>
                         <div class="row">
-                          <div class="col-50">
+                          <div class="col">
                             <h3>Billing Address:</h3>
                             <label for="fname"> Full Name:</label>
-                            <input class="fname" type="text" id="fname" name="fullName" placeholder="John M. Doe"
+                            <input class="fname form-control" type="text" id="fname" name="fullName" placeholder="John M. Doe"
                               required><br>
                             <label for="adr">Address:</label>
-                            <input class="formAddress" type="text" id="adr" name="address"
+                            <input class="formAddress form-control" type="text" id="adr" name="address"
                               placeholder="542 W. 15th Street" required>
                           </div>
                           <label>
@@ -233,20 +241,20 @@
                             <input type="radio" id="age4" name="card" value="100">
                             <label for="age4">Visa Debit</label><br><br>
                             <label for="cname">Name on Card:</label><br>
-                            <input type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
+                            <input class="form-control" type="text" id="cname" name="cardname" placeholder="John More Doe" required><br>
                             <label for="ccnum">Credit card number:</label>
-                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
+                            <input class="form-control" type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
                               required><br>
                             <label for="expmonth">Exp Month:</label>
-                            <input type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
+                            <input class="form-control" type="text" id="expmonth" name="expmonth" placeholder="September" required><br>
                             <div class="row">
                               <div class="col-50">
                                 <label for="expyear">Exp Year:</label>
-                                <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                                <input class="form-control" type="text" id="expyear" name="expyear" placeholder="2018" required>
                               </div>
                               <div class="col-50">
                                 <label for="cvv">CVV:</label>
-                                <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                                <input class="form-control" type="text" id="cvv" name="cvv" placeholder="352" required>
                               </div>
                             </div>
                           </div>
@@ -255,7 +263,9 @@
                         <p>Cart Total <span class="price" style="color:black"><b>€<span
                                 class="cart-total">0</span></b></span></p>
                         <hr>
-                        <button type="submit">Submit Payment</button>
+
+                        <button class="form-control" type="submit">Submit Payment</button>
+                        
                       </form>
                       {{/each}}
                       {{/if}}
@@ -264,93 +274,92 @@
                       {{#if altArtistApp}}
                       {{#each altArtistApp}}
                       <div>
-                        <button class="btn btn-primary"><a href="/artistCart/{{this._id}}/edit">Edit Application
-                            Details</a></button><br>
+                        <button class="form-control"><a href="/artistCart/{{this._id}}/edit">Edit Application</a></button><br>
                         <form action="/artistCart/{{this._id}}/delete" method="POST">
-                          <button class="btn btn-primary">Delete Application</button>
+                          <button class="form-control">Delete Application</button>
                         </form>
                       </div><br>
-                      <form action="/artistSubmitApp" method="POST">
+                      <form class="container p-50" action="/artistSubmitApp" method="POST">
                         <label>Application ID:</label>
-                          <input name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}"
+                          <input class="form-control" name="_id" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this._id}}"
                             readonly />
                         
                         <label>User ID:</label>
-                          <input name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}"
+                          <input class="form-control" name="user" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.user}}"
                             readonly />
                         
                         <label>Profile Picture:</label>
-                          <input name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="avatarUrl" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.avatarUrl}}" readonly />
                         
                         <label>First Name:</label>
-                          <input name="firstName" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="firstName" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.firstName}}" readonly />
                         
                         <label>Last Name:</label>
-                          <input name="lastName" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="lastName" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.lastName}}" readonly />
                         
                         <label>Email:</label>
-                          <input name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}"
+                          <input class="form-control" name="email" style="background-color: rgba(0, 255, 255, 0.5);" value="{{this.email}}"
                             readonly />
                         
                         <label>Phone Number:</label>
-                          <input name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="phoneNumber" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.phoneNumber}}" readonly />
                         
                         <label>Address:</label>
-                          <input name="address" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="address" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.address}}" readonly />
                         
                         <label>Date of Birth:</label>
-                          <input name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="dateOfBirth" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.dateOfBirth}}" readonly />
                         
                         <label>Artwork Name:</label>
-                          <input name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="artworkName" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.artworkName}}" readonly />
                         
                         <label>Application Status:</label>
-                          <input type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
+                          <input class="form-control" type="text" style="background-color: rgba(0, 255, 255, 0.5);" name="applicationStatus"
                             value="{{this.applicationStatus}}" readonly />
                         
                         <label>Artwork URL:</label>
-                          <input name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="artworkUrl" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.artworkUrl}}" readonly />
                         
                         <label>Art Type:</label>
-                          <input name="artType" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="artType" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.artType}}" readonly />
                         
                         <label>Wall Size:</label>
-                          <input class="price-by-wall-size" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="price-by-wall-size form-control" style="background-color: rgba(0, 255, 255, 0.5);"
                             name="wallSize" value="{{this.wallSize}}" readonly />
                         
                         <label>Description:</label>
-                          <input name="description" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="description" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.description}}" readonly />
                         
                         <label>Week of Exhibiton:</label>
-                          <input name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);"
+                          <input class="form-control" name="chooseWeek" style="background-color: rgba(0, 255, 255, 0.5);"
                             value="{{this.chooseWeek}}" readonly />
                         
 
                         <hr>
 
-                        <div class="container">
+                        <div>
                           <div class="row">
-                            <div class="col-75">
-                              <div class="container">
+                            <div class="col">
+                              <div>
                                 <form>
                                   <div class="row">
-                                    <div class="col-50">
+                                    <div class="col">
                                       <h3>Billing Address:</h3>
                                       <label for="fname"> Full Name:</label>
-                                      <input class="fname" type="text" id="fname" name="fullName"
+                                      <input class="fname form-control" type="text" id="fname" name="fullName"
                                         placeholder="John M. Doe" required><br>
                                       <label for="adr">Address:</label>
-                                      <input class="formAddress" type="text" id="adr" name="address"
+                                      <input class="formAddress form-control" type="text" id="adr" name="address"
                                         placeholder="542 W. 15th Street" required><br>
                                     </div>
                                     <label>
@@ -369,22 +378,22 @@
                                       <input type="radio" id="age4" name="card" value="100">
                                       <label for="age4">Visa Debit</label>
                                       <label for="cname">Name on Card:</label>
-                                      <input type="text" id="cname" name="cardname" placeholder="John More Doe"
+                                      <input class="form-control" type="text" id="cname" name="cardname" placeholder="John More Doe"
                                         required><br>
                                       <label for="ccnum">Credit card number:</label>
-                                      <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
+                                      <input class="form-control" type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
                                         required><br>
                                       <label for="expmonth">Exp Month:</label>
-                                      <input type="text" id="expmonth" name="expmonth" placeholder="September"
+                                      <input class="form-control" type="text" id="expmonth" name="expmonth" placeholder="September"
                                         required><br>
                                       <div class="row">
                                         <div class="col-50">
                                           <label for="expyear">Exp Year:</label>
-                                          <input type="text" id="expyear" name="expyear" placeholder="2018" required>
+                                          <input class="form-control" type="text" id="expyear" name="expyear" placeholder="2018" required>
                                         </div>
                                         <div class="col-50">
                                           <label for="cvv">CVV:</label>
-                                          <input type="text" id="cvv" name="cvv" placeholder="352" required>
+                                          <input class="form-control" type="text" id="cvv" name="cvv" placeholder="352" required>
                                         </div>
                                       </div>
                                     </div>
@@ -393,7 +402,8 @@
                                   <p>Cart Total <span class="price" style="color:black"><b>€<span
                                           class="cart-total">0</span></b></span></p>
                                   <hr>
-                                  <button class="btn btn-primary" type="submit">Submit Payment</button>
+                                  <button class="form-control" type="submit">Submit Payment</button>
+
                                 </form>
                                 {{/each}}
                                 {{/if}}
