@@ -62,7 +62,8 @@ router.get("/artist/:id/edit", isUserLoggedIn, isArtistOrAdmin, (req, res) => {
       buttonC: "Apply for Exhibition",
       linkC: "/artistApplication",
     });
-  });
+  })
+  .catch(err => console.log('err: ', err));
 });
 
 //This obtains the artist's edited details from the form and saves it on the database
