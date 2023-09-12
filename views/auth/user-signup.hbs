@@ -4,27 +4,27 @@
     <form action="/userSignup" method="POST">
 
       <label> Username: </label>
-        <input type="text" name="username" placeholder="ironhacker" />
+        <input class="form-control" type="text" name="username" placeholder="ironhacker" />
      
 
       <label> Email:</label>
-        <input type="email" name="email" placeholder="rockstar@ironhack.com" />
+        <input class="form-control" type="email" name="email" placeholder="rockstar@ironhack.com" />
       
 
       <label> Password:</label>
-        <input type="password" name="password" placeholder="********" />
+        <input class="form-control" type="password" name="password" placeholder="********" />
       
 
       <label> Reason for signing in:</label>
 
-        <select name="role">
+        <select class="form-control" name="role">
           <option value="visitor">Visitor</option>
           <option value="artist">Artist</option>
         </select><br>
 
       
 
-      <button class="btn btn-primary" type="submit">Create account</button><br><br>
+      <button class="btn btn-primary form-control" type="submit">Create account</button><br><br>
 
       {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

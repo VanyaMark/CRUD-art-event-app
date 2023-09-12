@@ -8,13 +8,13 @@
 
     {{#each applicationsArray}}
     <hr>
-    <form action="/allArtworks" method="POST">
+    <form class="d-flex flex-column justify-content-center align-items-center" action="/allArtworks" method="POST">
 
         <h6>Artwork Title:</h6>
         <p>{{this.artworkName}}</p>
         <input name="artworkName" value="{{this.artworkName}}" hidden/>
         <input name="artworkUrl" value="{{this.artworkUrl}}" hidden />
-        <img class="ex-pic" src="{{this.artworkUrl}}">
+        <img class="col-12 col-sm-12 col-md-8 col-lg-10" src="{{this.artworkUrl}}">
         <h6>Description:</h6>
         <p>{{this.description}}</p>
         <input name="description" value="{{this.description}}" hidden/>

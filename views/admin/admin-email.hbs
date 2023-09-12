@@ -2,12 +2,12 @@
   <h1>EMAIL</h1>
   <form action="/emailSent" method="post">
     <label for="">Email:</label><br>
-    <input type="email" name="email"/><br>
+    <input class="form-control" type="email" name="email"/><br>
     <label for="">Subject:</label><br>
-    <input type="text" name="subject" /><br>
+    <input class="form-control" type="text" name="subject" /><br>
     <label for="">Message:</label><br>
-    <textarea type="text" name="message" id="email-textarea" rows="4" cols="25"></textarea><br>
-    <button class="btn btn-primary" type="submit">Submit</button><br>
+    <textarea class="form-control" type="text" name="message" id="email-textarea" rows="4" cols="25"></textarea><br>
+    <button class="btn btn-primary form-control" type="submit">Submit</button><br>
 </div>
 <div>
   {{>buttonsPartial}}

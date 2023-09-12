@@ -90,7 +90,7 @@ window.onload = () => {
   const canvas = document.querySelector("#my-canvas")
   const ctx = canvas.getContext('2d')
 
-  fetch("https://artbox.cyclic.app/statsDetails", { credentials: "same-origin" })
+  fetch("http://localhost:3002/statsDetails", { credentials: "same-origin" })
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
